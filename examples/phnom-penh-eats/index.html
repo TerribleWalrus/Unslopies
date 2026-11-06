@@ -150,6 +150,41 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
 .pick .from { font-weight: 500; opacity: 0.8; font-size: var(--fs-s); }
 .pick:disabled { background: var(--surface-2); color: var(--text-3); cursor: not-allowed; transform: none; }
 
+/* ---------- Phone: one quick row on top, Filters and Pick in thumb reach ---------- */
+.quick { display: flex; gap: var(--s2); align-items: center; }
+.quick .segmented { flex: 1; min-width: 0; }
+.quick .chip { flex: none; height: calc(var(--h-m) + 2 * var(--s1)); }
+.filters-btn { position: relative; flex: none; height: var(--h-l); padding: 0 var(--s4); display: inline-flex; align-items: center; gap: var(--s2);
+  border: 0; border-radius: var(--r-card); background: var(--surface); font-weight: 600; cursor: pointer; }
+.filters-btn svg { width: 20px; height: 20px; }
+.badge { min-width: 22px; height: 22px; padding: 0 6px; border-radius: var(--r-round); background: var(--accent); color: var(--on-accent);
+  font-size: var(--fs-xs); font-weight: 700; display: inline-grid; place-items: center; font-variant-numeric: tabular-nums; }
+.badge[hidden] { display: none; }
+.pickbar-inner { display: flex; gap: var(--s2); }
+.pick { flex: 1; min-width: 0; }
+.sortname { color: var(--text-3); }
+.fsheet { display: grid; gap: var(--s5); padding-top: var(--s2); }
+.fsheet h3 { margin: 0 0 var(--s2); font-size: var(--fs-s); font-weight: 600; color: var(--text-2); }
+.wrapchips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.wrapchips .chip { background: var(--surface-2); }
+.wrapchips .chip[aria-pressed="true"] { background: var(--accent); }
+.fsheet .segmented { background: var(--surface-2); }
+.fsheet .segmented button[aria-checked="true"] { background: var(--surface); }
+.factions { display: grid; grid-template-columns: auto 1fr; gap: var(--s2); }
+.factions .btn.primary { height: var(--h-l); font-size: var(--fs-m); }
+.factions .btn:not(.primary) { height: var(--h-l); }
+@media (max-width: 899px) {
+  .more, .sort { display: none; }
+  .filters { margin-bottom: var(--s4); }
+  .rating .n { display: none; }
+  .listbar { margin-bottom: var(--s2); }
+}
+@media (min-width: 900px) {
+  .quick { display: grid; }
+  .quick .chip { justify-self: start; height: var(--h-m); }
+  .filters-btn, .sortname { display: none; }
+}
+
 @media (min-width: 900px) {
   .app { display: grid; grid-template-columns: 300px 1fr; gap: 0 var(--s7); padding-bottom: var(--s7); }
   .lights, header.top, .live { grid-column: 1 / -1; }
@@ -311,6 +346,7 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
   <symbol id="i-music" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 15V4.5l9-2V13"/><circle cx="5" cy="15" r="2.5"/><circle cx="14" cy="13" r="2.5"/></symbol>
   <symbol id="i-star" viewBox="0 0 20 20" fill="currentColor"><path d="m10 2 2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L10 14.4l-5 2.8 1.2-5.6L2 7.8l5.6-.6L10 2Z"/></symbol>
   <symbol id="i-close" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="m5 5 10 10M15 5 5 15"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M3 6h6M13 6h4M3 14h3M10 14h7"/><circle cx="11" cy="6" r="2"/><circle cx="8" cy="14" r="2"/></symbol>
   <symbol id="i-pin" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18s5.5-5.2 5.5-9.5a5.5 5.5 0 0 0-11 0C4.5 12.8 10 18 10 18Z"/><circle cx="10" cy="8.5" r="2"/></symbol>
   <symbol id="m-flick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="14" height="5" rx="1.5"/><path d="M6 4h8M6 16h8"/></symbol>
   <symbol id="m-shake" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9.5h10l-1.4 7.5H6.4Z"/><path d="M8 9.5 7 3M10 9.5V2M12 9.5l1-5.5"/></symbol>
@@ -337,20 +373,23 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
 
   <aside class="side" aria-label="Filters">
     <div class="filters">
+      <div class="quick">
       <div class="segmented" role="radiogroup" aria-label="Type of place">
         <button type="button" role="radio" class="press" data-type="all" aria-checked="true">Both</button>
         <button type="button" role="radio" class="press" data-type="food" aria-checked="false" tabindex="-1">Food</button>
         <button type="button" role="radio" class="press" data-type="coffee" aria-checked="false" tabindex="-1">Coffee</button>
       </div>
-      <div class="chips" role="group" aria-label="Price and opening">
-        <button type="button" class="chip press" data-open aria-pressed="false">Open now</button>
+      <button type="button" class="chip press" data-open aria-pressed="false">Open now</button>
+      </div>
+      <div class="chips more" role="group" aria-label="Price">
         <button type="button" class="chip press" data-price="1" aria-pressed="false">$<span class="sub">under $5</span></button>
         <button type="button" class="chip press" data-price="2" aria-pressed="false">$$<span class="sub">$5–15</span></button>
         <button type="button" class="chip press" data-price="3" aria-pressed="false">$$$<span class="sub">$15+</span></button>
       </div>
-      <div class="chips" role="group" aria-label="Area" id="areaChips"></div>
+      <div class="chips more" role="group" aria-label="Area" id="areaChips"></div>
     </div>
     <div class="pickbar"><div class="pickbar-inner">
+      <button class="filters-btn press" id="filtersBtn" type="button" aria-haspopup="dialog"><svg aria-hidden="true"><use href="#i-sliders"/></svg><span>Filters</span><span class="badge" id="fBadge" hidden></span></button>
       <button class="pick press" id="pickBtn" type="button"><svg aria-hidden="true"><use id="pickIcon" href="#m-spin"/></svg><span id="pickLabel">Pick for me</span></button>
     </div></div>
   </aside>
@@ -430,6 +469,7 @@ function busy(p, now) {
   return lvl;
 }
 const BUSY = ["", "Quiet", "Steady", "Lively"];
+const SORTS = { popular: "Most popular", rated: "Top rated", cheap: "Cheapest" };
 const priceHTML = n => `${"$".repeat(n)}<span class="dim">${"$".repeat(3 - n)}</span>`;
 const fmtReviews = n => n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n);
 const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -606,7 +646,11 @@ function render() {
     firstRender = false; list.classList.remove("swapping");
   };
   if (firstRender || reduceMotion()) draw(); else { list.classList.add("swapping"); setTimeout(draw, 120); }
-  $("#count").textContent = `${items.length} ${items.length === 1 ? "place" : "places"}`;
+  $("#count").innerHTML = `${items.length} ${items.length === 1 ? "place" : "places"}<span class="sortname"> · ${SORTS[state.sort]}</span>`;
+  const n = state.prices.size + (state.area !== "All areas" ? 1 : 0), badge = $("#fBadge");
+  badge.hidden = !n; badge.textContent = n;
+  $("#filtersBtn").setAttribute("aria-label", n ? `Filters, ${n} on` : "Filters");
+  paintFilterSheet(items.length);
   $("#pickBtn").disabled = !items.length;
   $("#pickLabel").innerHTML = items.length ? `Pick for me <span class="from">from ${items.length}</span>` : "Nothing to pick from";
 }
@@ -638,8 +682,7 @@ $("#sort").addEventListener("change", e => { state.sort = e.target.value; render
 $("#list").addEventListener("click", e => {
   if (e.target.closest("#clearAll")) {
     state.prices.clear(); state.openNow = false; state.area = "All areas";
-    document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.area === "All areas"));
-    render(); $("#pickBtn").focus(); return;
+    syncChips(); render(); $("#pickBtn").focus(); return;
   }
   const card = e.target.closest(".card"); if (card) openDetail(PLACES[+card.dataset.i], card);
 });
@@ -702,6 +745,49 @@ document.addEventListener("keydown", e => {
   const end = () => { if (!dragging) return; dragging = false; const v = dy / (performance.now() - t0); sheet.style.transition = ""; sheet.style.transform = ""; if (dy > sheet.offsetHeight * 0.3 || (v > 0.5 && dy > 20)) closeSheet(); };
   grab.addEventListener("pointerup", end); grab.addEventListener("pointercancel", end);
 })();
+
+/* ================= Filters sheet (phones) ================= */
+function syncChips() {
+  document.querySelectorAll(".side [data-price]").forEach(b => b.setAttribute("aria-pressed", state.prices.has(+b.dataset.price)));
+  document.querySelectorAll(".side [data-area]").forEach(b => b.setAttribute("aria-pressed", b.dataset.area === state.area));
+  document.querySelectorAll(".side [data-open]").forEach(b => b.setAttribute("aria-pressed", state.openNow));
+  $("#sort").value = state.sort;
+}
+function filterSheetHTML() {
+  const sorts = Object.entries(SORTS);
+  return `<div class="fsheet" id="fsheet">
+    <section><h3 id="fhPrice">Price per person</h3><div class="wrapchips" role="group" aria-labelledby="fhPrice">
+      ${[["1", "$", "under $5"], ["2", "$$", "$5–15"], ["3", "$$$", "$15+"]].map(([n, a, b]) => `<button type="button" class="chip press" data-fprice="${n}" aria-pressed="false">${a}<span class="sub">${b}</span></button>`).join("")}</div></section>
+    <section><h3 id="fhArea">Area</h3><div class="wrapchips" role="group" aria-labelledby="fhArea">
+      ${AREAS.map(a => `<button type="button" class="chip press" data-farea="${a}" aria-pressed="false">${a}</button>`).join("")}</div></section>
+    <section><h3 id="fhSort">Sort by</h3><div class="segmented" role="radiogroup" aria-labelledby="fhSort">
+      ${sorts.map(([k, v]) => `<button type="button" role="radio" class="press" data-fsort="${k}" aria-checked="false">${v}</button>`).join("")}</div></section>
+    <div class="factions"><button type="button" class="btn press" data-fclear>Clear</button><button type="button" class="btn primary press" data-fdone></button></div>
+  </div>`;
+}
+function paintFilterSheet(count) {
+  const fs = document.getElementById("fsheet"); if (!fs) return;
+  fs.querySelectorAll("[data-fprice]").forEach(b => b.setAttribute("aria-pressed", state.prices.has(+b.dataset.fprice)));
+  fs.querySelectorAll("[data-farea]").forEach(b => b.setAttribute("aria-pressed", b.dataset.farea === state.area));
+  fs.querySelectorAll("[data-fsort]").forEach(b => { const on = b.dataset.fsort === state.sort; b.setAttribute("aria-checked", on); b.tabIndex = on ? 0 : -1; });
+  fs.querySelector("[data-fdone]").textContent = count ? `Show ${count} ${count === 1 ? "place" : "places"}` : "No places match";
+  fs.querySelector("[data-fclear]").disabled = !state.prices.size && state.area === "All areas" && state.sort === "popular";
+}
+$("#filtersBtn").addEventListener("click", e => {
+  showSheet("Filters", filterSheetHTML(), e.currentTarget);
+  paintFilterSheet(filtered().length);
+  arrowRadios(document.querySelector("#fsheet .segmented"), "[data-fsort]");
+});
+layer.addEventListener("click", e => {
+  const pr = e.target.closest("[data-fprice]"), ar = e.target.closest("[data-farea]"), so = e.target.closest("[data-fsort]");
+  if (pr) { const n = +pr.dataset.fprice, on = !state.prices.has(n); on ? state.prices.add(n) : state.prices.delete(n); on ? Sound.up() : Sound.down(); }
+  else if (ar) state.area = ar.dataset.farea;
+  else if (so) state.sort = so.dataset.fsort;
+  else if (e.target.closest("[data-fclear]")) { state.prices.clear(); state.area = "All areas"; state.sort = "popular"; Sound.down(); }
+  else if (e.target.closest("[data-fdone]")) { closeSheet(); return; }
+  else return;
+  syncChips(); render();
+});
 
 /* ================= Pick: four ways ================= */
 function weightOf(p) { return Math.pow(p.rating - 3.5, 2) * Math.log10(p.reviews) * (isOpen(p) ? 1 : 0.12); } // lean to good, popular and open now

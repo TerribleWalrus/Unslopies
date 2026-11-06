@@ -133,3 +133,13 @@ Checks run in Chromium at 390 and 1280 px, in dark and light:
 
 Not checked here: what the sounds sound like, real phone shaking (the devicemotion API), and touch drag on a real
 device.
+
+## Round 3: phone layout (user: "the filters feel crowded; make it easier to reach and simpler")
+- **The top is one row:** Both / Food / Coffee plus "Open now". Price, area and sort moved into a Filters sheet.
+- **Filters and Pick sit side by side** at the bottom, inside thumb reach. Filters shows how many filters are on.
+- **The Filters sheet** updates the list live behind it. Its main button says "Show 2 places", and Clear resets
+  price, area and sort.
+- **Cards** drop the review count on phones, so each card is one line shorter.
+- **Desktop is unchanged:** the sidebar keeps every filter, and the Filters button is hidden there.
+- **Measured:** the first card now starts at 243 px from the top, down from about 420 px.
+- **Bug found in review:** the badge showed "0" when no filters were on, because `display` overrode `hidden`. Fixed.
