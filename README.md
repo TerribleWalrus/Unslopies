@@ -10,14 +10,14 @@ Think of it as the scaffolding: the steps every design goes through, plus the gu
 
 ## What's new in 1.6
 
-- **It asks before it designs.** It asks numbered questions in rounds, each with a recommended answer you can accept with "yes": who the design is for, how much animation you want, how far it should go (polish, refine or rethink), and whether you want sound. If you send a project that already exists, it looks at it first and asks whether you want a redesign or only fixes.
+- **It asks before it designs, and it doesn't pitch.** It asks small, easy questions built from your own prompt or existing design, and each answer leads to smaller follow-ups. You answer the vision questions (what it is, who it's for, how it should feel), and it helps you see your idea with quick visual takes such as palettes, type samples and rough wireframes. The craft questions (how far to go, how much animation, sound) come with a recommended answer you can accept with "yes". If you send a project that already exists, it looks at it first and asks whether you want a redesign or only fixes.
 - **Smoother, Apple-like motion.** It uses exact easing curves and durations, and most UI animations stay under 300 ms. Actions you repeat many times a day don't animate. Things scale from the button that opened them, leave the way they came in, can be interrupted halfway, and follow your finger when dragged. Reduced-motion settings keep fades and drop movement. The motion rules draw on [Emil Kowalski's animation skills](https://github.com/emilkowalski/skills).
 - **Interactive sound, if you want it.** Sound effects are opt-in and sit behind a visible on/off button. Each sound is tied to an action (a tap, a toggle, success, an error, opening a sheet) and plays at the same moment as the visual change. By default the sounds are synthesized in the browser. You can also supply your own files, or ask for royalty-free ones, whose sources and licences are listed in `SOUNDS.md`. Background music is added only when you ask for it, never autoplays, and has its own controls.
 - **A browser review before reporting.** It opens the result in a real browser, takes screenshots at phone and desktop widths in both themes, and plays transitions in slow motion. It lists what is hard to use in a findings table, fixes those issues and checks again.
 
 ## What the foundation provides
 
-- **Interview.** Questions in rounds with recommended answers, ending with a short summary for you to confirm.
+- **Interview.** Small questions in rounds that grow from your answers. Vision questions are yours to answer, and craft questions come with a recommendation. It ends with a short summary in your words for you to confirm.
 - **Concept phase (sites).** List real-world moments from the subject, write five metaphor-based concepts, score them, and prototype the risky parts before building the full page.
 - **Task table (apps).** Top tasks, how often each happens, and step counts before and after.
 - **Ban list.** Hard rules against common AI patterns: lines as the main structure, gradients, decorative italics, monospace as flavour, glossy orbs, generic hero-plus-three-cards layouts, janky motion and autoplaying sound.

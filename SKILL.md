@@ -11,9 +11,11 @@ thing is used. 1.6 keeps all of that and adds what 1.5 left vague: asking the us
 smooth and physical, sound that answers the user's actions, and a browser review of the result before reporting.
 
 **What changed from 1.5**
-- **Interview first (Phase 1).** Before designing, ask the user numbered questions in rounds, each with a recommended
-  answer: who it is for, how much animation, how far to go and whether they want sound. If they sent a project that
-  already exists, ask whether they want a redesign or only fixes.
+- **Interview first (Phase 1).** Before designing, ask the user small, easy questions in rounds, built from their
+  own prompt or existing design. Each answer leads to smaller follow-ups. The user answers the vision questions (what
+  it is, who it is for, how it should feel), and Claude helps them see their idea with quick visual takes instead of
+  proposing its own. Craft questions (how far to go, how much animation, sound) come with a recommended answer. If they
+  sent a project that already exists, ask whether they want a redesign or only fixes.
 - **Motion is its own phase (Phase 7)**, with exact curves and durations, a frequency rule for when not to animate,
   and rules for interrupting animations, transform origins, presses and exits. These are strong defaults. The
   interview's animation answer turns them up or down.
@@ -25,8 +27,8 @@ smooth and physical, sound that answers the user's actions, and a browser review
 
 ## The philosophy (read once, apply everywhere)
 
-1. **Ask, don't assume.** Who it is for, how much motion, how far to go and whether there is sound are the user's
-   decisions. Settle them up front instead of guessing them and redoing the work later.
+1. **Ask, don't assume, and don't pitch.** What it is, who it is for and how it should feel are the user's ideas.
+   Draw them out with small questions and help the user see them. Claude's own ideas are the generic ones.
 2. **People live in an interface, they don't only look at it.** Comfort beats rigour. A screen that impresses for
    five seconds and tires the eye after an hour has failed.
 3. **The content is the life, and the chrome recedes.** Faces, names, the user's words and the user's colours carry
@@ -88,55 +90,77 @@ interactions before and after.
 
 ## Phase 1. Interview the user
 
-Interview the user until you both agree on what is being built, then build it. Treat the open decisions as a tree in
-which each answer opens the questions that depend on it.
+The interview draws the user's own idea out of them and helps them see it. Claude's ideas are the generic ones, and
+the user's are the specific ones. So the interview asks rather than proposes, and keeps asking until you both agree on
+what is being built.
+
+**Two kinds of question**
+- **Vision questions** are answered by the user, never by Claude: what it is, who it is for, what it should feel like,
+  what it reminds them of, and what must happen first. Give no recommended answer and don't suggest a subject,
+  audience or concept. When you offer choices, take them from the user's own words or their existing design, and always
+  leave room for "something else".
+- **Craft questions** get a recommended answer, worded so that "yes" accepts it: how far to go, how much animation,
+  whether there is sound, and where sounds come from. These are technical defaults the user can wave through.
 
 **How to ask**
-- **Ask in rounds.** Each round asks every question that can be answered now without knowing the answer to another
-  open question. Wait for the replies, then work out the next round. A question that depends on an answer still
-  pending waits for a later round.
-- **Number every question and give a recommended answer**, worded so that "yes" accepts the recommendation. Use this
-  format:
+- **Start from what they gave you.** Read the prompt, or look at the existing design, and build the first questions
+  from it: the words they used, the screens they have, the problem they named. A question that could be asked about
+  any project is too generic. "You said popular places. Popular with whom: locals, expats, tourists or your friends?"
+  is better than "Who is your audience?"
+- **Small and easy.** Each question should take a few seconds to answer: a yes or no, a choice of 2 to 4, or a word
+  or two. Never ask "describe your vision".
+- **Grow questions from answers.** Each answer opens one or two smaller follow-ups that dig into it. For example:
+  "a price filter" leads to "what counts as cheap: under $3 or under $5?", which leads to "show prices in riel,
+  dollars or both?" Stop digging when the answer no longer changes what you would build.
+- **Ask in rounds.** Each round asks 3 to 5 questions that can be answered now without knowing the answer to another
+  open question. Wait for the replies, then work out the next round. Ask the questions that change the most work
+  first.
+- **Help them see it.** When an answer is about look or feel, show it rather than describing it. Turn their words
+  into 2 or 3 quick visual takes (a palette strip, a type sample, a rough wireframe, a ten-second motion demo) and ask
+  which is closest and what is missing. Each take is a reading of their idea, not a pitch for yours.
+- **Number every question**, and use this format. Craft questions add the ➡ line and vision questions leave it out:
 
   ```
-  ❓ **Q1** - **Who is it for**: <the question, with options if there are any>
-
-  ➡ <your recommended answer, and one line on why>
+  ❓ **Q1** - **<short title>**: <a small question built from their words, with options if there are any>
 
   ---
 
-  ❓ **Q2** - ...
+  ❓ **Q2** - **<short title>**: <a craft question>
+
+  ➡ <your recommended answer, and one line on why>
   ```
 
 - **Look up facts yourself and ask the user only for decisions.** Don't ask what framework the project uses or whether
   a file exists, because you can check. Don't ask anything the prompt or the taste record already answers.
-- **Keep rounds short:** about 6 questions at most, with the most important first. Ask the questions that change the
-  most work first.
-- **Stop when nothing is left undecided.** Then write a five-line summary of the decisions and ask the user to confirm
-  it before you build. If the user says "just build it" or "you decide", take your recommended answers, list them as
-  assumptions at the top of your reply, and go ahead.
+- **Stop when nothing is left undecided.** Then write a five-line summary in the user's own words and ask them to
+  confirm it before you build. If the user says "just build it" or "you decide", take the craft recommendations, list
+  them as assumptions at the top of your reply, and go ahead. Vision questions they skipped stay open: build from what
+  they did say and ask again when you show the first result.
 
-**Round 1: the questions to start from.** Drop any that are already answered:
+**Round 1: what to find out.** Drop anything the prompt already answers. Word each vision question from the prompt:
 
-| # | Question | Options | Usual recommendation |
+| What to learn | Kind | Ask it like this | Recommendation |
 |---|---|---|---|
-| Q1 | **Who is it for?** Who uses it, on what device, how often and for how long? | free text | Name the most likely user from the prompt, for example "regular customers, mostly on phones, a few minutes a week" |
-| Q2 | **New or existing?** Existing projects only: should this be a redesign, or fixes to what is there? Show your 3 to 5 worst findings from Phase 0. | Redesign · Fixes only · Fixes first, then decide | "Fixes first" when the bones are sound, "Redesign" when the layout itself causes the problems |
-| Q3 | **How far should I go?** | **Polish:** spacing, type, colour, states and motion, no layout changes · **Refine:** rework layouts within the current structure and navigation · **Rethink:** a new concept and structure that keeps the content and the wiring | Polish for "small fixes", Refine for an unclear request, Rethink for a new build or a redesign |
-| Q4 | **How much animation?** | **Calm:** feedback and state changes only, nothing animates in for show · **Standard:** adds menus, sheets, toasts and page transitions · **Expressive:** adds hero choreography, onboarding moments and playful springs | Calm for tools used daily, Standard for most products, Expressive for a marketing site or a game-like experience |
-| Q5 | **Sound effects?** Sounds that answer taps, toggles, success and errors, behind a visible on/off button. | No · Yes, sound effects · Yes, sound effects and background music | No, unless the subject is playful, musical, a game or a kids' product |
-| Q6 | **Anything fixed?** Brand colours, fonts, logo, content, or anything you liked or disliked in earlier versions. | free text | "Nothing fixed beyond what is in the prompt" |
+| What it is and who uses it | vision | Only if the prompt doesn't say: "Who opens this, and what do they want done in the first 10 seconds?" | none |
+| Their picture of it | vision | "Is there a place, app or object it should feel like?" or "Which word fits it best: calm, lively, cosy, sharp, or something else?" | none |
+| Existing projects: a redesign or fixes | craft | Show your 3 to 5 worst findings from Phase 0, then: "Redesign, fixes only, or fixes first and then decide?" | "Fixes first" when the bones are sound, "Redesign" when the layout itself causes the problems |
+| How far to go | craft | **Polish:** spacing, type, colour, states and motion, no layout changes · **Refine:** rework layouts within the current structure and navigation · **Rethink:** a new concept and structure that keeps the content and the wiring | Polish for "small fixes", Refine for an unclear request, Rethink for a new build or a redesign |
+| How much animation | craft | **Calm:** feedback and state changes only · **Standard:** adds menus, sheets, toasts and page transitions · **Expressive:** adds one choreographed moment and playful springs | Calm for tools used daily, Standard for most products, Expressive for a marketing site or a game-like experience |
+| Sound | craft | No · sound effects · sound effects and background music | No, unless the subject is playful, musical, a game or a kids' product |
+| Anything fixed | vision | "Any colours, fonts, logo or content that must stay? Anything you already dislike?" | none |
 
-**Later rounds depend on the answers:**
-- **A redesign or "Rethink":** what must stay (the name, content, URLs, a beloved feature)? Is there a reference the
-  user likes?
-- **Fixes only:** confirm the fix list. Recommend your Phase 0 findings, ordered by how much they hurt the user.
-  Anything beyond the list needs the user's yes.
-- **Yes to sound:** do they have their own sound files? If not, recommend synthesized sounds, with no downloads and no
-  licence questions. Should sound be on or off on first visit? Recommend off, with a clear button to turn it on.
-- **Yes to music:** will they supply the track, or should you find one? If you find one, it must be CC0 or royalty-free
-  with the licence written down. Should the music react to what the user does (Phase 8)? What is its mood, in one or
-  two words?
+**Later rounds grow from the answers,** for example:
+- **Each feature they name:** what it does first, what its edge cases are, and how they would use it themselves.
+  "Random pick" leads to "from everything, or only from what the filters show?", which leads to "can they pick
+  again?"
+- **A feeling or a reference:** show 2 or 3 visual takes on it and ask which is closest.
+- **A redesign or "Rethink":** what must stay (the name, content, URLs, a beloved feature)?
+- **Fixes only:** confirm the fix list, ordered by how much each problem hurts the user. Anything beyond the list needs
+  the user's yes.
+- **Yes to sound:** do they have their own files? If not, recommend synthesized sounds. On or off on first visit?
+  Recommend off, with a clear button to turn it on.
+- **Yes to music:** their own track, one you find (CC0 or royalty-free, with the licence written down), or a
+  synthesized loop? Should it react to what the user does (Phase 8)? What is its mood, in one or two words?
 - **Expressive animation:** which single moment deserves the most motion? Everything else stays calm.
 
 Record the answers in the taste record (Phase 14) so the next session doesn't ask again.
@@ -171,8 +195,10 @@ Write this in the planning notes before any visual work:
 1. **Real-world moments.** List 8 or more physical moments, objects or places from the subject's world that people
    already have feelings about, across the senses and before, during and after use. Sounds count: they become the
    sound palette if the user said yes to sound.
-2. **Five concepts.** Each concept is one metaphor the page lives inside, plus its hero mechanic (what the visitor
-   does with their hands), how every section maps onto it, and the paradigm.
+2. **Five concepts, built from the interview.** Start from the user's words, references and feelings, not from your
+   own favourite ideas, and show the strongest two or three as quick sketches so the user can react. Each concept is
+   one metaphor the page lives inside, plus its hero mechanic (what the visitor does with their hands), how every
+   section maps onto it, and the paradigm.
 3. **Score and pick.** Rate each from 1 to 5 on fascination, fit, clarity (does the main job still get done?),
    accessibility path, feasibility and freshness. Write one line on why the runner-up lost.
 4. **Prototype the risky part first.** Build the hero mechanic alone. Check that it works at a smooth frame rate,
