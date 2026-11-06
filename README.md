@@ -15,7 +15,18 @@ Think of it as the scaffolding: the steps every design goes through, plus the gu
 - **Interactive sound, if you want it.** Sound effects are opt-in and sit behind a visible on/off button. Each sound is tied to an action (a tap, a toggle, success, an error, opening a sheet) and plays at the same moment as the visual change. By default the sounds are synthesized in the browser. You can also supply your own files, or ask for royalty-free ones, whose sources and licences are listed in `SOUNDS.md`. Background music is added only when you ask for it, never autoplays, and has its own controls.
 - **Life and warmth are built in, not added on.** Your feeling words ("lively", "cosy", "calm") are turned into decisions about the colour temperature, type, rhythm, the form of the first screen, motion, copy and sound before any code is written. Decoration on top of a generic layout doesn't count. Before the full build, you're shown 2 or 3 quick takes of the first screen to pick from, even if you said "you decide".
 - **Built to ship, users first.** Everything is built for real use. Real-world facts are researched and checked against sources, nothing is invented (no fake ratings, hours or reviews), and demo leftovers are banned. When a creative idea makes something harder to use, the idea is reshaped until it works for people, never swapped for a template. Long lists on phones are measured and reshaped, for example into a swipeable row.
-- **A browser review before reporting.** It opens the result in a real browser, takes screenshots at phone and desktop widths in both themes, and plays transitions in slow motion. It lists what is hard to use in a findings table, fixes those issues and checks again.
+- **A browser review before reporting.** It opens the result in a real browser, takes screenshots at phone and desktop widths in both themes, and plays transitions in slow motion. It lists what is hard to use in a findings table, fixes those issues and checks again. The skill includes a ready-to-run review script that measures contrast, tap target sizes, sideways scroll, page height and demo leftovers.
+- **The scope decides how much runs.** Polish, Refine and Rethink each run only the steps they need, so a small fix doesn't go through the full concept process.
+- **It respects what's already there and where it ships.** It reuses your existing design system and tokens, checks what your deploy target blocks (autoplay, motion sensors, external fonts) and plans fallbacks, and picks fonts that cover your audience's script.
+
+## Files
+
+- `SKILL.md`: the process and rules. It is always loaded.
+- `references/motion.md`: motion tokens, the rules for each kind of motion, and how to check them. It is loaded before any animation work.
+- `references/sound.md`: the sound toggle, sound map, synthesis, music and checks. It is loaded only when you want sound.
+- `references/review.md`: the browser review loop, scripts and the scorecard. It is loaded before the review.
+
+Keep the folder together when you install it, for example as `~/.claude/skills/unslop-design-1-6/`, so the reference files are found.
 
 ## What the foundation provides
 
@@ -40,17 +51,18 @@ Think of it as the scaffolding: the steps every design goes through, plus the gu
 - The page or pages to build, or the existing project to improve
 - Any brand constraints: colors, fonts, logos, or content you already have
 - Functional requirements: forms, booking, live data, or other behavior
-- Your answers to the interview. Say "you decide" to accept every recommended answer.
+- Your answers to the interview. "You decide" accepts the recommended craft choices (scope, animation, sound). The look is still yours: you are shown 2 or 3 takes of the first screen to pick from.
 
 ## How to use it
 
 1. Give your subject and the pages you need, or point it at your existing project.
 2. Answer the interview rounds. Confirm the summary.
-3. Review the concepts (sites) or the task table (apps), and the prototype of anything risky.
+3. Pick from the 2 or 3 takes of the first screen, and review the concepts (sites) or the task table (apps).
 4. Read the browser review findings and the scorecard at the end. Any failed rule should be explained or fixed.
 
 ## Notes
 
 - Fonts and layouts are chosen to avoid the usual defaults, so they may not match what you expected. Ask for a specific font or layout if you need one.
 - If you want a brand look kept exactly, say so, or choose "Fixes only" or "Polish" in the interview.
+- Real-world facts (places, prices, hours, ratings) are only shown when they can be verified. Anything that can't be is left out and linked to a live source instead.
 - Sound is off on first visit unless you choose otherwise. Your choice is remembered per browser.
