@@ -26,6 +26,10 @@ smooth and physical, sound that answers the user's actions, and a browser review
   (temperature, type, rhythm, the first screen's form, motion, copy, sound) before any code. Decoration added on
   top of a generic structure does not count as life. A template test and a blurred-screenshot test check the
   result.
+- **Built for deploy, users first (Phase 0, Phase 3, Phase 13).** Everything is built to ship, not to demo. Real
+  content is researched and verified, and nothing is invented (ratings, reviews, hours, prices, quotes). Demo
+  leftovers are banned. When usability and a unique idea pull apart, fix the usability inside the idea instead of
+  falling back to a template.
 - **Browser review loop (Phase 13).** After building or fixing, drive the result in a real browser. Take screenshots,
   play the transitions in slow motion and list what is hard to use. Fix it and check again before reporting.
 
@@ -33,32 +37,37 @@ smooth and physical, sound that answers the user's actions, and a browser review
 
 1. **Ask, don't assume, and don't pitch.** What it is, who it is for and how it should feel are the user's ideas.
    Draw them out with small questions and help the user see them. Claude's own ideas are the generic ones.
-2. **People live in an interface, they don't only look at it.** Comfort beats rigour. A screen that impresses for
+2. **Build for deploy, not for a demo.** People will rely on what ships: the data is real, the links go somewhere and
+   the copy is final. A good-looking demo with invented content isn't finished work.
+3. **Users first, character kept.** People use this skill so their product stops looking AI-made, not so it gets
+   harder to use. When a creative choice hurts usability, change the form of the idea until it serves the user. Don't
+   throw the idea away for a template, and don't keep it as it is at the user's expense.
+4. **People live in an interface, they don't only look at it.** Comfort beats rigour. A screen that impresses for
    five seconds and tires the eye after an hour has failed.
-3. **The content is the life, and the chrome recedes.** Faces, names, the user's words and the user's colours carry
+5. **The content is the life, and the chrome recedes.** Faces, names, the user's words and the user's colours carry
    the warmth. Never override a content setting the user chose (their text colours, fonts, sizes).
-4. **A feature that isn't used is clutter.** A permanent panel the user never asked for makes the app worse, however
+6. **A feature that isn't used is clutter.** A permanent panel the user never asked for makes the app worse, however
    pretty it is. "I don't use this" is a design verdict.
-5. **Separate with space and surfaces, not lines.** Lines make a layout look like a form. Space and tonal surfaces
+7. **Separate with space and surfaces, not lines.** Lines make a layout look like a form. Space and tonal surfaces
    make it look composed.
-6. **Warmth is a temperature, not a feature list.** It lives in the ground, the surfaces, the type and the voice.
+8. **Warmth is a temperature, not a feature list.** It lives in the ground, the surfaces, the type and the voice.
    A cool shell with a warm accent and a few friendly badges still reads cold. Dark brown reads as black, so warmth
    needs a lifted reading surface, neutrals that lean toward the accent, and one warm accent.
-7. **Motion is physics, not decoration.** Things come from somewhere and go back there. They respond the moment the
+9. **Motion is physics, not decoration.** Things come from somewhere and go back there. They respond the moment the
    user touches them, follow the finger, and can be interrupted halfway. If the user waits for an animation, it is too
    slow. If they notice it on the hundredth use, it shouldn't be there.
-8. **Sound is feedback, not a soundtrack.** A sound confirms what the hand just did. It is quiet, short, opt-in and
+10. **Sound is feedback, not a soundtrack.** A sound confirms what the hand just did. It is quiet, short, opt-in and
    never the only signal.
-9. **A phone is a different posture.** The user holds it with a thumb, in a bus, in the dark. A desktop layout made
+11. **A phone is a different posture.** The user holds it with a thumb, in a bus, in the dark. A desktop layout made
    narrower is not a phone design.
-10. **Behaviour is part of the design.** Where focus lands, what Escape does and what a button says while it works are
+12. **Behaviour is part of the design.** Where focus lands, what Escape does and what a button says while it works are
     design decisions. Leave them undecided and they become frustrations.
-11. **What the user sees is the real test.** Their data, their settings, their device and network, their cache.
+13. **What the user sees is the real test.** Their data, their settings, their device and network, their cache.
     Your clean test page is only a proxy, so look at the result in a browser before you call it done.
-12. **Taste is evidence, so write it down.** Every verdict the user gives is a rule for next time.
-13. **Consistency comes from one source.** One icon set, one token file, one motion language, one sound palette and
+14. **Taste is evidence, so write it down.** Every verdict the user gives is a rule for next time.
+15. **Consistency comes from one source.** One icon set, one token file, one motion language, one sound palette and
     one shared kit. If something is defined twice, it will drift.
-14. **Compare details, not impressions.** When matching a reference, go detail by detail with pass or fail. "Looks
+16. **Compare details, not impressions.** When matching a reference, go detail by detail with pass or fail. "Looks
     about right" hides the twenty small misses that make it feel off.
 
 ## Phase 0. Read the room
@@ -75,6 +84,16 @@ can run the process, and this skill's bans and checks apply on top.
 **If the user sent an existing project,** look at it before the interview. Run it, take screenshots at 390 px and
 1280 px, try its main tasks, and note the worst 3 to 5 problems. You bring this list to the interview (Phase 1, Q2)
 so the user can choose between a redesign and fixes based on what is really there.
+
+**Real content, verified.** Build with the user's real content. When the product needs real-world facts (places,
+products, prices, people, events), research them and check each one against at least one current, reliable source.
+Keep a list of the sources and share it with the user.
+- **Never invent facts and present them as real:** ratings, review counts, opening hours, prices, quotes,
+  testimonials, statistics or people.
+- **If a fact can't be verified, leave it out** and link to a live source instead (a maps link for hours, the
+  official site for prices). Say on the page that it can change.
+- **If the user has the data, ask for it** rather than guessing.
+- **Placeholder or sample content is only for a mockup the user asked for.** Label it as such, and never ship it.
 
 **Pick the mode** and write one line on why:
 
@@ -249,6 +268,9 @@ Never ship these unless the user asks for them. The right-hand column says where
 | Animating actions repeated 100+ times a day: keyboard shortcuts, command palette open and close, typing, list navigation by keyboard | never |
 | Sound that autoplays, plays on hover, on every keystroke or scroll, background music with no pause, or a sound that is the only signal | never (Phase 8) |
 | Grey on grey: secondary text so dim the app reads as disabled | never (see the text floors in Phase 5) |
+| **Invented facts shown as real:** made-up ratings, review counts, hours, prices, quotes, testimonials or statistics | never; leave the fact out or link to a live source (Phase 0) |
+| **Demo leftovers in a shipped build:** "sample data", "demo", lorem ipsum, placeholder names, test notes, dead links | a mockup the user asked for, clearly labelled |
+| **A list that scrolls forever on a phone:** the same tall card repeated for screen after screen | never; compact it, group it, or turn it into a swipeable row (Phase 10) |
 | Emoji as icons | never |
 | Purple-blue, cream plus terracotta, black plus one neon accent, brown on brown sold as "warm" | never |
 
@@ -555,6 +577,9 @@ Design the phone as its own layout, not as a squeezed desktop:
 - Respect safe areas (`env(safe-area-inset-*)`) and the on-screen keyboard. The composer or form stays visible above
   the keyboard.
 - Targets are at least 44 px, and spacing tightens less than you'd think: thumbs are bigger than cursors.
+- **Measure the scroll.** If one repeated item fills more than about three phone screens, change its form: a compact
+  row, groups the user can open, or a horizontal row that snaps one item at a time, with a visible "swipe" hint and
+  position dots. Keep the item's character in its new form.
 - Test at the real device size of the user's phone if you know it, and at 390 px if you don't.
 
 ## Phase 11. Accessibility (WCAG 2.2 AA minimum)
@@ -630,19 +655,21 @@ and look at it as the user would:
 5. **Probe what is hard to use.** Script checks for targets under 44 px on a phone, text under 4.5:1, focus that gets
    lost or trapped, controls without a visible label, and horizontal scroll. Try the obvious wrong move as a new
    user would: tap the thing that looks tappable, press Escape, press back, double-tap submit.
-6. **List the findings** in a table, worst first:
+6. **Check it's ready to ship.** Search the page for "sample", "demo", "lorem", "placeholder", "TODO" and "test".
+   Open every link. Check every fact against its source list. Measure the page height on a phone.
+7. **List the findings** in a table, worst first:
 
    | Issue | Where | Who it hurts | Fix |
    |---|---|---|---|
 
-7. **Fix, then repeat the loop** until nothing serious is left. Under "Fixes only" (Phase 1, Q2), fix what was
+8. **Fix, then repeat the loop** until nothing serious is left. Under "Fixes only" (Phase 1, Q2), fix what was
    agreed, and bring anything new to the user as a proposal instead of fixing it unasked.
 
 ## Phase 14. Record taste, then report
 
 **Write down every verdict** in the project's memory file (PROJECT_MEMORY.md, DESIGN.md or the brief): the interview
 answers, the user's words, the date and the rule each implies. "I do not use this", "brown isn't warm", "too many
-lines", "it lacks life and warmth", "the animation is too slow" and "the click sound is annoying" are each worth
+lines", "it lacks life and warmth", "the scroll is way too long", "the animation is too slow" and "the click sound is annoying" are each worth
 more than any rule in this skill. When a verdict says the design lacks life or creativity, go back to the feeling
 table and the first screen's form. More ornament on the same structure is not a fix.
 
@@ -654,6 +681,7 @@ table and the first screen's form. More ornament on the same structure is not a 
 | Scope respected | | redesign, fixes or polish, and nothing beyond it without a yes |
 | Mode chosen | | site or app, and why |
 | Taste record read | | the file, the rules applied from it |
+| Ready to deploy | | real content and its sources, nothing invented, no demo leftovers, links checked |
 | Task table (app) | | top five tasks, frequency, steps before and after |
 | Concepts and prototype (site) | | the 5 concepts and scores, what was prototyped, the variations |
 | Ban list clean | | grep for gradient, italic, monospace, `border`, `<hr`, `box-shadow`, radius, `ease-in`, `transition: all`, `scale(0)`, with a reason for each that remains |
@@ -667,7 +695,7 @@ table and the first screen's form. More ornament on the same structure is not a 
 | Sound | | n/a if declined, otherwise the toggle, the sound map, the source of each sound (and SOUNDS.md for found files), music controls |
 | Icons | | the set, the double-checks |
 | Four states | | each control's working, success and failure feedback |
-| Phone posture | | thumb reach, sheets, safe areas, gesture alternatives |
+| Phone posture | | thumb reach, sheets, safe areas, gesture alternatives, page height on a phone |
 | Accessibility | | contrast, keyboard, live regions, reduced motion, sound never the only signal |
 | Feel and performance | | measured numbers (frame time, interaction cost, throttle) |
 | Tested by use | | tasks run with step counts, extremes, keyboard, phone, the user's real setup |
