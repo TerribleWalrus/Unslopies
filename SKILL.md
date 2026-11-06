@@ -1,6 +1,6 @@
 ---
 name: unslop-design-1-6
-description: Unslop Design 1.6. Design and build front ends that look like a specific studio made them for this subject, that feel warm, alive and easy to live in, and whose motion and sound feel smooth and calm, in the spirit of Apple's design. Covers websites and apps alike, including landing pages, web apps, app shells, chat UIs, dashboards, settings screens, mobile layouts, skins and themes for existing apps, mockups, redesigns, design reviews, animation passes and adding sound effects or background music. It replaces unslop-design 1.5 and 1.0, so use this one whenever more than one applies. Also use it when the user only says "make it look good", "it feels lifeless", "too many lines", "it's cold", "restyle this", "it's hard to use", "make the animations smoother", "it feels janky" or "add sounds".
+description: Unslop Design 1.6. Design and build front ends that look like a specific studio made them for this subject, that feel warm, alive and easy to live in, and whose motion and sound feel smooth and calm, in the spirit of Apple's design. Covers websites and apps alike, including landing pages, web apps, app shells, chat UIs, dashboards, settings screens, mobile layouts, skins and themes for existing apps, mockups, redesigns, design reviews, animation passes and adding sound effects or background music. It replaces unslop-design 1.5 and 1.0, so use this one whenever more than one applies. Also use it when the user only says "make it look good", "it feels lifeless", "too many lines", "it's cold", "restyle this", "it's hard to use", "it lacks life", "it's not creative enough", "make the animations smoother", "it feels janky" or "add sounds".
 ---
 
 # Unslop Design 1.6
@@ -22,6 +22,10 @@ smooth and physical, sound that answers the user's actions, and a browser review
 - **Sound is its own phase (Phase 8).** Sound effects are opt-in, have a visible toggle, and each one is mapped to a
   user action. Sounds are synthesized by default, the user can supply their own, and background music is played only
   when the user asks for it.
+- **The feeling is built, not added (Phase 5).** The user's feeling word is turned into decisions in every layer
+  (temperature, type, rhythm, the first screen's form, motion, copy, sound) before any code. Decoration added on
+  top of a generic structure does not count as life. A template test and a blurred-screenshot test check the
+  result.
 - **Browser review loop (Phase 13).** After building or fixing, drive the result in a real browser. Take screenshots,
   play the transitions in slow motion and list what is hard to use. Fix it and check again before reporting.
 
@@ -37,8 +41,9 @@ smooth and physical, sound that answers the user's actions, and a browser review
    pretty it is. "I don't use this" is a design verdict.
 5. **Separate with space and surfaces, not lines.** Lines make a layout look like a form. Space and tonal surfaces
    make it look composed.
-6. **Warmth comes from light and accent, not from brown.** Dark brown reads as black. Warmth needs a lifted reading
-   surface, a hue-biased neutral and one warm accent.
+6. **Warmth is a temperature, not a feature list.** It lives in the ground, the surfaces, the type and the voice.
+   A cool shell with a warm accent and a few friendly badges still reads cold. Dark brown reads as black, so warmth
+   needs a lifted reading surface, neutrals that lean toward the accent, and one warm accent.
 7. **Motion is physics, not decoration.** Things come from somewhere and go back there. They respond the moment the
    user touches them, follow the finger, and can be interrupted halfway. If the user waits for an animation, it is too
    slow. If they notice it on the hundredth use, it shouldn't be there.
@@ -136,6 +141,9 @@ what is being built.
   confirm it before you build. If the user says "just build it" or "you decide", take the craft recommendations, list
   them as assumptions at the top of your reply, and go ahead. Vision questions they skipped stay open: build from what
   they did say and ask again when you show the first result.
+- **"You decide" covers craft, not the look.** Before the full build, always show 2 or 3 quick takes of the first
+  screen (rough but real screenshots, built from the user's words and the feeling table in Phase 5) and let the user
+  pick or mix. This takes minutes and is the cheapest place to find out a design lacks life.
 
 **Round 1: what to find out.** Drop anything the prompt already answers. Word each vision question from the prompt:
 
@@ -232,6 +240,10 @@ Never ship these unless the user asks for them. The right-hand column says where
 | Kickers or eyebrows above headings | never |
 | Generic site layouts: hero plus 3 cards, bento grid, a centred column of stacked sections, split hero, logo cloud, testimonial carousel | never |
 | Generic app layouts: settings as one long list of label rows split by rules, a dashboard of identical cards, sidebar, header and content in one grey with borders between, a permanent panel nobody asked for | never |
+| **The template app, reskinned:** a header, rows of chips, a list of rounded cards and a button at the bottom, with the subject's colours poured in | the user asked for plain, or the content is a dense working list (mail, files, logs) |
+| **Decoration as life:** bunting, stickers, badges, coloured initials or meters added on top of an unchanged generic structure | the element carries real information and the structure itself already carries the feeling |
+| **A cool shell under a warm subject:** grey, slate or grey-teal grounds and surfaces for food, home, people, evenings or celebrations | the subject itself is cool (a lab, ice, the sea, a bank vault) |
+| **Creativity hidden behind a button:** the one inventive idea lives in a sheet or a second screen while the first screen stays generic | never: the first screen carries the idea |
 | Motion "because": fade-up on every section, scroll-reveal from opacity 0, everything animating in | the motion explains a change of state (Phase 7) |
 | Janky motion: `ease-in` on UI, growing from `scale(0)`, `transition: all`, animating width, height, top or left, a bounce on every element, animations that block input until they finish | never (Phase 7 has the replacements) |
 | Animating actions repeated 100+ times a day: keyboard shortcuts, command palette open and close, typing, list navigation by keyboard | never |
@@ -270,35 +282,74 @@ Grep for them before you finish and justify or delete each one.
 - **Blur test.** Blur a screenshot by about 8 px, or squint. You should see a few shapes of different sizes. If you
   see stripes of equal height, the layout is a list of sections, so go back.
 
-## Phase 5. Warmth and life
+## Phase 5. Feeling, warmth and life
 
-Check each item and write the evidence:
+Life and warmth are the first things a user notices and the first things a safe build loses. A design can pass every
+ban and every check and still feel like a template with the subject's colours poured in. This phase stops that.
 
-- **Neutrals with a hue bias** toward the accent, not pure mid-grey. Pure white or near-black grounds are fine when
+### Make the feeling the build
+Take the user's feeling words from the interview ("lively like a night market", "calm", "cosy") and, before any code,
+write a **feeling table**. Each row says how the feeling changes that layer's *base*, not what gets added on top:
+
+| Layer | What the feeling decides |
+|---|---|
+| Temperature and colour | the ground and surfaces, not only the accent; how saturated; how many colours the content may bring |
+| Type | the display face and its size, weight and width; how loud the headings are against the body |
+| Rhythm and density | tight and bustling, or airy and slow; regular or deliberately uneven |
+| Shape language | soft, cut, hand-drawn, stamped, printed; taken from the subject's own objects |
+| The first screen's form | what the main view *is* (Phase 6 forbids the template answer) |
+| Motion character | snappy, bouncy, drifting; which one moment gets the most motion |
+| Copy voice | how someone from this world would say it, still plain and clear |
+| Sound | the material the sounds are made of, if there is sound |
+
+Two rules:
+- **Decoration is not life.** Lights, stickers, badges or meters added to a generic structure don't count. If you
+  remove every ornament and the screen no longer shows the feeling, the feeling was never built in.
+- **One feeling, every layer.** If the table has a row that the feeling doesn't change, explain why in one line.
+
+### Warmth
+- **Temperature matches the subject.** For a warm subject (food, home, people, evenings, celebrations), the ground and
+  surfaces lean warm too. Keep the neutrals' hue within about 40° of the accent's hue, or write the reason.
+- **Neutrals with a hue bias** toward the accent, never pure mid-grey. Pure white or near-black grounds are fine when
   chosen on purpose.
-- **Warmth from light and accent.** Use one warm accent in a few deliberate places. Brown surfaces below about
-  L\* 12 read as black, so lift the reading surface (around L\* 19–22 on dark themes) before you expect any hue to
-  show. Low-opacity noise texture can add material warmth, but a gradient can't.
+- **Warm darks need lifting.** Brown and wine surfaces below about L\* 12 read as black, so lift the reading surface
+  (around L\* 19–22) before you expect any hue to show. Low-opacity noise or a paper texture adds material warmth, but
+  a gradient can't.
 - **Rounded and concentric** (Phase 6), soft but not bubbly.
 - **Text that is comfortable for hours.** Body text is 16–17 px with a line height near 1.5. For apps, aim for
   contrast floors of about 10:1 for primary text, 7:1 for secondary and 4.6:1 for tertiary, and avoid stark pure
   white on pure black for long reading. Body prose must never be the dimmest thing on screen.
-- **Signs of life:** the content's own faces and colours (avatars, a colour per speaker), relative times ("2 min
-  ago"), unread dots, typing and streaming indicators, real names, and empty states that say what to do next.
+- **Both themes designed**, not inverted, and both warm. Check the taste record for which one is the default.
+
+### Life
+- **The subject's own material is on the first screen,** not in icons: drawings of its real objects built from
+  simple geometry, the user's real photos where they have them, textures, the names and words of that world.
+- **Signs of life** that carry information: the content's own faces and colours, relative times ("2 min ago"),
+  unread dots, typing and streaming indicators, real names, and empty states that say what to do next.
 - **Human copy.** Buttons are verbs ("Save changes", not "Submit"), and messages are plain sentences that say what
-  happened and what to do.
+  happened and what to do, in the voice from the feeling table.
 - **Motion that responds** to the user: presses press, drags follow, things settle (Phase 7).
-- **Both themes designed**, not inverted. Check the taste record for which one is the default.
+
+### Creativity lives on the first screen
+- **The first screen carries the idea.** Inventive moments behind a button or in a sheet are welcome, but they don't
+  count toward the first impression.
+- **Apps change the form, not the step count.** The main view can become something from the subject's world while
+  every top task keeps its target step count from the task table.
+- **The template test.** Swap the name and the content for a different subject's. If the screen still works
+  unchanged for that subject, it isn't designed yet.
 
 ## Phase 6. Rejection protocol and the detail system
 
 ### Rejection (write it down before any code)
 1. **Fonts.** List the first 10 fonts that come to mind. All 10 are out, so pick from outside the list. Each face
-   must read well at 16 px, with clear `Il1` and `0O`, and cover the weights you need. Check the taste record for
-   faces the user already rejected.
-2. **Layouts.** List the first 5 layout ideas and reject them all. A site's candidate comes from the subject's own
-   world. An app's candidate must serve the task table, so a fresh layout that adds steps loses. Under "Polish"
-   (Phase 1, Q3) skip this step and keep the layout.
+   must read well at 16 px, with clear `Il1` and `0O`, and cover the weights you need. Pair a display face with
+   character (for the name, headings and the signature moment) with a calm body face. One family is allowed only if
+   it carries the feeling on its own. Check the taste record for faces the user already rejected.
+2. **Layouts.** List the first 5 layout ideas and reject them all. For an app, the template (a header, chips, a list
+   of cards and a bottom button) always counts as one of the five, whether or not it came to mind. A site's
+   candidate comes from the subject's own world. An app's candidate must keep the task table's step counts, so
+   change the form instead of adding steps. "A fresh layout would add steps" is never a reason to fall back to the
+   template. Under "Polish" (Phase 1, Q3) skip this step and keep the layout.
 3. **Paradigm (sites).** Pick one not used in the last design: tabletop, isometric, page-as-a-place, paper cut-out,
    blueprint, printed matter, signage, instrument panel, cartographic, museum label, transit map, packaging dieline,
    or another. Apps can keep the paradigm quiet. Their identity lives in the theme, type and core loop.
@@ -566,29 +617,34 @@ and look at it as the user would:
    - **Feeling:** does it create the intended emotion?
    - **Load:** is anything on screen that the next decision doesn't need?
    - **The 100th use (apps):** what will annoy them?
-2. **Watch the motion slowed down.** Slow the animations to about 10% speed (through the DevTools protocol's
+2. **Check the feeling.** Put the first screen next to the feeling table and go row by row. Then blur the
+   screenshot heavily and hide all text: would a stranger guess the subject and the feeling from shape, colour and
+   rhythm alone? Run the template test from Phase 5. If any of these fail, the build fails, however clean it is.
+3. **Watch the motion slowed down.** Slow the animations to about 10% speed (through the DevTools protocol's
    `Animation.setPlaybackRate`) and capture frames of every transition you touched. Look for things that pop instead
    of moving, scale from the wrong corner, exit in a different direction from how they entered, overshoot, or leave
    a gap that snaps shut. Then trigger each one twice quickly to check that it reverses smoothly instead of
    restarting.
-3. **Check sound,** if there is any: each mapped action plays its sound once, nothing plays before the first gesture
+4. **Check sound,** if there is any: each mapped action plays its sound once, nothing plays before the first gesture
    or with the toggle off, the toggle survives a reload, and ten fast taps don't distort.
-4. **Probe what is hard to use.** Script checks for targets under 44 px on a phone, text under 4.5:1, focus that gets
+5. **Probe what is hard to use.** Script checks for targets under 44 px on a phone, text under 4.5:1, focus that gets
    lost or trapped, controls without a visible label, and horizontal scroll. Try the obvious wrong move as a new
    user would: tap the thing that looks tappable, press Escape, press back, double-tap submit.
-5. **List the findings** in a table, worst first:
+6. **List the findings** in a table, worst first:
 
    | Issue | Where | Who it hurts | Fix |
    |---|---|---|---|
 
-6. **Fix, then repeat the loop** until nothing serious is left. Under "Fixes only" (Phase 1, Q2), fix what was
+7. **Fix, then repeat the loop** until nothing serious is left. Under "Fixes only" (Phase 1, Q2), fix what was
    agreed, and bring anything new to the user as a proposal instead of fixing it unasked.
 
 ## Phase 14. Record taste, then report
 
 **Write down every verdict** in the project's memory file (PROJECT_MEMORY.md, DESIGN.md or the brief): the interview
 answers, the user's words, the date and the rule each implies. "I do not use this", "brown isn't warm", "too many
-lines", "the animation is too slow" and "the click sound is annoying" are each worth more than any rule in this skill.
+lines", "it lacks life and warmth", "the animation is too slow" and "the click sound is annoying" are each worth
+more than any rule in this skill. When a verdict says the design lacks life or creativity, go back to the feeling
+table and the first screen's form. More ornament on the same structure is not a fix.
 
 **Report a scorecard** after building, with pass or fail for each row. Mark rows that don't apply to the mode as n/a.
 
@@ -603,7 +659,8 @@ lines", "the animation is too slow" and "the click sound is annoying" are each w
 | Ban list clean | | grep for gradient, italic, monospace, `border`, `<hr`, `box-shadow`, radius, `ease-in`, `transition: all`, `scale(0)`, with a reason for each that remains |
 | Separation ladder | | how many lines remain and why, ΔL\* between adjacent surfaces |
 | Layout from content | | measure in ch, sidebar width, the zones and which one dominates, blur test result |
-| Warmth and life | | each checklist item |
+| Feeling, warmth and life | | the feeling table, the neutrals' hue against the accent's, the template test, the blurred-screenshot test |
+| First screen carries the idea | | what the main view is, and why it isn't the template |
 | Fonts and layouts rejected | | the lists, the chosen faces and layout |
 | Scales and tokens | | type sizes, radii, control heights, motion curves and durations |
 | Motion | | animation level, the frequency rule applied, durations under 300 ms, entrances and exits matched, interruptible, transform origins |
@@ -614,6 +671,6 @@ lines", "the animation is too slow" and "the click sound is annoying" are each w
 | Accessibility | | contrast, keyboard, live regions, reduced motion, sound never the only signal |
 | Feel and performance | | measured numbers (frame time, interaction cost, throttle) |
 | Tested by use | | tasks run with step counts, extremes, keyboard, phone, the user's real setup |
-| Browser review | | screenshots taken, slowed-motion check, the findings table and what was fixed |
+| Browser review | | screenshots taken, feeling check, slowed-motion check, the findings table and what was fixed |
 | Hero (site) | | what it is, its states, its keyboard path, why it fascinates |
 | Taste recorded | | what was written, and where |
