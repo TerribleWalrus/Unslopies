@@ -13,8 +13,7 @@
   /* Colour: river at dusk (neutral), marigold (accent), street-plate blue */
   --ground: #101b1e;
   --surface: #1f3036;      /* +10 L* over ground */
-  --surface-2: #2c4047;    /* chips idle, +7 L* over surface */
-  --surface-press: #364c54;
+  --surface-2: #2c4047;    /* +7 L* over surface */
   --text: #ecf2f0;
   --text-2: #bccac7;
   --text-3: #98aaa7;
@@ -23,81 +22,67 @@
   --accent-text: #f5c068;
   --plate: #1d5fae;
   --on-plate: #ffffff;
+  --ink: #10191b;          /* text on content colours */
+  --wire: #50666b;
   --scrim: rgb(4 10 12 / 0.6);
   --shadow-float: 0 24px 60px rgb(0 0 0 / 0.45);
+  --shadow-object: 0 6px 18px rgb(0 0 0 / 0.35);
 
-  /* Type scale (6) */
   --fs-xs: 0.8125rem; --fs-s: 0.9375rem; --fs-m: 1.0625rem;
   --fs-l: 1.25rem; --fs-xl: 1.75rem; --fs-xxl: 2.5rem;
-  /* Radii (concentric: sheet 24 → card 16 → control 10) */
   --r-sheet: 24px; --r-card: 16px; --r-control: 10px; --r-plate: 6px; --r-round: 999px;
-  /* Spacing scale (4px module) */
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
-  /* Control heights (3) */
   --h-s: 36px; --h-m: 44px; --h-l: 56px;
 
-  /* Motion tokens (Unslop 1.6, Phase 7) */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-spring: cubic-bezier(0.34, 1.32, 0.64, 1); /* small overshoot, the pick only */
+  --ease-spring: cubic-bezier(0.34, 1.32, 0.64, 1);
   --dur-press: 120ms; --dur-micro: 160ms; --dur-small: 200ms;
   --dur-medium: 280ms; --dur-large: 380ms; --dur-hero: 600ms;
 }
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --ground: #e7eeeb; --surface: #fbfcfb; --surface-2: #d9e3df; --surface-press: #cbd8d3;
+  :root {
+    --ground: #e7eeeb; --surface: #fbfcfb; --surface-2: #d9e3df;
     --text: #12201f; --text-2: #3b4e50; --text-3: #56696b;
     --accent: #e8a02c; --on-accent: #241703; --accent-text: #7f4c00;
-    --plate: #1d5fae; --scrim: rgb(18 32 31 / 0.4);
+    --wire: #9fb1ad; --scrim: rgb(18 32 31 / 0.4);
     --shadow-float: 0 24px 60px rgb(18 32 31 / 0.22);
+    --shadow-object: 0 6px 18px rgb(18 32 31 / 0.18);
   }
-}
-:root[data-theme="light"] {
-  --ground: #e7eeeb; --surface: #fbfcfb; --surface-2: #d9e3df; --surface-press: #cbd8d3;
-  --text: #12201f; --text-2: #3b4e50; --text-3: #56696b;
-  --accent: #e8a02c; --on-accent: #241703; --accent-text: #7f4c00;
-  --plate: #1d5fae; --scrim: rgb(18 32 31 / 0.4);
-  --shadow-float: 0 24px 60px rgb(18 32 31 / 0.22);
 }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0; background: var(--ground); color: var(--text);
-  font-family: "Kantumruy Pro", system-ui, sans-serif; font-size: 1rem; line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
+body { margin: 0; background: var(--ground); color: var(--text);
+  font-family: "Kantumruy Pro", system-ui, sans-serif; font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 button, select, input { font: inherit; color: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } /* line: focus ring, required */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } /* line: focus ring */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: var(--s4); top: -100px; background: var(--accent); color: var(--on-accent);
   padding: var(--s2) var(--s4); border-radius: var(--r-control); z-index: 50; }
 .skip:focus { top: var(--s2); }
-
-/* Pressables: feedback starts on pointer-down */
 .press { transition: transform var(--dur-press) var(--ease-out), background-color var(--dur-micro) ease, color var(--dur-micro) ease; }
 .press:active { transform: scale(0.97); }
 
 /* ---------- Shell ---------- */
-.app {
-  max-width: 1120px; margin: 0 auto;
-  padding: calc(var(--s4) + env(safe-area-inset-top)) var(--s4) calc(var(--h-l) + var(--s7) + env(safe-area-inset-bottom));
-}
-header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: var(--s5); }
+.app { max-width: 1120px; margin: 0 auto;
+  padding: calc(var(--s2) + env(safe-area-inset-top)) var(--s4) calc(var(--h-l) + var(--s7) + env(safe-area-inset-bottom)); }
+.lights { display: block; width: 100%; height: 34px; margin-bottom: var(--s1); overflow: visible; }
+.lights .bulb { opacity: 0.25; }
+.lights.on .bulb { opacity: 1; transition: opacity 240ms var(--ease-out); transition-delay: calc(var(--i) * 50ms); }
+header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: var(--s2); }
 .brand { display: flex; align-items: baseline; gap: var(--s2); margin-right: auto; min-width: 0; }
 .brand h1 { margin: 0; font-size: var(--fs-xl); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
 .brand .km { font-size: var(--fs-l); color: var(--accent-text); font-weight: 600; }
-.tagline { margin: calc(-1 * var(--s4)) 0 var(--s5); color: var(--text-2); font-size: var(--fs-s); }
-
-.icon-btn {
-  display: inline-flex; align-items: center; gap: var(--s2); height: var(--h-m); padding: 0 var(--s3);
-  border: 0; border-radius: var(--r-round); background: var(--surface); cursor: pointer; font-size: var(--fs-s); font-weight: 500;
-}
+.live { margin: 0 0 var(--s5); color: var(--text-2); font-size: var(--fs-s); }
+.live b { color: var(--text); font-weight: 600; }
+.icon-btn { display: inline-flex; align-items: center; gap: var(--s2); height: var(--h-m); padding: 0 var(--s3);
+  border: 0; border-radius: var(--r-round); background: var(--surface); cursor: pointer; font-size: var(--fs-s); font-weight: 500; }
 .icon-btn[aria-pressed="true"], .icon-btn.playing { background: var(--accent); color: var(--on-accent); }
 .icon-btn svg { width: 20px; height: 20px; flex: none; }
-@media (hover: hover) and (pointer: fine) { .icon-btn:hover { background: var(--surface-2); } .icon-btn[aria-pressed="true"]:hover { background: var(--accent); } }
+@media (hover: hover) and (pointer: fine) { .icon-btn:hover { background: var(--surface-2); } .icon-btn[aria-pressed="true"]:hover, .icon-btn.playing:hover { background: var(--accent); } }
 
 /* ---------- Filters ---------- */
 .filters { display: grid; gap: var(--s3); margin-bottom: var(--s5); }
@@ -106,13 +91,12 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
 .segmented button { height: var(--h-m); border: 0; border-radius: var(--r-control); background: transparent;
   font-weight: 600; font-size: var(--fs-s); cursor: pointer; color: var(--text-2); }
 .segmented button[aria-checked="true"] { background: var(--surface-2); color: var(--text); }
-.chips { display: flex; gap: var(--s2); overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--s4)); padding: 2px var(--s4); scroll-padding: var(--s4); }
+.chips { display: flex; gap: var(--s2); overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--s4)); padding: 2px var(--s4); }
 .chips::-webkit-scrollbar { display: none; }
 .chip { flex: none; height: var(--h-m); padding: 0 var(--s4); border: 0; border-radius: var(--r-round);
   background: var(--surface); color: var(--text-2); font-size: var(--fs-s); font-weight: 500; cursor: pointer; white-space: nowrap; }
 .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); font-weight: 600; }
 .chip .sub { opacity: 0.75; font-weight: 400; margin-left: 2px; }
-.chip-gap { flex: none; width: var(--s3); }
 @media (hover: hover) and (pointer: fine) {
   .chip:hover, .segmented button:hover { background: var(--surface-2); color: var(--text); }
   .chip[aria-pressed="true"]:hover { background: var(--accent); color: var(--on-accent); }
@@ -127,26 +111,29 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
 /* ---------- List ---------- */
 .list { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s3); padding: 0; margin: 0; list-style: none; transition: opacity 120ms ease; }
 .list.swapping { opacity: 0; }
-.card { width: 100%; text-align: left; display: grid; gap: var(--s1); padding: var(--s4); border: 0;
-  border-radius: var(--r-card); background: var(--surface); cursor: pointer; }
+.card { width: 100%; text-align: left; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: var(--s3); align-items: start;
+  padding: var(--s4); border: 0; border-radius: var(--r-card); background: var(--surface); cursor: pointer; }
 @media (hover: hover) and (pointer: fine) { .card:hover { background: var(--surface-2); } }
-.card.enter { animation: cardIn var(--dur-medium) var(--ease-out) both; }
-@keyframes cardIn { from { opacity: 0; transform: translateY(8px); } }
-.card-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); }
-.card > * { min-width: 0; }
-.card .title { margin: 0; font-size: var(--fs-m); font-weight: 600; line-height: 1.3; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card.enter { animation: rise var(--dur-medium) var(--ease-out) both; }
+.avatar { width: 48px; height: 48px; border-radius: var(--r-control); display: grid; place-items: center;
+  background: var(--c); color: var(--ink); font-weight: 700; font-size: var(--fs-m); letter-spacing: 0.02em; }
+.card-body { display: grid; gap: 2px; min-width: 0; }
+.card-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); min-width: 0; }
+.card .title { font-size: var(--fs-m); font-weight: 600; line-height: 1.3; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .price { flex: none; font-weight: 600; color: var(--accent-text); font-variant-numeric: tabular-nums; }
 .price .dim { color: var(--text-3); opacity: 0.4; }
-.meta { color: var(--text-2); font-size: var(--fs-s); }
-.facts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); font-size: var(--fs-s); color: var(--text-2); margin-top: var(--s1); }
+.meta { color: var(--text-2); font-size: var(--fs-s); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.facts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); font-size: var(--fs-s); color: var(--text-2); margin-top: 2px; }
 .rating { display: inline-flex; align-items: center; gap: var(--s1); color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
 .rating svg { width: 14px; height: 14px; color: var(--accent); }
 .rating .n { color: var(--text-3); font-weight: 400; }
 .status-open { color: var(--text); }
-.status-open::before, .status-closed::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
-.status-open::before { background: #5fcf8e; }
 .status-closed { color: var(--text-3); }
-.status-closed::before { background: var(--text-3); }
+.busy { display: inline-flex; align-items: center; gap: 6px; }
+.bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.bars i { width: 4px; border-radius: 1px; background: var(--surface-2); }
+.bars i:nth-child(1) { height: 5px; } .bars i:nth-child(2) { height: 8px; } .bars i:nth-child(3) { height: 12px; }
+.bars i.on { background: var(--accent); }
 .empty { padding: var(--s6) var(--s4); border-radius: var(--r-card); background: var(--surface); text-align: center; }
 .empty p { margin: 0 0 var(--s4); color: var(--text-2); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); height: var(--h-m); padding: 0 var(--s5);
@@ -154,23 +141,20 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
 .btn.primary { background: var(--accent); color: var(--on-accent); }
 .note { margin-top: var(--s5); color: var(--text-3); font-size: var(--fs-xs); }
 
-/* ---------- Pick bar (thumb zone) ---------- */
-.pickbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-  padding: var(--s3) var(--s4) calc(var(--s3) + env(safe-area-inset-bottom)); background: var(--ground); }
+/* ---------- Pick bar ---------- */
+.pickbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: var(--s3) var(--s4) calc(var(--s3) + env(safe-area-inset-bottom)); background: var(--ground); }
 .pickbar-inner { max-width: 1120px; margin: 0 auto; }
 .pick { width: 100%; height: var(--h-l); display: flex; align-items: center; justify-content: center; gap: var(--s3);
   border: 0; border-radius: var(--r-card); background: var(--accent); color: var(--on-accent); font-size: var(--fs-m); font-weight: 700; cursor: pointer; }
-.pick svg { width: 22px; height: 22px; }
+.pick svg { width: 22px; height: 22px; flex: none; }
 .pick .from { font-weight: 500; opacity: 0.8; font-size: var(--fs-s); }
 .pick:disabled { background: var(--surface-2); color: var(--text-3); cursor: not-allowed; transform: none; }
 
-/* ---------- Desktop: filters column + grid ---------- */
 @media (min-width: 900px) {
-  .app { display: grid; grid-template-columns: 300px 1fr; gap: var(--s4) var(--s7); padding-bottom: var(--s7); }
-  header.top, .tagline { grid-column: 1 / -1; }
+  .app { display: grid; grid-template-columns: 300px 1fr; gap: 0 var(--s7); padding-bottom: var(--s7); }
+  .lights, header.top, .live { grid-column: 1 / -1; }
   .side { position: sticky; top: var(--s5); align-self: start; }
   .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
-  .chip-gap { flex-basis: 100%; height: 0; }
   .list { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
   .pickbar { position: static; padding: 0; background: none; margin-top: var(--s5); }
 }
@@ -179,45 +163,124 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
 .layer { position: fixed; inset: 0; z-index: 30; display: flex; align-items: flex-end; justify-content: center; }
 .layer[hidden] { display: none; }
 .scrim { position: absolute; inset: 0; background: var(--scrim); opacity: 0; transition: opacity var(--dur-medium) ease; }
-.sheet { position: relative; width: 100%; max-width: 560px; max-height: 88dvh; overflow: auto; overscroll-behavior: contain;
-  background: var(--surface); border-radius: var(--r-sheet) var(--r-sheet) 0 0; box-shadow: var(--shadow-float); /* shadow: it floats */
+.sheet { position: relative; width: 100%; max-width: 560px; max-height: 92dvh; overflow: auto; overscroll-behavior: contain;
+  background: var(--surface); border-radius: var(--r-sheet) var(--r-sheet) 0 0; box-shadow: var(--shadow-float); /* floats */
   padding: 0 var(--s5) calc(var(--s5) + env(safe-area-inset-bottom));
-  transform: translateY(100%); transition: transform var(--dur-medium) var(--ease-out); touch-action: pan-y; }
+  transform: translateY(100%); transition: transform var(--dur-medium) var(--ease-out); }
 .layer.open .scrim { opacity: 1; }
 .layer.open .sheet { transform: translateY(0); transition-duration: var(--dur-large); transition-timing-function: var(--ease-drawer); }
-.grab { display: flex; justify-content: space-between; align-items: center; padding: var(--s3) 0 var(--s2); position: sticky; top: 0; background: var(--surface); cursor: grab; touch-action: none; }
+.grab { display: flex; justify-content: space-between; align-items: center; padding: var(--s3) 0 var(--s2); position: sticky; top: 0; z-index: 3; background: var(--surface); cursor: grab; touch-action: none; }
 .grab::before { content: ""; position: absolute; left: 50%; top: 8px; width: 40px; height: 5px; margin-left: -20px; border-radius: 3px; background: var(--surface-2); }
 .grab .label { font-size: var(--fs-s); color: var(--text-2); padding-top: var(--s3); }
 .close { width: var(--h-m); height: var(--h-m); margin-top: var(--s2); display: grid; place-items: center; border: 0; border-radius: var(--r-round); background: var(--surface-2); cursor: pointer; }
 .close svg { width: 18px; height: 18px; }
-.sheet h2 { margin: var(--s2) 0 var(--s2); font-size: var(--fs-xl); line-height: 1.15; font-weight: 700; }
+.sheet h2 { margin: var(--s2) 0; font-size: var(--fs-xl); line-height: 1.15; font-weight: 700; }
 .plate { display: inline-flex; align-items: center; gap: var(--s2); padding: 3px var(--s2); border-radius: var(--r-plate);
   background: var(--plate); color: var(--on-plate); font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.02em; }
-.detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); margin: var(--s5) 0; }
+.detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); margin: var(--s4) 0; }
 .stat { background: var(--surface-2); border-radius: var(--r-control); padding: var(--s3); }
 .stat b { display: block; font-size: var(--fs-l); font-variant-numeric: tabular-nums; line-height: 1.2; }
 .stat span { font-size: var(--fs-xs); color: var(--text-2); }
-.dishes { margin: 0 0 var(--s5); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--s2); }
+.dishes { margin: 0 0 var(--s4); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--s2); }
 .dishes li { padding: var(--s1) var(--s3); border-radius: var(--r-round); background: var(--surface-2); font-size: var(--fs-s); color: var(--text-2); }
 .actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
 .actions .btn { padding: 0 var(--s3); }
-
-/* Pick reel: the Expressive moment */
-.reel { display: grid; place-items: center; height: 120px; margin: var(--s2) 0 var(--s3); border-radius: var(--r-card);
-  background: var(--ground); cursor: pointer; overflow: hidden; border: 0; width: 100%; }
-.reel-name { font-size: var(--fs-l); font-weight: 700; text-align: center; padding: 0 var(--s4); }
-.reel-hint { font-size: var(--fs-xs); color: var(--text-3); margin-top: var(--s1); }
-.reel.landed .reel-name { animation: land var(--dur-hero) var(--ease-spring) both; color: var(--accent-text); }
-@keyframes land { from { transform: scale(0.94); opacity: 0.6; } }
 .reveal > * { animation: rise var(--dur-medium) var(--ease-out) both; }
 .reveal > *:nth-child(2) { animation-delay: 40ms; } .reveal > *:nth-child(3) { animation-delay: 80ms; }
 .reveal > *:nth-child(4) { animation-delay: 120ms; } .reveal > *:nth-child(5) { animation-delay: 160ms; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+@keyframes pop { from { transform: scale(0.94); } }
 
-/* Music popover: scales from its trigger */
+/* ---------- Pick: stage, modes ---------- */
+.stage { position: relative; height: 280px; margin-top: var(--s1); border-radius: var(--r-card); background: var(--ground);
+  overflow: hidden; display: grid; place-items: center; user-select: none; -webkit-user-select: none; }
+.stage-in { position: absolute; inset: 0; display: grid; place-items: center; animation: swapIn 240ms var(--ease-out) both; }
+@keyframes swapIn { from { opacity: 0; filter: blur(2px); transform: scale(0.97); } }
+.hint { position: absolute; left: 0; right: 0; bottom: var(--s3); text-align: center; font-size: var(--fs-xs); color: var(--text-3); pointer-events: none; transition: opacity var(--dur-micro) ease; }
+.landed .hint { opacity: 0; }
+.controls { display: grid; gap: var(--s3); margin-top: var(--s3); }
+.controls[hidden] { display: none; }
+.modes { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s1); padding: var(--s1);
+  background: var(--surface-2); border-radius: calc(var(--r-control) + var(--s1)); }
+.puck { position: absolute; top: var(--s1); bottom: var(--s1); left: var(--s1); width: calc((100% - 20px) / 4);
+  border-radius: var(--r-control); background: var(--accent); transform: translateX(calc(var(--m, 0) * (100% + 4px)));
+  transition: transform var(--dur-medium) var(--ease-in-out); }
+.mode { position: relative; z-index: 1; height: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  border: 0; border-radius: var(--r-control); background: transparent; cursor: pointer; font-size: var(--fs-xs); font-weight: 600; color: var(--text-2);
+  transition: color var(--dur-micro) ease, transform var(--dur-press) var(--ease-out); }
+.mode:active { transform: scale(0.95); }
+.mode[aria-checked="true"] { color: var(--on-accent); }
+.mode svg { width: 24px; height: 24px; }
+.mode.ping[data-mode="flick"] svg { animation: pFlick 420ms var(--ease-out); }
+.mode.ping[data-mode="shake"] svg { animation: pShake 420ms var(--ease-out); }
+.mode.ping[data-mode="draw"] svg { animation: pDraw 480ms var(--ease-in-out); }
+.mode.ping[data-mode="spin"] svg { animation: pSpin 520ms var(--ease-out); }
+@keyframes pFlick { 30% { transform: translateY(-4px); } }
+@keyframes pShake { 20% { transform: rotate(-12deg); } 45% { transform: rotate(10deg); } 70% { transform: rotate(-5deg); } }
+@keyframes pDraw { 50% { transform: rotateY(90deg); } }
+@keyframes pSpin { to { transform: rotate(180deg); } }
+.act { height: var(--h-l); }
+
+/* Flick: the board */
+.board { position: relative; width: calc(100% - 32px); height: 168px; overflow: hidden; touch-action: none; cursor: grab;
+  -webkit-mask-image: linear-gradient(transparent, #000 32%, #000 68%, transparent); mask-image: linear-gradient(transparent, #000 32%, #000 68%, transparent); /* scroll-edge fade */ }
+.band { position: absolute; left: 0; right: 0; top: 56px; height: 56px; background: var(--surface-2); border-radius: var(--r-control); }
+.col { position: relative; will-change: transform; }
+.row { height: 56px; display: flex; align-items: center; justify-content: center; font-size: var(--fs-l); font-weight: 700; padding: 0 var(--s3); }
+.row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row.win { color: var(--accent-text); }
+.row.win span { animation: pop var(--dur-hero) var(--ease-spring); }
+
+/* Shake: the fortune-stick cup */
+.cupwrap { position: relative; width: 150px; height: 200px; margin-bottom: 26px; transition: transform var(--dur-medium) var(--ease-out); touch-action: none; cursor: grab; }
+.cup { width: 100%; height: 100%; overflow: visible; transform-origin: 50% 92%; }
+.cup.wobble { animation: wobble 130ms ease-in-out infinite alternate; }
+@keyframes wobble { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+.stick { transform-box: fill-box; transform-origin: 50% 100%; }
+.chosen { transform-box: fill-box; transition: transform var(--dur-hero) var(--ease-spring); }
+.chosen.up { transform: translateY(-112px); }
+.tag { position: absolute; left: 50%; top: 14px; max-width: calc(100% - 32px); padding: var(--s2) var(--s4); border-radius: var(--r-control);
+  background: var(--surface); box-shadow: var(--shadow-object); font-weight: 700; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transform: translateX(-50%) scale(0.95); transform-origin: 50% 100%; opacity: 0; transition: opacity var(--dur-small) var(--ease-out), transform var(--dur-medium) var(--ease-spring); z-index: 2; }
+.tag.show { opacity: 1; transform: translateX(-50%) scale(1); }
+.tag small { display: block; font-weight: 500; color: var(--text-2); font-size: var(--fs-xs); }
+
+/* Draw: the deck */
+.deck { position: absolute; inset: 0; }
+.c3 { position: absolute; left: 50%; bottom: 52px; width: 104px; height: 146px; margin-left: -52px; padding: 0; border: 0; background: none; cursor: pointer;
+  transform-origin: 50% 100%; perspective: 900px;
+  transform: translate(var(--x, 0px), calc(var(--y, 0px) - var(--lift, 0px))) rotate(var(--r, 0deg)) scale(var(--s, 1));
+  transition: transform var(--dur-medium) var(--ease-out), opacity var(--dur-small) var(--ease-out); }
+.c3.chosen-card { z-index: 5; transition-timing-function: var(--ease-in-out); }
+.c3.gone { opacity: 0; --y: 140px; pointer-events: none; }
+@media (hover: hover) and (pointer: fine) { .c3:not(.gone):not(.chosen-card):hover { --lift: 12px; } }
+.c3-in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 520ms var(--ease-in-out); }
+.c3.flipped .c3-in { transform: rotateY(180deg); }
+.c3-face { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; box-shadow: var(--shadow-object); /* floats */ }
+.c3-back { background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%23241703' stroke-opacity='.35' stroke-width='1.5'%3E%3Cpath d='M10 2 18 10 10 18 2 10Z'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%23241703' fill-opacity='.35' stroke='none'/%3E%3C/svg%3E") center / 20px; }
+.c3-back::after { content: "ញ៉ាំ"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 26px; font-weight: 700; color: var(--on-accent); }
+.c3-back::before { content: ""; position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: var(--accent); }
+.c3-front { transform: rotateY(180deg); background: var(--surface); display: flex; flex-direction: column; text-align: left; color: var(--text); }
+.c3-front .band2 { height: 50px; background: var(--c); color: var(--ink); display: grid; place-items: center; font-weight: 700; font-size: var(--fs-l); }
+.c3-front .body { padding: var(--s2) 10px; display: grid; gap: 2px; }
+.c3-front b { font-size: var(--fs-s); line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.c3-front span { font-size: var(--fs-xs); color: var(--text-2); }
+
+/* Spin: the lazy Susan */
+.wheelwrap { position: relative; width: 212px; height: 212px; margin-bottom: 26px; }
+.wheel { position: absolute; inset: 0; border-radius: 50%; touch-action: none; cursor: grab; will-change: transform; }
+.wheel svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.wheel .wedge { transition: opacity var(--dur-medium) ease; }
+.wheel .wedge.dim { opacity: 0.3; }
+.pointer { position: absolute; left: 50%; top: -10px; width: 22px; height: 20px; margin-left: -11px; color: var(--text); z-index: 2; }
+.hub { position: absolute; left: 50%; top: 50%; width: 68px; height: 68px; margin: -34px 0 0 -34px; border: 0; border-radius: 50%; z-index: 2;
+  background: var(--surface); color: var(--text); font-weight: 700; font-size: var(--fs-s); cursor: pointer; box-shadow: var(--shadow-object); /* floats */
+  display: grid; place-items: center; }
+
+/* Music popover */
 .music-wrap { position: relative; }
 .pop { position: absolute; right: 0; top: calc(100% + var(--s2)); z-index: 20; width: 240px; padding: var(--s4);
-  background: var(--surface); border-radius: var(--r-card); box-shadow: var(--shadow-float); /* shadow: it floats */
+  background: var(--surface); border-radius: var(--r-card); box-shadow: var(--shadow-float); /* floats */
   transform-origin: top right; transform: scale(0.95); opacity: 0; visibility: hidden;
   transition: transform 150ms var(--ease-out), opacity 150ms var(--ease-out), visibility 0s 150ms; }
 .pop.open { transform: none; opacity: 1; visibility: visible; transition: transform var(--dur-small) var(--ease-out), opacity var(--dur-small) var(--ease-out); }
@@ -227,12 +290,14 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
 .pop p { margin: var(--s2) 0 0; font-size: var(--fs-xs); color: var(--text-3); }
 
 @media (prefers-reduced-motion: reduce) {
-  .press:active { transform: none; }
-  .card.enter, .reveal > *, .reel.landed .reel-name { animation: fadeOnly var(--dur-micro) ease both; }
+  .press:active, .mode:active { transform: none; }
+  .card.enter, .reveal > *, .row.win span, .stage-in { animation: fadeOnly var(--dur-micro) ease both; }
+  .mode.ping svg, .cup.wobble { animation: none; }
   @keyframes fadeOnly { from { opacity: 0; } }
   .sheet, .layer.open .sheet { transform: none; transition: opacity var(--dur-micro) ease; opacity: 0; }
   .layer.open .sheet { opacity: 1; }
   .pop, .pop.open { transform: none; }
+  .puck, .c3, .c3-in, .chosen, .tag { transition-duration: 1ms; }
 }
 </style>
 </head>
@@ -244,22 +309,22 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
   <symbol id="i-sound" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8v4h3l4 3.5v-11L6 8H3Z"/><path d="M13.5 7.5a3.5 3.5 0 0 1 0 5"/><path d="M15.5 5a7 7 0 0 1 0 10"/></symbol>
   <symbol id="i-mute" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8v4h3l4 3.5v-11L6 8H3Z"/><path d="m13.5 8 4 4m0-4-4 4"/></symbol>
   <symbol id="i-music" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 15V4.5l9-2V13"/><circle cx="5" cy="15" r="2.5"/><circle cx="14" cy="13" r="2.5"/></symbol>
-  <symbol id="i-dice" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="3.5"/><circle cx="7" cy="7" r="0.6" fill="currentColor"/><circle cx="13" cy="13" r="0.6" fill="currentColor"/><circle cx="10" cy="10" r="0.6" fill="currentColor"/></symbol>
   <symbol id="i-star" viewBox="0 0 20 20" fill="currentColor"><path d="m10 2 2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L10 14.4l-5 2.8 1.2-5.6L2 7.8l5.6-.6L10 2Z"/></symbol>
   <symbol id="i-close" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="m5 5 10 10M15 5 5 15"/></symbol>
   <symbol id="i-pin" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18s5.5-5.2 5.5-9.5a5.5 5.5 0 0 0-11 0C4.5 12.8 10 18 10 18Z"/><circle cx="10" cy="8.5" r="2"/></symbol>
+  <symbol id="m-flick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="14" height="5" rx="1.5"/><path d="M6 4h8M6 16h8"/></symbol>
+  <symbol id="m-shake" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9.5h10l-1.4 7.5H6.4Z"/><path d="M8 9.5 7 3M10 9.5V2M12 9.5l1-5.5"/></symbol>
+  <symbol id="m-draw" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="8" height="12" rx="1.5" transform="rotate(-10 7.5 11)"/><rect x="8.5" y="3.5" width="8" height="12" rx="1.5" transform="rotate(8 12.5 9.5)"/></symbol>
+  <symbol id="m-spin" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="11" r="7"/><path d="M10 11 10 4M10 11l6 3.5M10 11l-6 3.5"/><circle cx="10" cy="11" r="1.6" fill="currentColor" stroke="none"/></symbol>
 </svg>
 
 <div class="app">
+  <svg class="lights" id="lights" aria-hidden="true"></svg>
   <header class="top">
     <div class="brand"><h1>Nham</h1><span class="km" lang="km">ញ៉ាំ</span></div>
-    <button class="icon-btn press" id="soundBtn" aria-pressed="false" type="button">
-      <svg aria-hidden="true"><use href="#i-mute"/></svg><span>Sound</span>
-    </button>
+    <button class="icon-btn press" id="soundBtn" aria-pressed="false" type="button"><svg aria-hidden="true"><use href="#i-mute"/></svg><span>Sound</span></button>
     <div class="music-wrap">
-      <button class="icon-btn press" id="musicBtn" aria-expanded="false" aria-controls="musicPop" type="button">
-        <svg aria-hidden="true"><use href="#i-music"/></svg><span>Music</span>
-      </button>
+      <button class="icon-btn press" id="musicBtn" aria-expanded="false" aria-controls="musicPop" type="button"><svg aria-hidden="true"><use href="#i-music"/></svg><span>Music</span></button>
       <div class="pop" id="musicPop" role="dialog" aria-label="Music">
         <button class="btn primary press" id="musicPlay" type="button">Play music</button>
         <label for="musicVol">Volume</label>
@@ -268,14 +333,14 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
       </div>
     </div>
   </header>
-  <p class="tagline">Where to eat or drink in Phnom Penh tonight.</p>
+  <p class="live" id="live">Where to eat or drink in Phnom Penh tonight.</p>
 
   <aside class="side" aria-label="Filters">
     <div class="filters">
       <div class="segmented" role="radiogroup" aria-label="Type of place">
         <button type="button" role="radio" class="press" data-type="all" aria-checked="true">Both</button>
-        <button type="button" role="radio" class="press" data-type="food" aria-checked="false">Food</button>
-        <button type="button" role="radio" class="press" data-type="coffee" aria-checked="false">Coffee</button>
+        <button type="button" role="radio" class="press" data-type="food" aria-checked="false" tabindex="-1">Food</button>
+        <button type="button" role="radio" class="press" data-type="coffee" aria-checked="false" tabindex="-1">Coffee</button>
       </div>
       <div class="chips" role="group" aria-label="Price and opening">
         <button type="button" class="chip press" data-open aria-pressed="false">Open now</button>
@@ -285,34 +350,26 @@ header.top { display: flex; align-items: center; gap: var(--s3); margin-bottom: 
       </div>
       <div class="chips" role="group" aria-label="Area" id="areaChips"></div>
     </div>
-    <div class="pickbar">
-      <div class="pickbar-inner">
-        <button class="pick press" id="pickBtn" type="button">
-          <svg aria-hidden="true"><use href="#i-dice"/></svg><span id="pickLabel">Pick for me</span>
-        </button>
-      </div>
-    </div>
+    <div class="pickbar"><div class="pickbar-inner">
+      <button class="pick press" id="pickBtn" type="button"><svg aria-hidden="true"><use id="pickIcon" href="#m-spin"/></svg><span id="pickLabel">Pick for me</span></button>
+    </div></div>
   </aside>
 
   <main id="places" tabindex="-1">
     <div class="listbar">
       <span class="count" id="count" role="status"></span>
       <label class="sort">Sort
-        <select id="sort">
-          <option value="popular">Most popular</option>
-          <option value="rated">Top rated</option>
-          <option value="cheap">Cheapest</option>
-        </select>
+        <select id="sort"><option value="popular">Most popular</option><option value="rated">Top rated</option><option value="cheap">Cheapest</option></select>
       </label>
     </div>
     <ul class="list" id="list"></ul>
-    <p class="note">These are sample places for this demo. Names, ratings and hours are made up.</p>
+    <p class="note">These are sample places for this demo. Names, ratings, hours and how busy they are, are made up.</p>
   </main>
 </div>
 
 <div class="layer" id="layer" hidden>
   <div class="scrim" data-close></div>
-  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetLabel">
     <div class="grab" id="grab">
       <span class="label" id="sheetLabel">Place</span>
       <button class="close press" type="button" data-close aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
@@ -343,6 +400,8 @@ const PLACES = [
   { name: "Coconut Corner Coffee", type: "coffee", cuisine: "Coffee and coconut", area: "Toul Kork", street: "St. 598", price: 1, range: "$1.5–3", rating: 4.3, reviews: 640, open: "06:30", close: "18:00", dishes: ["Coconut iced coffee", "Fresh coconut", "Pandan cake"] },
 ];
 const AREAS = ["All areas", ...new Set(PLACES.map(p => p.area))];
+/* Content colours (one per place), all with dark ink at 4.5:1 or better */
+const SWATCH = ["#e4572e", "#f2b046", "#4fa36b", "#e58fb1", "#3b8fd1", "#c98a3b", "#a6c94a", "#3fb6a8"];
 
 /* ================= Helpers ================= */
 const $ = s => document.querySelector(s);
@@ -351,89 +410,95 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem("nham." + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
   set(k, v) { try { localStorage.setItem("nham." + k, JSON.stringify(v)); } catch {} },
 };
-function ppNowMinutes() {
-  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Phnom_Penh", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date());
-  const h = +parts.find(p => p.type === "hour").value, m = +parts.find(p => p.type === "minute").value;
-  return h * 60 + m;
-}
+const ppParts = () => Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Phnom_Penh", weekday: "long", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
+  .formatToParts(new Date()).map(p => [p.type, p.value]));
+const ppNowMinutes = () => { const p = ppParts(); return +p.hour * 60 + +p.minute; };
 const toMin = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
 function isOpen(p, now = ppNowMinutes()) {
   const o = toMin(p.open), c = toMin(p.close) || 1440;
-  return c > o ? now >= o && now < c : now >= o || now < c; // handles past-midnight closing
+  return c > o ? now >= o && now < c : now >= o || now < c;
 }
 const shortTime = t => t === "00:00" ? "midnight" : t;
-function statusHTML(p) {
-  return isOpen(p) ? `<span class="status-open">Open until ${shortTime(p.close)}</span>`
-                   : `<span class="status-closed">Closed · opens ${p.open}</span>`;
+const colorOf = name => SWATCH[[...name].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7) % SWATCH.length];
+const initials = name => name.split(/\s+/).filter(w => /^[A-Za-z]/.test(w)).slice(0, 2).map(w => w[0].toUpperCase()).join("");
+function busy(p, now) {
+  if (!isOpen(p, now)) return 0;
+  const h = now / 60, peaks = p.type === "food" ? [12.5, 19.5] : [8.5, 15];
+  const d = Math.min(...peaks.map(x => Math.abs(h - x)));
+  let lvl = d < 1.5 ? 3 : d < 3 ? 2 : 1;
+  if (p.reviews < 1000) lvl = Math.max(1, lvl - 1);
+  return lvl;
 }
+const BUSY = ["", "Quiet", "Steady", "Lively"];
 const priceHTML = n => `${"$".repeat(n)}<span class="dim">${"$".repeat(3 - n)}</span>`;
 const fmtReviews = n => n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n);
 const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const buzz = ms => { if (Sound.on && navigator.vibrate) try { navigator.vibrate(ms); } catch {} };
 
-/* ================= Sound (Phase 8) ================= */
+/* ================= Sound ================= */
 const Sound = (() => {
   let ctx = null, master = null, sfxBus = null, musicBus = null, musicDuck = null;
-  let sfxOn = store.get("sfx", false);
-  let active = 0; const last = {};
+  let sfxOn = store.get("sfx", false), active = 0; const last = {};
   const PENTA = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 587.33, 659.25, 783.99, 880.0];
   function ensure() {
     if (!ctx) {
       const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
       ctx = new AC();
-      master = ctx.createGain(); master.gain.value = 1; master.connect(ctx.destination);
+      master = ctx.createGain(); master.connect(ctx.destination);
       sfxBus = ctx.createGain(); sfxBus.gain.value = 0.16; sfxBus.connect(master);
-      musicDuck = ctx.createGain(); musicDuck.gain.value = 1; musicDuck.connect(master);
+      musicDuck = ctx.createGain(); musicDuck.connect(master);
       musicBus = ctx.createGain(); musicBus.gain.value = 0; musicBus.connect(musicDuck);
     }
     if (ctx.state === "suspended") ctx.resume();
     return ctx;
   }
-  function voice(name, fn) {
+  function voice(name, fn, gap = 40) {
     if (!sfxOn || !ensure()) return;
     const now = performance.now();
-    if (last[name] && now - last[name] < 40) return; // spam-safe
-    if (active >= 4) return;                          // polyphony limit
-    last[name] = now; active++; setTimeout(() => active--, 260);
+    if (last[name] && now - last[name] < gap) return;
+    if (active >= 4) return;
+    last[name] = now; active++; setTimeout(() => active--, 220);
     fn(ctx, sfxBus, ctx.currentTime);
   }
   function tone(c, out, t, freq, { dur = 0.08, type = "sine", gain = 0.5 } = {}) {
     const o = c.createOscillator(), a = c.createGain();
     o.type = type; o.frequency.value = freq;
-    a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(gain, t + 0.004);
-    a.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(gain, t + 0.004); a.gain.exponentialRampToValueAtTime(0.0001, t + dur);
     o.connect(a).connect(out); o.start(t); o.stop(t + dur + 0.02);
   }
-  function noise(c, out, t, { dur = 0.16, from = 600, to = 2400, gain = 0.35 } = {}) {
+  function noise(c, out, t, { dur = 0.16, from = 600, to = 2400, gain = 0.35, q = 1.2 } = {}) {
     const len = Math.ceil(c.sampleRate * dur), buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
     for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
     const src = c.createBufferSource(), f = c.createBiquadFilter(), a = c.createGain();
-    src.buffer = buf; f.type = "bandpass"; f.Q.value = 1.2;
+    src.buffer = buf; f.type = "bandpass"; f.Q.value = q;
     f.frequency.setValueAtTime(from, t); f.frequency.exponentialRampToValueAtTime(to, t + dur);
-    a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(gain, t + dur * 0.35); a.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(gain, t + Math.min(0.01, dur * 0.35)); a.gain.exponentialRampToValueAtTime(0.0001, t + dur);
     src.connect(f).connect(a).connect(out); src.start(t); src.stop(t + dur + 0.02);
   }
   return {
     get on() { return sfxOn; },
     set(v) { sfxOn = v; store.set("sfx", v); if (v) ensure(); },
-    ctx: () => ensure(),
-    buses: () => ({ ctx, musicBus, musicDuck }),
-    PENTA,
+    ctx: () => ensure(), buses: () => ({ ctx, musicBus, musicDuck }), PENTA,
     tick: () => voice("tick", (c, o, t) => tone(c, o, t, 1760, { dur: 0.03, type: "triangle", gain: 0.25 })),
-    on_: () => voice("toggle", (c, o, t) => { tone(c, o, t, PENTA[2] * 2, { dur: 0.07, gain: 0.35 }); tone(c, o, t + 0.06, PENTA[4] * 2, { dur: 0.09, gain: 0.35 }); }),
-    off_: () => voice("toggle", (c, o, t) => { tone(c, o, t, PENTA[4] * 2, { dur: 0.07, gain: 0.3 }); tone(c, o, t + 0.06, PENTA[2] * 2, { dur: 0.09, gain: 0.3 }); }),
+    up: () => voice("toggle", (c, o, t) => { tone(c, o, t, PENTA[2] * 2, { dur: 0.07, gain: 0.35 }); tone(c, o, t + 0.06, PENTA[4] * 2, { dur: 0.09, gain: 0.35 }); }),
+    down: () => voice("toggle", (c, o, t) => { tone(c, o, t, PENTA[4] * 2, { dur: 0.07, gain: 0.3 }); tone(c, o, t + 0.06, PENTA[2] * 2, { dur: 0.09, gain: 0.3 }); }),
     open: () => voice("swish", (c, o, t) => noise(c, o, t, { dur: 0.18, from: 500, to: 2600, gain: 0.3 })),
     close: () => voice("swish", (c, o, t) => noise(c, o, t, { dur: 0.14, from: 2200, to: 500, gain: 0.18 })),
-    reel: i => voice("reel", (c, o, t) => tone(c, o, t, PENTA[Math.max(0, 9 - (i % 10))], { dur: 0.05, type: "triangle", gain: 0.3 })),
+    mode: i => voice("mode", (c, o, t) => tone(c, o, t, PENTA[i * 2] * 2, { dur: 0.1, type: "triangle", gain: 0.3 })),
+    reel: speed => voice("reel", (c, o, t) => tone(c, o, t, 700 + Math.min(speed, 1) * 900, { dur: 0.04, type: "triangle", gain: 0.3 }), 30),
+    rattle: () => voice("rattle", (c, o, t) => { noise(c, o, t, { dur: 0.035, from: 2600, to: 3400, gain: 0.4, q: 4 }); tone(c, o, t, 900 + Math.random() * 600, { dur: 0.03, type: "square", gain: 0.06 }); }, 55),
+    rise: () => voice("rise", (c, o, t) => [0, 1, 2].forEach(i => tone(c, o, t + i * 0.05, PENTA[3 + i] * 2, { dur: 0.08, type: "triangle", gain: 0.25 }))),
+    deal: () => voice("deal", (c, o, t) => noise(c, o, t, { dur: 0.07, from: 1500, to: 3200, gain: 0.18 }), 30),
+    flip: () => voice("flip", (c, o, t) => { noise(c, o, t, { dur: 0.05, from: 3000, to: 1800, gain: 0.3, q: 2 }); tone(c, o, t + 0.02, 1320, { dur: 0.04, type: "triangle", gain: 0.2 }); }),
+    spin: v => voice("spin", (c, o, t) => tone(c, o, t, 1100 + Math.min(Math.abs(v), 2) * 400, { dur: 0.025, type: "triangle", gain: 0.22 }), 35),
     land: () => voice("land", (c, o, t) => { tone(c, o, t, PENTA[3] * 2, { dur: 0.16, gain: 0.45 }); tone(c, o, t + 0.11, PENTA[5] * 2, { dur: 0.3, gain: 0.45 }); }),
   };
 })();
 
-/* Generative music: pentatonic, 84 bpm, follows the type filter and the pick */
 const Music = (() => {
   let playing = false, timer = null, step = 0, nextTime = 0, mode = "all", pendingMode = null, resolveAt = -1;
   let volume = store.get("musicVol", 30);
-  const BPM = 84, STEP = 60 / BPM / 2; // 8th notes
-  const P = Sound.PENTA;
+  const STEP = 60 / 84 / 2, P = Sound.PENTA;
   function pluck(c, out, t, f, g) {
     const o = c.createOscillator(), a = c.createGain(), lp = c.createBiquadFilter();
     o.type = "triangle"; o.frequency.value = f; lp.type = "lowpass"; lp.frequency.value = mode === "coffee" ? 1400 : 2400;
@@ -443,8 +508,7 @@ const Music = (() => {
   function pad(c, out, t, freqs) {
     freqs.forEach(f => {
       const o = c.createOscillator(), a = c.createGain(), lp = c.createBiquadFilter();
-      o.type = "sine"; o.frequency.value = f / 2; o.detune.value = (Math.random() - 0.5) * 8;
-      lp.type = "lowpass"; lp.frequency.value = 700;
+      o.type = "sine"; o.frequency.value = f / 2; o.detune.value = (Math.random() - 0.5) * 8; lp.type = "lowpass"; lp.frequency.value = 700;
       a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(0.06, t + 1.2); a.gain.linearRampToValueAtTime(0, t + STEP * 16);
       o.connect(lp).connect(a).connect(out); o.start(t); o.stop(t + STEP * 16 + 0.1);
     });
@@ -452,75 +516,78 @@ const Music = (() => {
   function schedule() {
     const { ctx, musicBus } = Sound.buses(); if (!ctx) return;
     while (nextTime < ctx.currentTime + 0.12) {
-      if (step % 8 === 0 && pendingMode) { mode = pendingMode; pendingMode = null; } // change on the bar
+      if (step % 8 === 0 && pendingMode) { mode = pendingMode; pendingMode = null; }
       const bar = Math.floor(step / 8);
-      if (step % 16 === 0) pad(ctx, musicBus, nextTime, bar % 4 < 2 ? [P[0], P[2], P[3]] : [P[4], P[0] * 2, P[2] * 2].map(f => f / 2));
-      const density = mode === "coffee" ? 0.3 : mode === "food" ? 0.6 : 0.45;
-      const octave = mode === "coffee" ? 0.5 : 1;
-      if (step === resolveAt) {
-        [P[3], P[4], P[5]].forEach((f, i) => pluck(ctx, musicBus, nextTime + i * STEP, f * octave * 2, 0.12));
-        resolveAt = -1;
-      } else if (Math.random() < density && step % 2 === 0 || step % 8 === 0) {
-        const f = P[Math.floor(Math.random() * 7)] * octave;
-        pluck(ctx, musicBus, nextTime, f, step % 8 === 0 ? 0.1 : 0.06);
-      }
+      if (step % 16 === 0) pad(ctx, musicBus, nextTime, bar % 4 < 2 ? [P[0], P[2], P[3]] : [P[4] / 2, P[0], P[2]]);
+      const density = mode === "coffee" ? 0.3 : mode === "food" ? 0.6 : 0.45, octave = mode === "coffee" ? 0.5 : 1;
+      if (step === resolveAt) { [P[3], P[4], P[5]].forEach((f, i) => pluck(ctx, musicBus, nextTime + i * STEP, f * octave * 2, 0.12)); resolveAt = -1; }
+      else if ((Math.random() < density && step % 2 === 0) || step % 8 === 0) pluck(ctx, musicBus, nextTime, P[Math.floor(Math.random() * 7)] * octave, step % 8 === 0 ? 0.1 : 0.06);
       nextTime += STEP; step++;
     }
   }
   function setGain(v, time) {
     const { ctx, musicBus } = Sound.buses(); if (!ctx) return;
-    const t = ctx.currentTime; musicBus.gain.cancelScheduledValues(t);
-    musicBus.gain.setValueAtTime(musicBus.gain.value, t); musicBus.gain.linearRampToValueAtTime(v, t + time);
+    const t = ctx.currentTime; musicBus.gain.cancelScheduledValues(t); musicBus.gain.setValueAtTime(musicBus.gain.value, t); musicBus.gain.linearRampToValueAtTime(v, t + time);
   }
   return {
-    get playing() { return playing; },
-    get volume() { return volume; },
-    play() {
-      const ctx = Sound.ctx(); if (!ctx) return; playing = true;
-      nextTime = ctx.currentTime + 0.05; step = 0; timer = setInterval(schedule, 25);
-      setGain(volume / 100 * 0.9, 0.6); // fade in 600ms
-    },
+    get playing() { return playing; }, get volume() { return volume; },
+    play() { const ctx = Sound.ctx(); if (!ctx) return; playing = true; nextTime = ctx.currentTime + 0.05; step = 0; clearInterval(timer); timer = setInterval(schedule, 25); setGain(volume / 100 * 0.9, 0.6); },
     pause() { playing = false; setGain(0, 0.3); setTimeout(() => { if (!playing) clearInterval(timer); }, 320); },
     setVolume(v) { volume = v; store.set("musicVol", v); if (playing) setGain(v / 100 * 0.9, 0.1); },
     setMode(m) { pendingMode = m; },
-    duck(on) {
-      const { ctx, musicDuck } = Sound.buses(); if (!ctx) return;
-      const t = ctx.currentTime; musicDuck.gain.cancelScheduledValues(t); musicDuck.gain.setValueAtTime(musicDuck.gain.value, t);
-      musicDuck.gain.linearRampToValueAtTime(on ? 0.35 : 1, t + (on ? 0.15 : 0.6));
-    },
-    resolve() { if (playing) resolveAt = step + (2 - (step % 2)); }, // on the next beat
+    duck(on) { const { ctx, musicDuck } = Sound.buses(); if (!ctx) return; const t = ctx.currentTime; musicDuck.gain.cancelScheduledValues(t); musicDuck.gain.setValueAtTime(musicDuck.gain.value, t); musicDuck.gain.linearRampToValueAtTime(on ? 0.35 : 1, t + (on ? 0.15 : 0.6)); },
+    resolve() { if (playing) resolveAt = step + (2 - (step % 2)); },
   };
 })();
-document.addEventListener("visibilitychange", () => {
-  const { ctx } = Sound.buses(); if (!ctx) return;
-  if (document.hidden) ctx.suspend(); else if (Music.playing || Sound.on) ctx.resume();
-});
-/* Press tick on pointer-down, for every pressable */
+document.addEventListener("visibilitychange", () => { const { ctx } = Sound.buses(); if (!ctx) return; if (document.hidden) ctx.suspend(); else if (Music.playing || Sound.on) ctx.resume(); });
 document.addEventListener("pointerdown", e => { if (e.target.closest(".press, .card")) Sound.tick(); });
 
-/* ================= State and rendering ================= */
+/* ================= String lights ================= */
+function drawLights() {
+  const svg = $("#lights"), w = svg.clientWidth || 360, h = 34, n = Math.max(7, Math.round(w / 42));
+  const path = `M -6 6 Q ${w * 0.25} ${h - 4} ${w * 0.5} 10 T ${w + 6} 6`;
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  svg.innerHTML = `<path id="wire" d="${path}" fill="none" stroke="var(--wire)" stroke-width="1.25"/>`; /* the wire */
+  const wire = svg.querySelector("#wire"), L = wire.getTotalLength();
+  let bulbs = "";
+  for (let i = 0; i < n; i++) {
+    const pt = wire.getPointAtLength(L * (i + 0.5) / n);
+    bulbs += `<g class="bulb" style="--i:${i}"><rect x="${pt.x - 1.5}" y="${pt.y}" width="3" height="3" fill="var(--wire)"/><circle cx="${pt.x}" cy="${pt.y + 8}" r="5" fill="${SWATCH[i % SWATCH.length]}"/></g>`;
+  }
+  svg.insertAdjacentHTML("beforeend", bulbs);
+}
+drawLights();
+requestAnimationFrame(() => requestAnimationFrame(() => $("#lights").classList.add("on")));
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { drawLights(); }, 150); });
+
+function paintLive() {
+  const p = ppParts(), now = +p.hour * 60 + +p.minute, open = PLACES.filter(x => isOpen(x, now)).length;
+  $("#live").innerHTML = `${p.weekday}, <b>${p.hour}:${p.minute}</b> in Phnom Penh · <b>${open}</b> of ${PLACES.length} places open`;
+}
+paintLive(); setInterval(paintLive, 30000);
+
+/* ================= List ================= */
 const state = { type: "all", prices: new Set(), openNow: false, area: "All areas", sort: "popular" };
 let firstRender = true;
-
 function filtered() {
   const now = ppNowMinutes();
-  let r = PLACES.filter(p =>
-    (state.type === "all" || p.type === state.type) &&
-    (state.prices.size === 0 || state.prices.has(p.price)) &&
-    (!state.openNow || isOpen(p, now)) &&
-    (state.area === "All areas" || p.area === state.area));
-  const by = { popular: (a, b) => b.reviews - a.reviews,
-               rated: (a, b) => b.rating - a.rating || b.reviews - a.reviews,
-               cheap: (a, b) => a.price - b.price || b.rating - a.rating }[state.sort];
+  const r = PLACES.filter(p => (state.type === "all" || p.type === state.type) && (state.prices.size === 0 || state.prices.has(p.price)) &&
+    (!state.openNow || isOpen(p, now)) && (state.area === "All areas" || p.area === state.area));
+  const by = { popular: (a, b) => b.reviews - a.reviews, rated: (a, b) => b.rating - a.rating || b.reviews - a.reviews, cheap: (a, b) => a.price - b.price || b.rating - a.rating }[state.sort];
   return r.sort(by);
 }
-function cardHTML(p, i) {
-  return `<li><button type="button" class="card" data-i="${PLACES.indexOf(p)}" ${firstRender && i < 6 && !reduceMotion() ? `style="animation-delay:${i * 30}ms"` : ""}>
-    <span class="card-head"><span class="title">${esc(p.name)}</span><span class="price" aria-label="Price ${p.price} of 3">${priceHTML(p.price)}</span></span>
-    <span class="meta">${esc(p.cuisine)} · ${esc(p.area)}</span>
-    <span class="facts">
-      <span class="rating"><svg aria-hidden="true"><use href="#i-star"/></svg>${p.rating.toFixed(1)}<span class="n">(${fmtReviews(p.reviews)})</span></span>
-      ${statusHTML(p)}
+function cardHTML(p, i, now) {
+  const b = busy(p, now), open = isOpen(p, now);
+  return `<li><button type="button" class="card${firstRender && i < 6 && !reduceMotion() ? " enter" : ""}" data-i="${PLACES.indexOf(p)}" style="animation-delay:${i * 30}ms">
+    <span class="avatar" style="--c:${colorOf(p.name)}" aria-hidden="true">${initials(p.name)}</span>
+    <span class="card-body">
+      <span class="card-head"><span class="title">${esc(p.name)}</span><span class="price" aria-label="Price ${p.price} of 3">${priceHTML(p.price)}</span></span>
+      <span class="meta">${esc(p.cuisine)} · ${esc(p.area)}</span>
+      <span class="facts">
+        <span class="rating"><svg aria-hidden="true"><use href="#i-star"/></svg>${p.rating.toFixed(1)}<span class="n">(${fmtReviews(p.reviews)})</span></span>
+        ${open ? `<span class="status-open">Open until ${shortTime(p.close)}</span>` : `<span class="status-closed">Closed · opens ${p.open}</span>`}
+        ${b ? `<span class="busy"><span class="bars" aria-hidden="true">${[1, 2, 3].map(k => `<i class="${k <= b ? "on" : ""}"></i>`).join("")}</span>${BUSY[b]}</span>` : ""}
+      </span>
     </span></button></li>`;
 }
 function activeFilters() {
@@ -532,50 +599,41 @@ function activeFilters() {
   return f.length ? f.join(" · ") : "these filters";
 }
 function render() {
-  const list = $("#list"), items = filtered();
+  const list = $("#list"), items = filtered(), now = ppNowMinutes();
   const draw = () => {
-    list.innerHTML = items.length ? items.map(cardHTML).join("") :
-      `<li class="empty"><p>No places match ${activeFilters()}.${state.openNow ? " Many places are closed right now." : ""}</p>
-       <button type="button" class="btn primary press" id="clearAll">Clear filters</button></li>`;
-    if (firstRender && !reduceMotion()) list.querySelectorAll(".card").forEach((c, i) => i < 6 && c.classList.add("enter"));
-    firstRender = false;
-    list.classList.remove("swapping");
+    list.innerHTML = items.length ? items.map((p, i) => cardHTML(p, i, now)).join("") :
+      `<li class="empty"><p>No places match ${activeFilters()}.${state.openNow ? " Many places are closed right now." : ""}</p><button type="button" class="btn primary press" id="clearAll">Clear filters</button></li>`;
+    firstRender = false; list.classList.remove("swapping");
   };
-  if (firstRender || reduceMotion()) draw();
-  else { list.classList.add("swapping"); setTimeout(draw, 120); }
+  if (firstRender || reduceMotion()) draw(); else { list.classList.add("swapping"); setTimeout(draw, 120); }
   $("#count").textContent = `${items.length} ${items.length === 1 ? "place" : "places"}`;
-  const pick = $("#pickBtn");
-  pick.disabled = items.length === 0;
+  $("#pickBtn").disabled = !items.length;
   $("#pickLabel").innerHTML = items.length ? `Pick for me <span class="from">from ${items.length}</span>` : "Nothing to pick from";
 }
-
-/* Filters */
 $("#areaChips").innerHTML = AREAS.map(a => `<button type="button" class="chip press" data-area="${a}" aria-pressed="${a === state.area}">${a}</button>`).join("");
 document.querySelector(".side").addEventListener("click", e => {
   const seg = e.target.closest("[data-type]"), chip = e.target.closest(".chip");
   if (seg) {
     state.type = seg.dataset.type;
-    document.querySelectorAll("[data-type]").forEach(b => b.setAttribute("aria-checked", b === seg));
+    document.querySelectorAll("[data-type]").forEach(b => { b.setAttribute("aria-checked", b === seg); b.tabIndex = b === seg ? 0 : -1; });
     Music.setMode(state.type); render();
   } else if (chip && chip.dataset.area) {
-    state.area = chip.dataset.area;
-    document.querySelectorAll("[data-area]").forEach(b => b.setAttribute("aria-pressed", b === chip));
-    render();
+    state.area = chip.dataset.area; document.querySelectorAll("[data-area]").forEach(b => b.setAttribute("aria-pressed", b === chip)); render();
   } else if (chip) {
-    const on = chip.getAttribute("aria-pressed") !== "true";
-    chip.setAttribute("aria-pressed", on);
-    if (chip.hasAttribute("data-open")) state.openNow = on;
-    else { const n = +chip.dataset.price; on ? state.prices.add(n) : state.prices.delete(n); }
-    on ? Sound.on_() : Sound.off_(); render();
+    const on = chip.getAttribute("aria-pressed") !== "true"; chip.setAttribute("aria-pressed", on);
+    if (chip.hasAttribute("data-open")) state.openNow = on; else { const n = +chip.dataset.price; on ? state.prices.add(n) : state.prices.delete(n); }
+    on ? Sound.up() : Sound.down(); render();
   }
 });
-// Arrow keys move within the segmented radiogroup
-document.querySelector(".segmented").addEventListener("keydown", e => {
-  if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
-  const btns = [...document.querySelectorAll("[data-type]")], i = btns.findIndex(b => b.getAttribute("aria-checked") === "true");
-  const next = btns[(i + (e.key === "ArrowRight" ? 1 : btns.length - 1)) % btns.length];
-  next.focus(); next.click(); e.preventDefault();
-});
+function arrowRadios(group, sel) {
+  group.addEventListener("keydown", e => {
+    if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+    const btns = [...group.querySelectorAll(sel)], i = btns.findIndex(b => b.getAttribute("aria-checked") === "true");
+    const next = btns[(i + (e.key === "ArrowRight" ? 1 : btns.length - 1)) % btns.length];
+    next.focus(); next.click(); e.preventDefault();
+  });
+}
+arrowRadios(document.querySelector(".segmented"), "[data-type]");
 $("#sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
 $("#list").addEventListener("click", e => {
   if (e.target.closest("#clearAll")) {
@@ -583,122 +641,358 @@ $("#list").addEventListener("click", e => {
     document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.area === "All areas"));
     render(); $("#pickBtn").focus(); return;
   }
-  const card = e.target.closest(".card"); if (card) openSheet("detail", PLACES[+card.dataset.i], card);
+  const card = e.target.closest(".card"); if (card) openDetail(PLACES[+card.dataset.i], card);
 });
 
-/* ================= Sheet ================= */
+/* ================= Sheet shell ================= */
 const layer = $("#layer"), sheet = $("#sheet");
-let opener = null, closeTimer = null, reelTimers = [];
-
-function detailHTML(p) {
-  const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.area + ", Phnom Penh");
-  return `<div class="reveal">
-    <h2 id="sheetTitle">${esc(p.name)}</h2>
-    <div><span class="plate"><svg width="12" height="12" aria-hidden="true"><use href="#i-pin"/></svg>${esc(p.street)} · ${esc(p.area)}</span></div>
-    <div class="detail-grid">
-      <div class="stat"><b>${p.rating.toFixed(1)}</b><span>${fmtReviews(p.reviews)} reviews</span></div>
-      <div class="stat"><b>${p.range}</b><span>per person</span></div>
-      <div class="stat"><b>${isOpen(p) ? "Open" : "Closed"}</b><span>${p.open}–${shortTime(p.close)}</span></div>
-    </div>
-    <ul class="dishes" aria-label="Known for">${p.dishes.map(d => `<li>${esc(d)}</li>`).join("")}</ul>
-    <div class="actions">
-      <a class="btn press" href="${maps}" target="_blank" rel="noopener">Area map</a>
-      <button type="button" class="btn primary press" data-pick>Pick another</button>
-    </div></div>`;
-}
-function weightedPick(items, avoid) {
-  const pool = items.length > 1 ? items.filter(p => p !== avoid) : items;
-  const w = pool.map(p => Math.pow(p.rating - 3.5, 2) * Math.log10(p.reviews)); // lean toward good and popular
-  let r = Math.random() * w.reduce((a, b) => a + b, 0);
-  for (let i = 0; i < pool.length; i++) { r -= w[i]; if (r <= 0) return pool[i]; }
-  return pool[pool.length - 1];
-}
-let lastPick = null;
-function runPick() {
-  reelTimers.forEach(clearTimeout); reelTimers = [];
-  const items = filtered(); if (!items.length) return;
-  const choice = weightedPick(items, lastPick); lastPick = choice;
-  $("#sheetLabel").textContent = "Picked for you";
-  const body = $("#sheetBody");
-  body.innerHTML = `<button type="button" class="reel" id="reel" aria-label="Stop and show the pick"><span><span class="reel-name" id="reelName" aria-hidden="true">…</span><span class="reel-hint" id="reelHint" style="display:block">Tap to stop</span></span></button><div id="pickResult"></div>`;
-  const nameEl = $("#reelName"), reel = $("#reel");
-  const land = () => {
-    reelTimers.forEach(clearTimeout); reelTimers = [];
-    nameEl.textContent = choice.name; $("#reelHint").textContent = `${choice.cuisine} · ${choice.area}`;
-    reel.classList.add("landed"); reel.setAttribute("aria-label", "Picked: " + choice.name); reel.disabled = true;
-    $("#pickResult").innerHTML = detailHTML(choice).replace('id="sheetTitle"', 'id="sheetTitle" class="sr-only"');
-    Sound.land(); Music.duck(false); Music.resolve();
-    $("#announce").textContent = "Picked " + choice.name + ", " + choice.cuisine + " in " + choice.area;
-  };
-  reel.addEventListener("click", land);
-  if (reduceMotion()) { land(); return; }
-  Music.duck(true);
-  // Departures-board flicks that slow down: 16 steps, ease-out spacing
-  let t = 0; const steps = 16;
-  for (let i = 0; i < steps; i++) {
-    t += 40 + Math.pow(i / steps, 2.2) * 200;
-    const p = i === steps - 1 ? choice : items[(Math.random() * items.length) | 0];
-    reelTimers.push(setTimeout(() => {
-      nameEl.textContent = p.name;
-      nameEl.animate([{ transform: "translateY(-10px)", opacity: 0.2 }, { transform: "none", opacity: 1 }], { duration: 90, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
-      Sound.reel(i);
-      if (i === steps - 1) land();
-    }, t));
-  }
-}
-function openSheet(kind, place, from) {
+let opener = null, closeTimer = null;
+function showSheet(label, html, from) {
   clearTimeout(closeTimer);
-  opener = from || document.activeElement;
-  if (kind === "detail") { $("#sheetLabel").textContent = "Place"; $("#sheetBody").innerHTML = detailHTML(place); }
-  const wasOpen = layer.classList.contains("open");
-  layer.hidden = false;
-  if (!wasOpen) { sheet.getBoundingClientRect(); layer.classList.add("open"); Sound.open(); }
-  if (kind === "pick") runPick();
-  document.body.style.overflow = "hidden";
+  if (from) opener = from;
+  $("#sheetLabel").textContent = label;
+  $("#sheetBody").innerHTML = html;
+  sheet.scrollTop = 0;
+  if (!layer.classList.contains("open")) { layer.hidden = false; sheet.getBoundingClientRect(); layer.classList.add("open"); Sound.open(); document.body.style.overflow = "hidden"; }
   sheet.querySelector(".close").focus({ preventScroll: true });
 }
 function closeSheet() {
   if (!layer.classList.contains("open")) return;
-  reelTimers.forEach(clearTimeout); reelTimers = []; Music.duck(false);
-  layer.classList.remove("open"); Sound.close();
-  document.body.style.overflow = "";
-  closeTimer = setTimeout(() => { layer.hidden = true; sheet.style.transform = ""; }, 300);
+  Pick.stop();
+  layer.classList.remove("open"); Sound.close(); document.body.style.overflow = "";
+  closeTimer = setTimeout(() => { layer.hidden = true; $("#sheetBody").innerHTML = ""; }, 300);
   if (opener && document.contains(opener)) opener.focus({ preventScroll: true });
 }
-$("#pickBtn").addEventListener("click", e => openSheet("pick", null, e.currentTarget));
+function detailHTML(p, again) {
+  const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.area + ", Phnom Penh");
+  return `<div class="reveal">
+    <h2>${esc(p.name)}</h2>
+    <div><span class="plate"><svg width="12" height="12" aria-hidden="true"><use href="#i-pin"/></svg>${esc(p.street)} · ${esc(p.area)}</span></div>
+    <div class="detail-grid">
+      <div class="stat"><b>${p.rating.toFixed(1)}</b><span>${fmtReviews(p.reviews)} reviews</span></div>
+      <div class="stat"><b>${p.range}</b><span>per person</span></div>
+      <div class="stat">${isOpen(p) ? `<b>Open</b><span>until ${shortTime(p.close)}</span>` : `<b>Closed</b><span>opens ${p.open}</span>`}</div>
+    </div>
+    <ul class="dishes" aria-label="Known for">${p.dishes.map(d => `<li>${esc(d)}</li>`).join("")}</ul>
+    <div class="actions">
+      <a class="btn press" href="${maps}" target="_blank" rel="noopener">Area map</a>
+      <button type="button" class="btn primary press" ${again ? "data-again" : "data-pick"}>Pick ${again ? "again" : "for me"}</button>
+    </div></div>`;
+}
+function openDetail(p, from) { showSheet("Place", detailHTML(p, false), from); }
+$("#pickBtn").addEventListener("click", e => Pick.open(e.currentTarget));
 layer.addEventListener("click", e => {
   if (e.target.closest("[data-close]")) closeSheet();
-  else if (e.target.closest("[data-pick]")) runPick();
+  else if (e.target.closest("[data-pick]")) Pick.open();
+  else if (e.target.closest("[data-again]")) Pick.again();
 });
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") { if (popOpen()) closePop(true); else closeSheet(); }
-  if (e.key === "Tab" && !layer.hidden && layer.classList.contains("open")) { // keep focus inside the sheet
-    const f = [...sheet.querySelectorAll("button:not(:disabled), a[href]")];
+  if (e.key === "Tab" && layer.classList.contains("open")) {
+    const f = [...sheet.querySelectorAll("button:not(:disabled), a[href]")].filter(x => x.offsetParent && x.tabIndex !== -1);
     if (!f.length) return;
     if (e.shiftKey && document.activeElement === f[0]) { f[f.length - 1].focus(); e.preventDefault(); }
     else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { f[0].focus(); e.preventDefault(); }
   }
 });
-// Drag to close: follows the finger 1:1, closes on 30% or a flick
-(() => {
+(() => { // drag the sheet down to close
   const grab = $("#grab"); let y0 = 0, dy = 0, t0 = 0, dragging = false;
-  grab.addEventListener("pointerdown", e => {
-    if (e.target.closest("button")) return;
-    dragging = true; y0 = e.clientY; dy = 0; t0 = performance.now(); grab.setPointerCapture(e.pointerId);
-    sheet.style.transition = "none";
-  });
-  grab.addEventListener("pointermove", e => {
-    if (!dragging) return; dy = Math.max(0, e.clientY - y0);
-    sheet.style.transform = `translateY(${dy}px)`;
-  });
-  const end = () => {
-    if (!dragging) return; dragging = false;
-    const v = dy / (performance.now() - t0);
-    sheet.style.transition = ""; sheet.style.transform = "";
-    if (dy > sheet.offsetHeight * 0.3 || (v > 0.5 && dy > 20)) closeSheet();
-  };
+  grab.addEventListener("pointerdown", e => { if (e.target.closest("button")) return; dragging = true; y0 = e.clientY; dy = 0; t0 = performance.now(); grab.setPointerCapture(e.pointerId); sheet.style.transition = "none"; });
+  grab.addEventListener("pointermove", e => { if (!dragging) return; dy = Math.max(0, e.clientY - y0); sheet.style.transform = `translateY(${dy}px)`; });
+  const end = () => { if (!dragging) return; dragging = false; const v = dy / (performance.now() - t0); sheet.style.transition = ""; sheet.style.transform = ""; if (dy > sheet.offsetHeight * 0.3 || (v > 0.5 && dy > 20)) closeSheet(); };
   grab.addEventListener("pointerup", end); grab.addEventListener("pointercancel", end);
 })();
+
+/* ================= Pick: four ways ================= */
+function weightOf(p) { return Math.pow(p.rating - 3.5, 2) * Math.log10(p.reviews) * (isOpen(p) ? 1 : 0.12); } // lean to good, popular and open now
+function sample(items, n, avoid) {
+  let pool = items.length > n ? items.filter(p => p !== avoid) : items.slice();
+  const out = [];
+  while (out.length < n && pool.length) {
+    let r = Math.random() * pool.reduce((a, p) => a + weightOf(p), 0), k = 0;
+    for (; k < pool.length - 1; k++) { r -= weightOf(pool[k]); if (r <= 0) break; }
+    out.push(pool[k]); pool.splice(k, 1);
+  }
+  return out;
+}
+const MODES = [
+  { id: "flick", label: "Flick", act: "Flick the board", hint: "Swipe up on the board, or tap below" },
+  { id: "shake", label: "Shake", act: "Hold to shake", hint: "Hold, drag the cup, or shake your phone" },
+  { id: "draw", label: "Draw", act: "Draw for me", hint: "Tap any card" },
+  { id: "spin", label: "Spin", act: "Spin the table", hint: "Flick the table round, or tap Spin" },
+];
+
+const Pick = (() => {
+  let items = [], modeId = store.get("pickMode", "spin"), ctrl = null, last = null;
+  if (!MODES.some(m => m.id === modeId)) modeId = "spin";
+  const stageEl = () => $("#stage");
+
+  function shell() {
+    const mi = MODES.findIndex(m => m.id === modeId);
+    return `<div class="stage" id="stage"></div>
+      <div class="controls" id="controls">
+        <div class="modes" role="radiogroup" aria-label="How to pick" style="--m:${mi}">
+          <span class="puck" aria-hidden="true"></span>
+          ${MODES.map((m, i) => `<button type="button" role="radio" class="mode" data-mode="${m.id}" aria-checked="${i === mi}" tabindex="${i === mi ? 0 : -1}"><svg aria-hidden="true"><use href="#m-${m.id}"/></svg>${m.label}</button>`).join("")}
+        </div>
+        <button type="button" class="pick press act" id="act"></button>
+      </div>
+      <div id="pickResult"></div>`;
+  }
+  function open(from) {
+    items = filtered(); if (!items.length) return;
+    showSheet("Pick for me", shell(), from);
+    const modes = document.querySelector(".modes");
+    modes.addEventListener("click", e => { const b = e.target.closest(".mode"); if (b) setMode(b.dataset.mode, b); });
+    arrowRadios(modes, ".mode");
+    bindAct();
+    mount(false);
+  }
+  function setMode(id, btn) {
+    if (id === modeId && ctrl) return;
+    modeId = id; store.set("pickMode", id);
+    const i = MODES.findIndex(m => m.id === id);
+    document.querySelector(".modes").style.setProperty("--m", i);
+    document.querySelectorAll(".mode").forEach(b => { const on = b.dataset.mode === id; b.setAttribute("aria-checked", on); b.tabIndex = on ? 0 : -1; });
+    if (btn) { btn.classList.remove("ping"); void btn.offsetWidth; btn.classList.add("ping"); }
+    Sound.mode(i); $("#pickIcon").setAttribute("href", "#m-" + id);
+    mount(true);
+  }
+  function mount(swap) {
+    stop();
+    const m = MODES.find(x => x.id === modeId);
+    const stage = stageEl(); stage.classList.remove("landed");
+    stage.innerHTML = `<div class="stage-in"${swap ? "" : ' style="animation:none"'}></div><p class="hint">${m.hint}</p>`;
+    $("#act").textContent = m.act;
+    ctrl = BUILD[modeId](stage.querySelector(".stage-in"));
+  }
+  function bindAct() {
+    const act = $("#act");
+    act.addEventListener("click", () => { if (modeId !== "shake") ctrl && ctrl.go(); });
+    act.addEventListener("pointerdown", e => { if (modeId === "shake") { e.preventDefault(); ctrl.hold(true); } });
+    ["pointerup", "pointerleave", "pointercancel"].forEach(t => act.addEventListener(t, () => { if (modeId === "shake") ctrl.hold(false); }));
+    act.addEventListener("keydown", e => { if (modeId === "shake" && (e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); ctrl.hold(true); } });
+    act.addEventListener("keyup", e => { if (modeId === "shake" && (e.key === " " || e.key === "Enter")) ctrl.hold(false); });
+  }
+  function begin() { Music.duck(true); $("#pickResult").innerHTML = ""; }
+  function land(p) {
+    if (!document.getElementById("stage")) return;
+    last = p; ctrl && (ctrl.busy = false);
+    stageEl().classList.add("landed");
+    Sound.land(); buzz(12); Music.duck(false); Music.resolve();
+    $("#controls").hidden = true;
+    $("#pickResult").innerHTML = detailHTML(p, true);
+    $("#pickResult [data-again]").focus({ preventScroll: true });
+    $("#announce").textContent = `Picked ${p.name}, ${p.cuisine} in ${p.area}.`;
+  }
+  function again() {
+    items = filtered(); if (!items.length) { closeSheet(); return; }
+    $("#controls").hidden = false; $("#pickResult").innerHTML = "";
+    mount(true); $("#act").focus({ preventScroll: true });
+  }
+  function stop() { if (ctrl) ctrl.destroy(); ctrl = null; Music.duck(false); }
+
+  /* ---- Flick: departures board ---- */
+  function flick(root) {
+    const ROW = 56;
+    root.innerHTML = `<div class="board" aria-hidden="true"><div class="band"></div><div class="col"></div></div>`;
+    const board = root.querySelector(".board"), col = root.querySelector(".col");
+    col.innerHTML = `<div class="row"><span>·</span></div><div class="row"><span>${esc(items[0].name)}</span></div><div class="row"><span>·</span></div>`;
+    let anim = null, raf = 0, y0 = 0, t0 = 0;
+    const c = { busy: false,
+      go(strength = 1) {
+        if (c.busy) { anim && anim.finish(); return; }
+        c.busy = true; begin();
+        const choice = sample(items, 1, last)[0];
+        const n = Math.round(14 + strength * 18), names = [];
+        for (let i = 0; i < n; i++) names.push(items[(Math.random() * items.length) | 0]);
+        names[n - 2] = choice; // centre row at the end
+        col.innerHTML = names.map(p => `<div class="row"><span>${esc(p.name)}</span></div>`).join("");
+        const target = -(n - 3) * ROW;
+        if (reduceMotion()) { col.style.transform = `translateY(${target}px)`; finish(); return; }
+        anim = col.animate([{ transform: "translateY(0)" }, { transform: `translateY(${target}px)` }], { duration: 1500 + strength * 700, easing: "cubic-bezier(0.12, 0.8, 0.22, 1)", fill: "forwards" });
+        let lastIdx = 0, lastY = 0, lastT = performance.now();
+        const watch = () => {
+          const y = new DOMMatrix(getComputedStyle(col).transform).m42, idx = Math.round(-y / ROW), now = performance.now();
+          if (idx !== lastIdx) { Sound.reel(Math.abs(y - lastY) / Math.max(1, now - lastT) / 2); lastIdx = idx; }
+          lastY = y; lastT = now; raf = requestAnimationFrame(watch);
+        };
+        raf = requestAnimationFrame(watch);
+        anim.finished.then(finish).catch(() => {});
+        function finish() { cancelAnimationFrame(raf); col.children[n - 2].classList.add("win"); land(choice); }
+      },
+      destroy() { cancelAnimationFrame(raf); anim && anim.cancel(); },
+    };
+    board.addEventListener("pointerdown", e => { y0 = e.clientY; t0 = performance.now(); board.setPointerCapture(e.pointerId); });
+    board.addEventListener("pointerup", e => {
+      const dy = y0 - e.clientY, v = dy / Math.max(1, performance.now() - t0);
+      if (c.busy) { anim && anim.finish(); return; }
+      if (dy > 20) c.go(Math.min(1, Math.max(0.2, v / 1.5)));
+    });
+    return c;
+  }
+
+  /* ---- Shake: fortune-stick cup ---- */
+  function shake(root) {
+    const sticks = Array.from({ length: 11 }, (_, i) => {
+      const x = 58 + i * 6.4 + (i % 2) * 1.5, h = 132 + ((i * 37) % 22), r = (i - 5) * 2.2;
+      return `<g class="stick" style="transform: rotate(${r}deg)"><rect x="${x}" y="${178 - h}" width="5" height="${h}" rx="2.5" fill="#d8b47a"/><rect x="${x}" y="${178 - h}" width="5" height="14" rx="2.5" fill="#e4572e"/></g>`;
+    }).join("");
+    root.innerHTML = `<div class="tag" id="tag"></div>
+      <div class="cupwrap" aria-hidden="true">
+        <svg class="cup" viewBox="0 0 180 240">
+          <g class="chosen" id="chosenStick"><rect x="87" y="56" width="6" height="140" rx="3" fill="#ead2a0"/><rect x="87" y="56" width="6" height="16" rx="3" fill="var(--accent)"/></g>
+          ${sticks}
+          <path d="M44 120 h92 l-8 104 a10 10 0 0 1 -10 9 H62 a10 10 0 0 1 -10 -9 Z" fill="#b5762f"/>
+          <path d="M45.5 140 h89 l-1 12 h-87 Z M49 200 h82 l-1 10 h-80 Z" fill="#8f5a20"/>
+          <ellipse cx="90" cy="120" rx="46" ry="7" fill="#8f5a20"/>
+        </svg>
+      </div>`;
+    const cupwrap = root.querySelector(".cupwrap"), cup = root.querySelector(".cup"), stickEls = [...root.querySelectorAll(".stick")], tag = root.querySelector("#tag");
+    let energy = 0, shaking = false, raf = 0, lastT = 0, jig = 0, drag = null, done = false;
+    const base = stickEls.map(s => s.style.transform);
+    function loop(t) {
+      const dt = Math.min(50, t - (lastT || t)); lastT = t;
+      if (shaking) energy += dt / 1000;
+      if (t - jig > 60) { jig = t; stickEls.forEach((s, i) => s.style.transform = `${base[i]} translateY(${-Math.random() * 8}px) rotate(${(Math.random() - 0.5) * 6}deg)`); Sound.rattle(); }
+      if (energy >= 1.1) { release(); return; }
+      raf = requestAnimationFrame(loop);
+    }
+    function startShake() {
+      if (done || shaking) return; shaking = true; c.busy = true; begin();
+      if (reduceMotion()) { release(); return; }
+      cup.classList.add("wobble"); lastT = 0; raf = requestAnimationFrame(loop);
+    }
+    function stopShake() {
+      if (!shaking) return; shaking = false; cancelAnimationFrame(raf); cup.classList.remove("wobble");
+      stickEls.forEach((s, i) => s.style.transform = base[i]);
+      if (!done) { root.parentElement.querySelector(".hint").textContent = "Keep shaking a little longer"; Music.duck(false); }
+    }
+    function release() {
+      shaking = false; done = true; cancelAnimationFrame(raf); cup.classList.remove("wobble");
+      stickEls.forEach((s, i) => s.style.transform = base[i]);
+      const choice = sample(items, 1, last)[0];
+      root.querySelector("#chosenStick").classList.add("up"); Sound.rise();
+      setTimeout(() => { tag.innerHTML = `${esc(choice.name)}<small>${esc(choice.cuisine)} · ${esc(choice.area)}</small>`; tag.classList.add("show"); land(choice); }, reduceMotion() ? 0 : 420);
+    }
+    // phone shake (asks permission on iOS during the first press)
+    let lastMag = 0;
+    const onMotion = e => {
+      const a = e.accelerationIncludingGravity; if (!a || done) return;
+      const mag = Math.hypot(a.x || 0, a.y || 0, a.z || 0), d = Math.abs(mag - lastMag); lastMag = mag;
+      if (d > 12) { if (!c.busy) { c.busy = true; begin(); } energy += 0.12; cup.classList.add("wobble"); Sound.rattle(); clearTimeout(c._mt); c._mt = setTimeout(() => cup.classList.remove("wobble"), 220); if (energy >= 1.1) release(); }
+    };
+    let motionOn = false;
+    function askMotion() {
+      if (motionOn) return; motionOn = true;
+      try { if (typeof DeviceMotionEvent !== "undefined" && DeviceMotionEvent.requestPermission) DeviceMotionEvent.requestPermission().then(s => s === "granted" && addEventListener("devicemotion", onMotion)).catch(() => {}); else addEventListener("devicemotion", onMotion); } catch {}
+    }
+    addEventListener("devicemotion", onMotion);
+    // drag the cup: follows 1:1 sideways, movement adds energy
+    cupwrap.addEventListener("pointerdown", e => { askMotion(); drag = { x: e.clientX, lx: e.clientX }; cupwrap.setPointerCapture(e.pointerId); cupwrap.style.transition = "none"; startShake(); });
+    cupwrap.addEventListener("pointermove", e => { if (!drag) return; const dx = Math.max(-50, Math.min(50, e.clientX - drag.x)); energy += Math.abs(e.clientX - drag.lx) / 900; drag.lx = e.clientX; cupwrap.style.transform = `translateX(${dx}px) rotate(${dx / 6}deg)`; });
+    const up = () => { if (!drag) return; drag = null; cupwrap.style.transition = ""; cupwrap.style.transform = ""; stopShake(); };
+    cupwrap.addEventListener("pointerup", up); cupwrap.addEventListener("pointercancel", up);
+    const c = { busy: false,
+      hold(on) { if (on) { askMotion(); startShake(); } else stopShake(); },
+      go() {},
+      destroy() { cancelAnimationFrame(raf); removeEventListener("devicemotion", onMotion); },
+    };
+    return c;
+  }
+
+  /* ---- Draw: fanned deck ---- */
+  function draw(root) {
+    const hand = sample(items, Math.min(5, items.length), last), n = hand.length;
+    root.innerHTML = `<div class="deck">${hand.map((p, i) => `
+      <button type="button" class="c3" data-k="${i}" aria-label="Card ${i + 1} of ${n}, face down" style="--y:60px;--s:0.9;opacity:0">
+        <span class="c3-in"><span class="c3-face c3-back"></span>
+          <span class="c3-face c3-front"><span class="band2" style="--c:${colorOf(p.name)}">${initials(p.name)}</span>
+            <span class="body"><b>${esc(p.name)}</b><span>${esc(p.area)} · ${"$".repeat(p.price)}</span><span>★ ${p.rating.toFixed(1)}</span></span></span>
+        </span></button>`).join("")}</div>`;
+    const cards = [...root.querySelectorAll(".c3")];
+    const step = n > 1 ? Math.min(56, (root.clientWidth - 130) / (n - 1)) : 0; // keep 44px+ of every card tappable
+    const fan = i => { const k = i - (n - 1) / 2; return { x: k * step, y: Math.abs(k) * 6, r: k * 7 }; };
+    let timers = [];
+    requestAnimationFrame(() => requestAnimationFrame(() => cards.forEach((el, i) => {
+      const f = fan(i);
+      el.style.transitionDelay = reduceMotion() ? "0ms" : `${i * 45}ms`;
+      el.style.cssText += `;--x:${f.x}px;--y:${f.y}px;--r:${f.r}deg;--s:1;opacity:1`;
+      timers.push(setTimeout(() => { Sound.deal(); el.style.transitionDelay = ""; }, i * 45));
+    })));
+    function choose(k) {
+      if (c.busy) return; c.busy = true; begin();
+      const el = cards[k];
+      cards.forEach((o, i) => { if (i !== k) { o.classList.add("gone"); o.style.setProperty("--y", "140px"); o.style.opacity = "0"; o.tabIndex = -1; } });
+      el.classList.add("chosen-card"); el.style.cssText += ";--x:0px;--y:-6px;--r:0deg;--s:1.14";
+      el.setAttribute("aria-label", "Card " + (k + 1) + ", turning over");
+      const d = reduceMotion() ? 0 : 300;
+      timers.push(setTimeout(() => { el.classList.add("flipped"); timers.push(setTimeout(Sound.flip, reduceMotion() ? 0 : 200)); }, d));
+      timers.push(setTimeout(() => { el.setAttribute("aria-label", hand[k].name); land(hand[k]); }, reduceMotion() ? 0 : d + 540));
+    }
+    root.addEventListener("click", e => { const el = e.target.closest(".c3"); if (el) choose(+el.dataset.k); });
+    const c = { busy: false, go() { choose((Math.random() * n) | 0); }, destroy() { timers.forEach(clearTimeout); } };
+    return c;
+  }
+
+  /* ---- Spin: lazy Susan ---- */
+  function spin(root) {
+    const segs = sample(items, Math.min(8, items.length), null), N = segs.length, SEG = 360 / N, R = 116, C = 120;
+    const pt = (a, r) => [C + r * Math.sin(a * Math.PI / 180), C - r * Math.cos(a * Math.PI / 180)];
+    const short = s => s.length > 13 ? s.slice(0, 12).trim() + "…" : s;
+    const wedges = segs.map((p, k) => {
+      const a0 = k * SEG - SEG / 2, a1 = a0 + SEG, [x0, y0] = pt(a0, R), [x1, y1] = pt(a1, R);
+      const d = N === 1 ? `M ${C} ${C - R} A ${R} ${R} 0 1 1 ${C - 0.01} ${C - R} Z` : `M ${C} ${C} L ${x0} ${y0} A ${R} ${R} 0 ${SEG > 180 ? 1 : 0} 1 ${x1} ${y1} Z`;
+      return `<g class="wedge" data-k="${k}"><path d="${d}" fill="${colorOf(p.name)}"/>
+        <text transform="rotate(${k * SEG - 90} ${C} ${C})" x="${C + 44}" y="${C + 4}" font-size="11.5" font-weight="700" fill="#10191b">${esc(short(p.name))}</text></g>`;
+    }).join("");
+    root.innerHTML = `<div class="wheelwrap">
+        <svg class="pointer" viewBox="0 0 22 20" aria-hidden="true"><path d="M2 2h18L11 18Z" fill="currentColor"/></svg>
+        <div class="wheel" aria-hidden="true"><svg viewBox="0 0 240 240"><circle cx="${C}" cy="${C}" r="${R + 4}" fill="var(--surface-2)"/>${wedges}</svg></div>
+        <button type="button" class="hub press" aria-label="Spin the table">Spin</button>
+      </div>`;
+    const wheel = root.querySelector(".wheel");
+    let angle = Math.random() * 360, vel = 0, raf = 0, lastIdx = -1, drag = null;
+    const idxAt = a => ((Math.round(((-a % 360) + 360) % 360 / SEG)) % N + N) % N;
+    const paint = () => { wheel.style.transform = `rotate(${angle}deg)`; const i = idxAt(angle); if (i !== lastIdx) { if (lastIdx !== -1) Sound.spin(vel); lastIdx = i; } };
+    paint();
+    function run(v) {
+      cancelAnimationFrame(raf); vel = v; c.busy = true; begin();
+      wheel.querySelectorAll(".wedge").forEach(w => w.classList.remove("dim"));
+      if (reduceMotion()) { const k = (Math.random() * N) | 0; angle = -k * SEG; paint(); stopAt(); return; }
+      let t0 = performance.now();
+      const step = t => { const dt = Math.min(40, t - t0); t0 = t; angle += vel * dt; vel *= Math.pow(0.99852, dt); paint(); if (Math.abs(vel) < 0.004) { stopAt(); return; } raf = requestAnimationFrame(step); };
+      raf = requestAnimationFrame(step);
+    }
+    function stopAt() {
+      const k = idxAt(angle);
+      wheel.querySelectorAll(".wedge").forEach(w => w.classList.toggle("dim", +w.dataset.k !== k));
+      land(segs[k]);
+    }
+    const ang = e => { const r = wheel.getBoundingClientRect(); return Math.atan2(e.clientX - (r.left + r.width / 2), -(e.clientY - (r.top + r.height / 2))) * 180 / Math.PI; };
+    wheel.addEventListener("pointerdown", e => { cancelAnimationFrame(raf); drag = { a: ang(e), hist: [{ t: performance.now(), a: angle }] }; wheel.setPointerCapture(e.pointerId); wheel.style.cursor = "grabbing"; });
+    wheel.addEventListener("pointermove", e => {
+      if (!drag) return; const a = ang(e); let d = a - drag.a; if (d > 180) d -= 360; if (d < -180) d += 360;
+      drag.a = a; angle += d; vel = d / 16; paint();
+      drag.hist.push({ t: performance.now(), a: angle }); if (drag.hist.length > 6) drag.hist.shift();
+    });
+    const up = () => {
+      if (!drag) return; wheel.style.cursor = "";
+      const h = drag.hist, first = h[0], lastH = h[h.length - 1], v = (lastH.a - first.a) / Math.max(1, lastH.t - first.t);
+      drag = null;
+      if (Math.abs(v) > 0.2) run(Math.max(-3, Math.min(3, v)));
+      else if (c.busy) { vel = 0; stopAt(); } // grabbed mid-spin: that's a brake, land where it stopped
+    };
+    wheel.addEventListener("pointerup", up); wheel.addEventListener("pointercancel", up);
+    root.querySelector(".hub").addEventListener("click", () => c.go());
+    const c = { busy: false, go() { run(1.3 + Math.random() * 0.6); }, destroy() { cancelAnimationFrame(raf); } };
+    return c;
+  }
+
+  const BUILD = { flick, shake, draw, spin };
+  return { open, again, stop, get mode() { return modeId; } };
+})();
+$("#pickIcon").setAttribute("href", "#m-" + Pick.mode);
 
 /* ================= Sound and music controls ================= */
 const soundBtn = $("#soundBtn");
@@ -707,9 +1001,8 @@ function paintSound() {
   soundBtn.querySelector("use").setAttribute("href", Sound.on ? "#i-sound" : "#i-mute");
   soundBtn.querySelector("span").textContent = Sound.on ? "Sound on" : "Sound";
 }
-soundBtn.addEventListener("click", () => { Sound.set(!Sound.on); paintSound(); if (Sound.on) Sound.on_(); });
+soundBtn.addEventListener("click", () => { Sound.set(!Sound.on); paintSound(); if (Sound.on) Sound.up(); });
 paintSound();
-
 const musicBtn = $("#musicBtn"), pop = $("#musicPop"), playBtn = $("#musicPlay"), vol = $("#musicVol");
 vol.value = Music.volume;
 const popOpen = () => pop.classList.contains("open");

@@ -8,8 +8,9 @@
 - **Animation:** Expressive. The one big moment is the random pick. Everything else stays calm.
 - **Sound:** sound effects and background music, both synthesized in the browser. Off on first visit.
 - **Fixed:** nothing. The user said "you decide", so the craft defaults above are assumptions.
-- **Still open (ask after the first result):** the look and feel. The user didn't describe one, so this build
-  takes its look from the city itself (blue street-name plates, evening light) and asks again with screenshots.
+- **Round 2 (after the first result):** "Push Nham further." The feel is "Lively, like a night market". Theme:
+  "Follow the phone". The pick: "add all of this and make the option picker creative, impress me", meaning names
+  flicking past, shaking, drawing a card and spinning, all four.
 
 ## Phase 0. Mode
 **App.** People come back to it whenever they're deciding where to eat, and repeat the same 3 tasks fast. There's
@@ -86,3 +87,49 @@ setting survives a reload, and with reduced motion the pick lands at once. At 10
 668 → 473 → 423 → 401 → 392 → 387 → 385 px: a fast start and a soft settle, with no jumps.
 
 Not checked here: how the sound actually sounds (headless Chromium has no speakers) and a real phone's touch drag.
+
+## Round 2 build: lively, four ways to pick
+**Lively, like a night market,** taken from what a night market actually has rather than adding decoration:
+- A string of bulbs across the top, in flat colours with no glow. They switch on one by one, once per load.
+- A live line: the day, the time in Phnom Penh, and how many places are open right now.
+- Each place gets its own colour and initials, like an avatar, so the list reads as places and not as rows.
+- A "how busy" meter (Quiet, Steady, Lively), shown as a word plus bars so colour is never the only signal.
+
+**Four ways to pick**, each with an object you handle directly, and a button for keyboards and laptops:
+| Mode | Object from the street | Direct manipulation | Button |
+|---|---|---|---|
+| Flick | a departures-style board of names | swipe the board up; a harder swipe spins longer | "Flick the board" |
+| Shake | a temple fortune-stick cup (siem si) | hold, drag the cup, or shake the phone; one stick rises | "Hold to shake" |
+| Draw | a fanned deck of cards | tap any card; it lifts, centres and flips | "Draw for me" |
+| Spin | the lazy Susan on a restaurant's round table | flick it round by finger, momentum carries on, ticks per slice | the hub, "Spin" |
+
+**The mode picker** is a 4-way segmented control. An accent puck slides between modes (`--ease-in-out`, 280 ms),
+each icon plays a one-off move when chosen (the board flicks, the cup wobbles, the card flips, the wheel turns),
+and the stage swaps with a short blur crossfade. The last mode used is remembered.
+
+**After the pick lands,** the controls step aside and the result takes their place, so the sheet fits a phone screen
+without scrolling. "Pick again" brings the controls back.
+
+**Sound per mode:** the board ticks fall in pitch as it slows, the sticks rattle like wood, cards swish as they're
+dealt and snap when flipped, the wheel ticks faster the faster it spins, and every pick lands on the same chime and
+a short vibration (where supported, with sound on).
+
+## Round 2 browser review findings (fixed)
+| Issue | Where | Who it hurts | Fix |
+|---|---|---|---|
+| Fanned cards showed only a 38 px strip each, so tapping a card's middle picked its neighbour | Draw | everyone on a phone | the fan spreads to fit the stage, leaving at least 58 px of every card tappable (measured) |
+| The cards that weren't picked stayed on screen | Draw | everyone | inline opacity overrode the exit; they now fade and drop away |
+| The hint text sat on top of the wheel and the cup, and the cup was cut off | Spin, Shake | everyone | the objects are smaller and sit above the hint |
+| Grabbing the spinning table to stop it left it stuck with no result | Spin | anyone who brakes by hand | a grab with no flick now counts as a brake and lands where it stops |
+| The pick could choose a place that is closed right now | all modes | someone deciding where to go now | picks favour places that are open (closed ones keep 12% weight); the stat says "opens 16:00" |
+
+Checks run in Chromium at 390 and 1280 px, in dark and light:
+- Every mode lands from its button: Flick in about 2.5 s, Shake 1.6 s, Draw 1.1 s, Spin 4 to 4.5 s.
+- Spin lands from a finger flick, Flick lands from a swipe, and Draw lands from tapping a card.
+- Keyboard only: arrows change the mode and Space starts it.
+- With reduced motion, every mode lands within 150 ms.
+- After landing, the controls step aside, focus moves to "Pick again", and the sheet doesn't scroll.
+- No horizontal scroll, no text under 4.5:1, and no console errors.
+
+Not checked here: what the sounds sound like, real phone shaking (the devicemotion API), and touch drag on a real
+device.
