@@ -12,7 +12,7 @@ AI-made without making it harder to use, so every rule here serves both: a uniqu
 ## How to run this skill
 
 1. **Read the room** (Phase 0): the taste record, the design system, the deploy target and the real content.
-2. **Interview the user** (Phase 1) until the vision is clear and confirmed.
+2. **Interview the user** (Phase 1) until what they want is clear and confirmed.
 3. **Plan on paper:**
    - the task table or concepts (Phase 2);
    - the feeling table (Phase 5);
@@ -46,8 +46,10 @@ different.
 
 ## The philosophy
 
-1. **Ask, don't pitch.** What it is, who it is for and how it should feel are the user's ideas. Draw them out with
-   small questions and help the user see them. Claude's own ideas are the generic ones.
+1. **Ask what they want, don't pitch.** What it is, who it is for and what they want from it are the user's ideas.
+   Draw them out with a few specialised questions that make them think, and let them answer in their own words.
+   Don't ask how it should feel: people can't answer that. Read the feeling from what they want, and let them judge
+   it in the takes. Claude's own ideas are the generic ones.
 2. **Build for deploy, not for a demo.** People will rely on what ships: the data is real, the links go somewhere and
    the copy is final. A good-looking demo with invented content isn't finished work.
 3. **Users first, character kept.** When a creative choice hurts usability, change the form of the idea until it
@@ -118,35 +120,48 @@ different.
 
 ## Phase 1. Interview the user
 
-The interview draws the user's own idea out of them and helps them see it. It asks rather than proposes, and keeps
-asking until you both agree on what is being built.
+The interview draws out what the user wants and helps them see it. It asks rather than proposes, and keeps asking
+until you both agree on what is being built. It starts with what they want, never with how it should feel.
 
 **Two kinds of question**
-- **Vision questions** are answered by the user, never by Claude: what it is, who it's for, what it should feel
-  like, what it reminds them of, and what must happen first.
-  - Give no recommended answer, and don't suggest a subject, audience or concept.
-  - When you offer choices, take them from the user's own words or their existing design, and always leave room for
-    "something else".
+- **Want questions** are answered by the user, in their own words, never by Claude: what they need done, who it is
+  for, what gets in the way today, and what "right" looks like when it's finished.
+  - They are open. Give no options, no leading examples and no recommended answer, and don't suggest a subject,
+    audience or concept.
+  - **Never ask how it should feel.** No mood words to pick from ("calm, lively, cosy or sharp?"), no "what should it
+    feel like?", no "what style do you like?". Most people can't answer that, and the answer they give is a guess.
+    The feeling is read from what they want (Phase 5) and judged by the user in the takes.
 - **Craft questions** get a recommended answer, worded so that "yes" accepts it: the scope, the animation level,
   sound, and where sounds come from.
 
 **How to ask**
-- **Start from what they gave you.** Build the first questions from the words they used, the screens they have and
-  the problem they named. "You said popular places. Popular with whom: locals, expats, tourists or your friends?"
-  beats "Who is your audience?"
-- **Small and easy.** Each question takes a few seconds to answer: a yes or no, a choice of 2 to 4, or a word or two.
-  Never ask "describe your vision".
+- **What they want comes first.** Round 1 is want questions only. Craft questions wait until round 2, once the want
+  is clear, because the right scope, motion and sound depend on it.
+- **Specialised, not generic.** Build every question from their project: a screen they have, a task they named, a
+  word they used, a real moment from their week. A good question could only be asked of this user. "When you open
+  Home in the morning, what do you look at first, and what do you do straight after?" beats "Who is your
+  audience?" or "What are your goals?"
+- **Make them think.** Ask about real moments and real decisions, not opinions or taste:
+  - the last time they did the task, where it slowed them down, and what they did instead;
+  - what they would keep if they could keep only three things on the screen;
+  - what someone watching over their shoulder would see them struggle with;
+  - what would make them say "that's it" the first time they open the finished thing.
+
+  Each question is one concrete thing, answered in a sentence or two. Never ask "describe your vision".
+- **Let them answer.** Ask, then stop and wait. Don't answer for them, don't offer a default, and don't rephrase their
+  answer into your own words. If an answer is short or vague, ask one follow-up about that answer ("You said it
+  gets messy. Messy where: the list, the buttons, or the numbers?") instead of filling the gap yourself.
 - **Grow questions from answers.** Each answer opens one or two smaller follow-ups. For example, "a price filter"
-  leads to "what counts as cheap?", which leads to "riel, dollars or both?". Stop when the answer would no longer
-  change what you build.
-- **Ask in rounds.** A round is 3 to 5 questions that can be answered now, with the ones that change the most work
-  first. Wait for the replies, then build the next round.
-- **Look up facts yourself.** Ask the user only for decisions. Don't ask what you can check (the framework, whether a
-  file exists), and don't ask what the prompt or the taste record already answers.
+  leads to "what counts as cheap for you?", which leads to "riel, dollars or both?". Stop when the answer would no
+  longer change what you build.
+- **Ask in rounds.** Round 1 is 3 or 4 want questions. Later rounds are 3 to 5 questions, with the ones that change
+  the most work first. Wait for the replies, then build the next round.
+- **Look up facts yourself.** Ask the user only for what only they know. Don't ask what you can check (the framework,
+  whether a file exists), and don't ask what the prompt or the taste record already answers.
 - **Number every question,** and add the ➡ line to craft questions only:
 
   ```
-  ❓ **Q1** - **<short title>**: <a small question built from their words, with options if there are any>
+  ❓ **Q1** - **<short title>**: <an open want question built from their project>
 
   ---
 
@@ -155,36 +170,46 @@ asking until you both agree on what is being built.
   ➡ <your recommended answer, and one line on why>
   ```
 
-- **Help them see it.** When an answer is about look or feel, show it instead of describing it. Before the full
-  build, always show 2 or 3 quick takes of the first screen, built from their words, the feeling table and the
-  rejection lists. These are rough but real screenshots, and the user picks or mixes. A "you decide" covers craft
-  choices, not the look. The takes are the cheapest place to find out that a design lacks life.
+- **Help them see it.** Before the full build, always show 2 or 3 quick takes of the first screen, built from what
+  they want, the feeling table and the rejection lists. Each take reads the feeling a different way. These are
+  rough but real screenshots, and the user picks or mixes: that pick is how the feeling gets decided, not a question.
+  A "you decide" covers craft choices, not the look. The takes are the cheapest place to find out that a design
+  lacks life.
 - **Stop when nothing is left undecided.** Write a five-line summary in the user's own words and ask them to confirm
   it.
   - If the user says "just build it", take the craft recommendations and list them as assumptions.
-  - Vision questions they skipped stay open: build from what they did say, and ask again with the takes.
+  - Want questions they skipped stay open: build from what they did say, and ask again with the takes.
 
-**Round 1: what to find out.** Drop anything the prompt already answers.
+**Round 1: what they want.** Ask 3 or 4, built from their project. Drop anything the prompt already answers.
 
-| What to learn | Kind | Ask it like this | Recommendation |
-|---|---|---|---|
-| What it is and who uses it | vision | Only if the prompt doesn't say: "Who opens this, and what do they want done in the first 10 seconds?" | none |
-| Their picture of it | vision | "Is there a place, app or object it should feel like?" or "Which word fits best: calm, lively, cosy, sharp, or something else?" | none |
-| Redesign or fixes (existing projects) | craft | Show the worst findings from Phase 0, then: "Redesign, fixes only, or fixes first and then decide?" | fixes first when the bones are sound; redesign when the layout itself causes the problems |
-| Scope | craft | Polish, Refine or Rethink (see the scope table) | Polish for "small fixes", Refine for an unclear request, Rethink for a new build or a redesign |
-| Animation level | craft | **Calm:** feedback and state changes · **Standard:** adds menus, sheets, toasts and page transitions · **Expressive:** adds one choreographed signature moment and playful springs | Calm for tools used daily, Standard for most products, Expressive for marketing or anything game-like |
-| Sound | craft | No · sound effects · effects and background music | No, unless the subject is playful, musical, a game or for children |
-| What must stay | vision | "Any colours, fonts, logo or content that must stay? Anything you already dislike?" | none |
+| What to learn | Ask it like this (fill in their screen, task or words) |
+|---|---|
+| The first job | "When you open <screen>, what is the first thing you need done, and what do you do straight after?" |
+| What gets in the way today | "Think of the last time you <task>. Where did it slow you down or annoy you?" |
+| What finished looks like | "It's finished and you're using it on a normal day. What is on the screen that isn't there now?" |
+| What matters most | "If <screen> could only keep three things, which three? What would you never miss?" |
+| Who else and where | Only if you can't tell: "Who else opens this, and where are they when they do: at a desk, on a phone, in a hurry?" |
+| What must stay | "Any colours, fonts, logo or content that must stay? Anything you already dislike?" |
+
+**Round 2: craft.** Once the want is clear, ask these with a recommendation each.
+
+| What to decide | Ask it like this | Recommendation |
+|---|---|---|
+| Redesign or fixes (existing projects) | Show the worst findings from Phase 0, then: "Redesign, fixes only, or fixes first and then decide?" | fixes first when the bones are sound; redesign when the layout itself causes the problems |
+| Scope | Polish, Refine or Rethink (see the scope table) | Polish for "small fixes", Refine for an unclear request, Rethink for a new build or a redesign |
+| Animation level | **Calm:** feedback and state changes · **Standard:** adds menus, sheets, toasts and page transitions · **Expressive:** adds one choreographed signature moment and playful springs | Calm for tools used daily, Standard for most products, Expressive for marketing or anything game-like |
+| Sound | No · sound effects · effects and background music | No, unless the subject is playful, musical, a game or for children |
 
 **Later rounds grow from the answers.** For example:
 - **Each feature they name:** what it does first, its edge cases, and how they would use it themselves.
-- **A feeling or a reference:** show takes on it and ask which is closest.
+- **A reference they bring up** (an app, a place, an object): "What do you like about it?", in their words, then
+  show takes on it and ask which is closest.
 - **A redesign:** what must stay (the name, URLs, a beloved feature).
 - **Fixes only:** confirm the fix list, ordered by how much each problem hurts the user. Anything beyond it needs a
   yes.
 - **Sound:** their own files or synthesized; on or off on first visit (recommend off).
 - **Music:** their track, a CC0 or royalty-free one you find, or a synthesized loop; whether it reacts to what the
-  user does; its mood in a word or two.
+  user does. Its mood comes from what they want, shown as a short sample, not asked as a word.
 - **Expressive motion:** which single moment gets the most motion.
 
 ## Phase 2A. App: start from the tasks
@@ -296,8 +321,10 @@ them before you finish.
 A design can pass every ban and still feel like a template with the subject's colours poured in. This phase stops
 that.
 
-**The feeling table.** Take the user's feeling words and, before any code, write how they change the base of every
-layer, not what gets added on top:
+**The feeling table.** The user doesn't name the feeling; you read it from what they want. Before any code, write 2
+or 3 feeling words taken from their answers (the first job, what gets in the way, what finished looks like, who and
+where), and quote the answer each word comes from. Then write how they change the base of every layer, not what gets
+added on top. The takes test the reading: each take reads it a little differently, and the user's pick confirms it.
 
 | Layer | What the feeling decides |
 |---|---|
