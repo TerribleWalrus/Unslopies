@@ -23,17 +23,18 @@ AI-made without making it harder to use, so every rule here serves both: a uniqu
 6. **Review in a real browser** (Phase 13), fix, and repeat.
 7. **Record the user's taste and report** (Phase 14).
 
-**The scope decides how much runs.** The user picks it in the interview:
+**The scope decides how much runs.** The user picks it with the interview's first questions (Phase 1):
 
-| | Polish | Refine | Rethink |
-|---|---|---|---|
-| What changes | spacing, type, colour, states, motion, sound | layouts within the current structure and navigation | the concept and structure; the content and wiring are kept |
-| Interview | short: scope, animation, sound, what must stay | full | full |
-| Tasks or concepts (2) | skip | task table only | full |
-| Feeling table (5) | warmth and life checks only | full | full |
-| Rejection (6) | tokens only; keep the fonts and layout unless asked | fonts if asked; layouts within the structure | full |
-| First-screen takes | before and after of one screen | yes | yes |
-| Everything else (3, 4, 7–14) | yes | yes | yes |
+| | New look | Small changes | Keep the layout | Change the layout | Full redesign |
+|---|---|---|---|---|---|
+| What changes | colour, type, shapes, motion, sound; the layout and the parts stay | spacing, type, colour, states, motion; fixes | the parts inside each section (their form, controls and states); the layout and navigation stay | the layout of each screen, within the current pages and navigation | the concept and structure; the content and wiring are kept |
+| Interview | the first questions, what stays, then general and specific | the first questions, the fix list, what stays | full | full | full |
+| Tasks or concepts (2) | skip | skip | task table | task table | full |
+| Usability bar (2A) | yes | yes | yes | yes | yes |
+| Feeling table (5) | full | warmth and life checks only | full | full | full |
+| Rejection (6) | fonts, palette and shapes; layouts untouched | tokens only; keep the fonts and layout unless asked | fonts if asked; the forms of the parts | fonts if asked; layouts within the structure | full |
+| First-screen takes | 2 or 3 looks on the same layout | before and after of one screen | yes | yes | yes |
+| Everything else (3, 4, 7–14) | yes | yes | yes | yes | yes |
 
 **Planning notes** go in your reply or in the project's design file (DESIGN.md or the brief), never in the shipped
 product. Write them down rather than keeping them in your head: the written steps are what make the output
@@ -47,8 +48,8 @@ different.
 ## The philosophy
 
 1. **Ask what they want, general first, don't pitch.** What it is, who it is for and what they want from it are the
-   user's ideas. Start with a few open, general questions built from their project and let them answer in their own
-   words; then grill the specifics, each with a recommended answer. Don't ask how it should feel: people can't answer
+   user's ideas. Start by asking what kind of change they want, then a few open, general questions built from their
+   project that they answer in their own words; then grill the specifics, each with a recommended answer. Don't ask how it should feel: people can't answer
    that. Read the feeling from what they want, and let them judge it in the takes. Claude's own ideas are the generic
    ones.
 2. **Build for deploy, not for a demo.** People will rely on what ships: the data is real, the links go somewhere and
@@ -129,9 +130,11 @@ tree, start at the root with general questions, and work down the branches round
 undecided. It asks rather than proposes, and it never asks how the design should feel.
 
 **The decision tree**
-- **The root is general:** what this is for, who uses it and how often, the one job it must get right, and why it is
-  being made or changed now. Nothing further down can be decided well until these are answered, so round 1 asks only
-  these.
+- **The root is the kind of change.** For an existing project the very first question is whether the user wants a
+  redesign or a new look, and everything after is built off that answer (see "The first questions" below). A new
+  build, with nothing to change, skips straight to the general questions.
+- **Then general:** what this is for, who uses it and how often, the one job it must get right, and why it is being
+  made or changed now. Ask only what the project and the first answers don't already tell you.
 - **The branches get specific:** each answer opens the decisions that depend on it: a task's steps, a screen's main
   action, what a status means, an edge case, what must stay.
 - **The frontier** is every open decision whose parent is already answered. Each round asks the whole frontier (3 to
@@ -139,18 +142,23 @@ undecided. It asks rather than proposes, and it never asks how the design should
   a later round. After each round, work out the new frontier.
 - **Done** when the frontier is empty and nothing is silently assumed. Confirm a short summary before building.
 
-**Three kinds of question**
-- **General questions** (round 1) are open and answered in the user's own words.
+**Four kinds of question**
+- **Choice questions** (the first questions) decide what kind of change this is and what stays. Each offers 2 to 4
+  options with a one-line description, and always room for something else; "what stays" allows several picks. Ask
+  them with the host's question tool when there is one, so the user can tap an answer; otherwise as a numbered list
+  of options. Give no recommendation unless the user's own words already point to an option: then mark it and quote
+  those words.
+- **General questions** (after the first questions) are open and answered in the user's own words.
   - Give no options, no recommended answer and no examples that lead. Don't suggest a subject, audience or concept.
   - Ask, then stop and wait. Don't answer for them, and don't rephrase their answer into your own words. If an
     answer is short or vague, the next round asks about that answer.
-- **Specific questions** (round 2 onwards) grow from their answers, and each one gets a ➡ recommended answer, worded
+- **Specific questions** (after the general ones) grow from their answers, and each one gets a ➡ recommended answer, worded
   so that "yes" accepts it, with room to say something else.
   - The recommendation comes from their own earlier answers and the Phase 0 evidence, never from taste. Say which
     answer or finding it comes from.
   - What belongs to the user alone gets no recommendation: names, their content, what must stay.
-- **Craft questions** (scope, animation level, sound, where sounds come from) are specific questions too: each gets a
-  recommendation, and they come after round 1.
+- **Craft questions** (animation level, sound, where sounds come from) are specific questions too: each gets a
+  recommendation, and they come after the general questions.
 - **Never ask how it should feel.** No mood words to pick from ("calm, lively, cosy or sharp?"), no "what should it
   feel like?", no "what style do you like?". Most people can't answer that, and the answer they give is a guess. The
   feeling is read from what they want (Phase 5) and judged by the user in the takes.
@@ -189,7 +197,30 @@ undecided. It asks rather than proposes, and it never asks how the design should
   - If the user says "just build it", take the recommendations and list them as assumptions.
   - General questions they skipped stay open: build from what they did say, and ask again with the takes.
 
-**Round 1: general, open.** Ask 3 or 4, in the user's terms. Drop anything the prompt already answers.
+**The first questions: what kind of change** (existing projects). Look at the project first (Phase 0) and show
+the worst 3 to 5 findings, then ask, one at a time, building each question off the last answer:
+
+1. **Redesign or new look?**
+   - **Redesign:** change how it is laid out or how it works.
+   - **New look:** keep the layout and the parts, and give it a new visual style.
+2. **If redesign: how big?**
+   - **Full redesign:** a new concept and structure; the content and wiring are kept.
+   - **Change the layout:** the same pages and content, arranged differently on each screen.
+   - **Keep the layout:** the same layout and navigation, with the parts inside each section redesigned.
+   - **Small changes:** spacing, type, colour, states and fixes only.
+3. **If new look: how far?**
+   - **A whole new style:** new colours, fonts, shapes and motion.
+   - **Same brand, fresher:** keep the colours and logo, and change the rest.
+   - **Polish only:** the current style, made cleaner and more consistent.
+4. **What must stay?** (several picks) Options taken from what the project has: its logo, colours, fonts, light and
+   dark themes, its page names, a feature the user mentioned.
+5. **Small changes only:** confirm the fix list, worst first. Anything beyond it needs a yes.
+
+The answers pick the column in the scope table, and every later question is built off them. For example, "change the
+layout" leads to "which screen gets in your way most?", and "a whole new style" leads to what must stay and then the
+general questions.
+
+**Next: general, open.** Ask 2 to 4, in the user's terms, built off the first answers. Drop anything the prompt already answers.
 
 | What to learn | Ask it like this (fill in their project, screen or words) |
 |---|---|
@@ -199,26 +230,19 @@ undecided. It asks rather than proposes, and it never asks how the design should
 | Why now | "What made you want to change it now? What happened the last time it let you down?" |
 | What must stay | "Any colours, fonts, logo, words or content that must stay? Anything you already dislike?" |
 
-**Round 2 onwards: specific, with a recommendation.** Built from round 1. For example:
+**Then: specific, with a recommendation.** Built from the general answers. For example:
 - **The top tasks they named:** "You said you check the running movie first. Should its progress be the biggest thing
   on Home? ➡ Yes: it's the first thing you look at."
 - **Steps:** "Starting a movie takes 3 steps now (paste, Set up, Start). Should it take 2? ➡ Yes, if the preset you
   picked is right most of the time, as you said."
 - **What they find hard:** "You said you lose track of which part is which. Should every part show its movie's title
   next to its number? ➡ Yes."
-- **Redesign or fixes** (existing projects): show the worst findings from Phase 0, then "Redesign, fixes only, or
-  fixes first and then decide? ➡ fixes first when the bones are sound; redesign when the layout itself causes the
-  problems."
-- **Scope:** Polish, Refine or Rethink (see the scope table). ➡ Polish for "small fixes", Refine for an unclear
-  request, Rethink for a new build or a redesign.
 - **Animation level:** **Calm** (feedback and state changes) · **Standard** (adds menus, sheets, toasts and page
   transitions) · **Expressive** (adds one choreographed signature moment and playful springs). ➡ Calm for tools used
   daily, Standard for most products, Expressive for marketing or anything game-like.
 - **Sound:** no · sound effects · effects and background music. ➡ No, unless the subject is playful, musical, a game
   or for children. Then: their own files or synthesized; on or off on first visit (➡ off).
 - **A reference they bring up** (an app, a place, an object): "What do you like about it?", then show takes on it.
-- **Fixes only:** confirm the fix list, ordered by how much each problem hurts the user. Anything beyond it needs a
-  yes.
 - **Music:** their track, a CC0 or royalty-free one you find, or a synthesized loop; whether it reacts to what the
   user does. Its mood comes from what they want, shown as a short sample.
 - **Expressive motion:** which single moment gets the most motion.

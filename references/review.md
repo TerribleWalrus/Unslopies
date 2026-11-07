@@ -52,7 +52,7 @@ data. Look at the result as the user would.
     - the page height on a phone is reasonable;
     - no console errors.
 11. **Compare with any reference** (a mockup, a comp, the original) detail by detail, with pass or fail for each.
-12. **Write the findings table, worst first, then fix and repeat** until nothing serious is left. Under "Fixes only",
+12. **Write the findings table, worst first, then fix and repeat** until nothing serious is left. Under "Small changes",
     fix what was agreed, and bring anything new to the user as a proposal.
 
     | Issue | Where | Who it hurts | Fix |
@@ -150,7 +150,7 @@ Report this after building, with pass or fail for each row. Mark rows that don't
 | Rule | Result | Evidence |
 |---|---|---|
 | Interview | | the rounds asked, the confirmed summary, or the assumptions listed if the user said "you decide" |
-| Scope respected | | Polish, Refine or Rethink, and nothing beyond it without a yes |
+| Scope respected | | the first answers (redesign or new look, how big, what stays), and nothing beyond them without a yes |
 | Taste record and design system | | the files read, the rules and tokens reused |
 | Ready to deploy | | real content and its sources, nothing invented, no demo leftovers, links checked, deploy target's limits handled |
 | Usability bar | | the cold-read answers, labels that kept plain names, the one next action per zone, steps before and after |
