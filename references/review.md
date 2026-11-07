@@ -18,6 +18,10 @@ data. Look at the result as the user would.
    Look at each screenshot yourself. Automated checks miss the problems that matter most: text sitting on top of
    objects, things cut off at an edge, a dish drawn twice, a label wrapping onto two lines.
 3. **Walk through each screen:**
+   - **The cold read:** show a screenshot to a sub-agent with a fresh context and no explanation. Ask what the
+     screen is, what is happening and what to do next. Any wrong answer is a finding.
+   - **The usability bar** (SKILL.md Phase 2A), line by line: plain names, one obvious next action, status spelled
+     out, the metaphor explains or it goes, conventions kept, steps counted.
    - **First 5 seconds:** is the main action obvious?
    - **Load:** is anything on screen that the next decision doesn't need?
    - **The 100th use (apps):** what will annoy them?
@@ -149,6 +153,7 @@ Report this after building, with pass or fail for each row. Mark rows that don't
 | Scope respected | | Polish, Refine or Rethink, and nothing beyond it without a yes |
 | Taste record and design system | | the files read, the rules and tokens reused |
 | Ready to deploy | | real content and its sources, nothing invented, no demo leftovers, links checked, deploy target's limits handled |
+| Usability bar | | the cold-read answers, labels that kept plain names, the one next action per zone, steps before and after |
 | Task table (app) / concepts (site) | | top tasks with steps before and after / the concepts, scores and prototype |
 | First-screen takes | | the takes shown and which the user picked |
 | Feeling, warmth and life | | the feeling table, the neutrals' hue against the accent's, the template test, the blurred-screenshot test |
