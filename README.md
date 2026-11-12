@@ -4,38 +4,19 @@ A foundation skill for front-end design and web page builds. Its goal is output 
 
 ## Install
 
-One command, for Claude Code, Codex, Cursor, Gemini CLI, OpenCode and Copilot:
-
 ```bash
 npx unslop-design
 ```
 
-It finds the agents on your machine, shows where it will put the skill, asks to confirm, and installs it globally as `unslop-design`. Restart your agent afterwards.
+It finds your agents (Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Copilot), installs the skill into each, and you restart your agent. Run it again to update.
 
-```bash
-npx unslop-design --agent claude,codex   # only those agents
-npx unslop-design --project --all        # into this project, for every agent
-npx unslop-design --list                 # show locations and what's detected
-npx unslop-design --remove               # uninstall
-npx unslop-design --dry-run              # preview, change nothing
-```
+For other options, run `npx unslop-design --help`.
 
-Or use the open skills CLI, which reads this repo directly:
+Or use the open skills CLI:
 
 ```bash
 npx skills add TerribleWalrus/Unslopies
 ```
-
-| Agent | Global folder | Project folder |
-| --- | --- | --- |
-| Claude Code | `~/.claude/skills/` | `.claude/skills/` |
-| Codex | `~/.codex/skills/` (or `$CODEX_HOME/skills/`) | `.agents/skills/` |
-| Cursor | `~/.cursor/skills/` | `.cursor/skills/` |
-| Gemini CLI | `~/.gemini/skills/` | `.gemini/skills/` |
-| OpenCode | `~/.config/opencode/skills/` | `.opencode/skills/` |
-| Copilot | `~/.copilot/skills/` | `.github/skills/` |
-
-Updating is the same command again; it replaces the old copy.
 
 ## What this skill is
 
