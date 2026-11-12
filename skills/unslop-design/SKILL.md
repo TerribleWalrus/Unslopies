@@ -1,5 +1,5 @@
 ---
-name: unslop-design-1-7
+name: unslop-design
 description: Unslop Design 1.7. Design and build front ends that look like a bold, specific studio made them for this subject, feel warm, lived-in, detailed and easy to use, and move and sound smooth and calm in the spirit of Apple's design, built to ship with real content. Covers websites and apps alike, including landing pages, web apps, app shells, chat UIs, dashboards, settings screens, mobile layouts, skins and themes for existing apps, redesigns, design reviews, animation passes and adding sound effects or music. It replaces unslop-design 1.65, 1.6, 1.5 and 1.0. Also use it when the user only says "make it look good", "it looks AI-made", "it feels lifeless", "too many lines", "it's cold", "restyle this", "it's hard to use", "it's not creative enough", "make the animations smoother", "it feels janky", "it looks mundane", "it's too safe", "it lacks detail" or "add sounds".
 ---
 

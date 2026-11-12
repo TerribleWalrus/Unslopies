@@ -1,0 +1,12 @@
+{
+  "name": "unslop-design",
+  "version": "1.7.0",
+  "description": "Unslop Design: an agent skill for front-end design that doesn't look AI-made. Installs into Claude Code, Codex, Cursor, Gemini CLI, OpenCode and Copilot.",
+  "keywords": ["agent-skill", "skill", "claude-code", "codex", "cursor", "gemini-cli", "opencode", "copilot", "design", "frontend"],
+  "homepage": "https://github.com/TerribleWalrus/Unslopies#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/TerribleWalrus/Unslopies.git" },
+  "bugs": { "url": "https://github.com/TerribleWalrus/Unslopies/issues" },
+  "bin": { "unslop-design": "bin/cli.js" },
+  "files": ["bin", "skills", "README.md"],
+  "engines": { "node": ">=18" }
+}
