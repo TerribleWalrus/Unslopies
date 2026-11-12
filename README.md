@@ -2,6 +2,22 @@
 
 A foundation skill for front-end design and web page builds. Its goal is output that looks designed by a specific studio for a specific subject, with no recognizable AI design patterns, and that stays easy to use for a first-time visitor and for a power user on their hundredth hour.
 
+## Install
+
+```bash
+npx unslop-design
+```
+
+It finds your agents (Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Copilot), installs the skill into each, and you restart your agent. Run it again to update.
+
+For other options, run `npx unslop-design --help`.
+
+Or use the open skills CLI:
+
+```bash
+npx skills add TerribleWalrus/Unslopies
+```
+
 ## What this skill is
 
 Unslop Design is a foundation, not a finished design system. It sets the process and the hard rules. It does not decide the look of your project. The subject, concept, palette, fonts, layout and hero element come from the prompt you give it and from your answers to its questions. When you bring no visual direction, it brings a point of view and commits to it.
@@ -47,13 +63,13 @@ Every rule serves three things at once:
 
 ## Files
 
-- `SKILL.md`: the process and rules. It is always loaded.
-- `references/foundations.md`: design principles from outside sources, with the source list. It is loaded when planning screens and during the rival critique.
-- `references/motion.md`: motion tokens, the rules for each kind of motion, and how to check them. It is loaded before any animation work.
-- `references/sound.md`: the sound toggle, sound map, synthesis, music and checks. It is loaded only when you want sound.
-- `references/review.md`: the browser review loop, scripts and the scorecard. It is loaded before the review.
+- `skills/unslop-design/SKILL.md`: the process and rules. It is always loaded.
+- `skills/unslop-design/references/foundations.md`: design principles from outside sources, with the source list. It is loaded when planning screens and during the rival critique.
+- `skills/unslop-design/references/motion.md`: motion tokens, the rules for each kind of motion, and how to check them. It is loaded before any animation work.
+- `skills/unslop-design/references/sound.md`: the sound toggle, sound map, synthesis, music and checks. It is loaded only when you want sound.
+- `skills/unslop-design/references/review.md`: the browser review loop, scripts and the scorecard. It is loaded before the review.
 
-Keep the folder together when you install it, for example as `~/.claude/skills/unslop-design-1-7/`, so the reference files are found. It replaces 1.65, 1.6, 1.5 and 1.0, so turn older versions off to stop them competing.
+The skill lives in `skills/unslop-design/`. Keep that folder together so the reference files are found. It replaces 1.65, 1.6, 1.5 and 1.0, so delete older versions (including `unslop-design-1-7`) to stop them competing.
 
 ## What the foundation provides
 
