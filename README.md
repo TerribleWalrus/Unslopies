@@ -1,16 +1,16 @@
-# Unslop Design (v1.7)
+# Unslop Design (v1.76)
 
 A foundation skill for front-end design and web page builds. Its goal is output that looks designed by a specific studio for a specific subject, with no recognizable AI design patterns, and that stays easy to use for a first-time visitor and for a power user on their hundredth hour.
 
 ## Install
 
 ```bash
-npx unslop-design
+npx unslopies
 ```
 
 It finds your agents (Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Copilot), installs the skill into each, and you restart your agent. Run it again to update.
 
-For other options, run `npx unslop-design --help`.
+For other options, run `npx unslopies --help`. (The npm package `unslop-design` is a different project, not this one.)
 
 Or use the open skills CLI:
 
@@ -32,7 +32,21 @@ Every rule serves three things at once:
 2. **Good taste when you bring none.** Most people can't describe what they want visually, so the skill makes confident choices on type, colour, rhythm, motion and detail.
 3. **Good to live with.** A look that wins on day one and slows people down on day thirty counts as a failure, not a style.
 
-## What's new in 1.7
+## What's new in 1.76
+
+1.76 is built on the experimental 1.7e branch, after comparing AI-made builds with human-made ones. AI pages kept converging on the same skeleton: a heading on one side and a picture, list or form on the other, section after section, on one background colour, with all the creativity spent on the hero.
+
+- **The page is a sequence, not a screen.** A page storyboard is planned before any code: every section is a beat with its height, alignment, background and density, and rules force variation (no neighbours alike, at least one full-size moment, side-by-side splits only for real pairs, colour bands for pacing).
+- **A silhouette check.** `scripts/silhouette.js` prints a built page as beats (`C`, `L`, `F`, `LR`, `G` with S to XL heights) and flags the left/right rut. It runs after the first build and again at review.
+- **The two-column reflex, explained.** Why pages fall into left/right, and five ways to use the empty half without a second column.
+- **Sections from the subject.** "How it works", testimonials, FAQ, stats and call-to-action bands are each justified or dropped.
+- **Calm in behaviour, not in composition,** and **a liveliness dial** (Quiet, Warm, Lively) with a life budget: every section of a lively build gets a live detail tied to a real fact, and it stays addictive by curiosity, never by pressure.
+- **New clichés:** the alternating split, heading-left/paragraph-right heads, creativity only in the hero, equal-weight bands, and rolling text (marquees and tickers).
+- **Music is a deliverable when chosen:** pick "effects and background music" and the build must ship a working music player.
+
+See `skills/unslop-design/CHANGELOG.md` for every change.
+
+## New in 1.7
 
 - **Foundations from real sources.** A new reference, `references/foundations.md`, collects design principles read from outside sources rather than habit: NN/g's visual design principles and usability heuristics, Laws of UX, Refactoring UI, Practical Typography, data table guidance, the GOV.UK Design System, Linear's 2026 interface refresh, and research on why AI-made interfaces all converge. It covers hierarchy, grouping without boxes, OKLCH colour systems with tinted neutrals, type for reading, dense tables, and how to steer away from the median look. Every source is listed.
 - **Two named looks to step away from.** The skill now names the looks Claude falls into for serious tools, so it can spot them early:
@@ -67,9 +81,11 @@ Every rule serves three things at once:
 - `skills/unslop-design/references/foundations.md`: design principles from outside sources, with the source list. It is loaded when planning screens and during the rival critique.
 - `skills/unslop-design/references/motion.md`: motion tokens, the rules for each kind of motion, and how to check them. It is loaded before any animation work.
 - `skills/unslop-design/references/sound.md`: the sound toggle, sound map, synthesis, music and checks. It is loaded only when you want sound.
-- `skills/unslop-design/references/review.md`: the browser review loop, scripts and the scorecard. It is loaded before the review.
+- `skills/unslop-design/references/review.md`: what the review script checks, and the scorecard. It is loaded before the review.
+- `skills/unslop-design/scripts/review.js` and `scripts/silhouette.js`: the browser review and the page silhouette check (Node with Playwright; set `CHROME=` to use another Chromium).
+- `skills/unslop-design/CHANGELOG.md`: what changed from 1.7e.
 
-The skill lives in `skills/unslop-design/`. Keep that folder together so the reference files are found. It replaces 1.65, 1.6, 1.5 and 1.0, so delete older versions (including `unslop-design-1-7`) to stop them competing.
+The skill lives in `skills/unslop-design/`. Keep that folder together so the reference files are found. It replaces 1.75e, 1.7e, 1.7, 1.65, 1.6, 1.5 and 1.0, so delete older versions (`unslop-design-1-76`, `unslop-design-1-75e`, `unslop-design-1-7e`, `unslop-design-1-7` and earlier) to stop them competing. The installer warns when it finds them.
 
 ## What the foundation provides
 

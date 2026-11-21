@@ -1,814 +1,840 @@
 ---
-name: unslop-design
-description: Unslop Design 1.7. Design and build front ends that look like a bold, specific studio made them for this subject, feel warm, lived-in, detailed and easy to use, and move and sound smooth and calm in the spirit of Apple's design, built to ship with real content. Covers websites and apps alike, including landing pages, web apps, app shells, chat UIs, dashboards, settings screens, mobile layouts, skins and themes for existing apps, redesigns, design reviews, animation passes and adding sound effects or music. It replaces unslop-design 1.65, 1.6, 1.5 and 1.0. Also use it when the user only says "make it look good", "it looks AI-made", "it feels lifeless", "too many lines", "it's cold", "restyle this", "it's hard to use", "it's not creative enough", "make the animations smoother", "it feels janky", "it looks mundane", "it's too safe", "it lacks detail" or "add sounds".
+name: "unslop-design"
+description: "Unslop Design 1.76: usability first, then bold, lively, human-made front ends whose whole-page composition (not only the hero) comes from the subject, checked with a page storyboard and a silhouette script so pages stop converging on alternating left/right sections. Use when the user asks for 1.76, Unslop Design, or wants a site or app designed, restyled or reviewed so it does not look AI-made, generic or bland."
 ---
 
-# Unslop Design 1.7
+# Unslop Design 1.76
 
-A design is good when it looks like a specific studio made it for this subject, the people who use it are
-comfortable in it for hours, and it is ready to ship. People use this skill to make their product stop looking
-AI-made without making it harder to use, so every rule here serves both: a unique character and the user first.
+Built on 1.7e, with the layout and liveliness directives learned from comparing AI builds with human-made
+ones. Run it instead of 1.7, 1.7e or 1.75e, never together with them. `CHANGELOG.md` says what changed.
 
-## The aim (read this first; every rule below serves it)
+It covers websites and apps alike: landing pages, web apps, app shells, chat UIs, dashboards, settings screens,
+mobile layouts, posters, skins and themes for existing apps, redesigns, design reviews, animation passes and sound.
 
-Make front ends that a person with taste would be proud to have designed, and that nobody could get from a one-line
-prompt to an AI. Three things at once:
-1. **Unique to this subject:** it could not be reskinned for another product unchanged, and it doesn't look like
-   Claude's other work.
-2. **Good taste when the user brings none:** most people can't describe what they want visually. Bring a point of
+## The aim
+
+Make front ends that people are comfortable using every day and every hour, that a person with taste would be
+proud to have designed, and that nobody could get from a one-line prompt to an AI. In this order:
+
+1. **Good to live with.** Easy for a first-time visitor, fast and calm for someone on their hundredth hour. Easy to
+   navigate, easy to understand, easy to use, never a burden. This is the main feature. A look that wins on day one
+   and slows people down on day thirty is a failure, not a style.
+2. **Unique to this subject.** It could not be reskinned for another product unchanged, and it does not look like
+   other AI work, including other work made with this skill.
+3. **Good taste when the user brings none.** Most people can't describe what they want visually. Bring a point of
    view on type, colour, rhythm, motion and detail, and commit to it.
-3. **Good to live with:** easy for a first-time visitor, and fast and comfortable for a power user on their
-   hundredth hour. A look that wins on day one and slows people down on day thirty is a failure, not a style.
 
-When a rule here seems to conflict with the aim, the aim wins; write down why.
+**Order of authority.** The user's words, then the project's existing design system, then the usability bar
+(Phase 1), then everything else in this file. When two rules here conflict, the one that makes the product easier
+to live with wins. Write down why.
 
-**What 1.65 fixed.** Builds under 1.6 were usable but timid: ideas that could have gone much further stopped at the
-first workable version; screens looked clean, new and empty, with nothing worn, handled or small to discover; and
-mockups were treated as chores. Three new phases close this: the bold pass (5B), the lived-in detail system (5C) and
-the rival critique (13B). They are not optional, and they run at every scope except "Small changes".
+**How to read examples in this file.** Every example is an illustration from a subject that is not yours. Never
+reuse one. If a detail in your plan also appears as an example anywhere in this file, replace it: it came from the
+file, not from the subject. Where this file could have listed examples, it asks questions instead. Answer the
+questions for this subject.
 
-**What 1.7 adds.** Foundations from outside sources (`references/foundations.md`), and two named looks to step
-away from for serious tools: civic admin and the SaaS starter pack (Phase 3B).
+## Pick the tier, then the scope
 
-## How to run this skill
+**The tier decides how much process runs.** Pick it yourself, say which in one line, and let the user change it.
 
-1. **Read the room** (Phase 0): the taste record, the design system, the deploy target and the real content.
-2. **Interview the user** (Phase 1) until what they want is clear and confirmed.
-3. **Plan on paper:**
-   - the task table or concepts (Phase 2);
-   - the feeling table (Phase 5);
-   - the rejection lists and tokens (Phase 6);
-   - the sound map, if there is sound (Phase 8).
-   - the bold pass: the world inventory, the escalation ladder and the signature details (Phase 5B);
-   - the detail inventory at three zoom levels (Phase 5C).
-4. **Show 2 or 3 takes of the first screen** and let the user pick or mix them (Phase 1, "Help them see it"). At
-   least one take sits on the highest rung of the ladder that clears the usability bar.
-5. **Build,** following Phases 3–12, as seriously as a paid client build (the serious-build bar in 13B).
-6. **Review in a real browser** (Phase 13), then **critique it like a rival studio** (Phase 13B) for at least two
-   rounds, fixing between rounds, before the user sees it.
-7. **Record the user's taste and report** (Phase 14).
+| | Quick | Standard | Full |
+|---|---|---|---|
+| For | one component, one state, a copy fix, one screen tweak, a review comment | one screen or a few, a restyle, small changes across a project | a new product, a full redesign, a multi-page site |
+| Interview (2) | at most one question, only if a wrong guess is costly | first questions, then one round | until the frontier is empty |
+| Tasks or concepts (3) | skip | task table, or 3 concepts | full |
+| Page storyboard (6S) | skip | sites: yes | sites: yes, plus whole-page takes |
+| Feeling table (7) | skip; match what exists | yes | yes |
+| Bold pass and detail (8, 9) | skip | yes, sized by context | yes, sized by context |
+| First-screen takes | none; before and after | 2 | 2 or 3 |
+| Rival critique (18) | one pass | one round | two rounds |
+| Always | usability bar (1), convergence check (4), behaviour (13), accessibility (15), the review script, the silhouette check on sites, and looking at the result (17) | same | same |
 
-**The scope decides how much runs.** The user picks it with the interview's first questions (Phase 1):
+**The scope decides what may change** (existing projects; the user picks it in the first questions):
 
-| | New look | Small changes | Keep the layout | Change the layout | Full redesign |
-|---|---|---|---|---|---|
-| What changes | colour, type, shapes, motion, sound; the layout and the parts stay | spacing, type, colour, states, motion; fixes | the parts inside each section (their form, controls and states); the layout and navigation stay | the layout of each screen, within the current pages and navigation | the concept and structure; the content and wiring are kept |
-| Interview | the first questions, what stays, then general and specific | the first questions, the fix list, what stays | full | full | full |
-| Tasks or concepts (2) | skip | skip | task table | task table | full |
-| Usability bar (2A) | yes | yes | yes | yes | yes |
-| Feeling table (5) | full | warmth and life checks only | full | full | full |
-| Rejection (6) | fonts, palette and shapes; layouts untouched | tokens only; keep the fonts and layout unless asked | fonts if asked; the forms of the parts | fonts if asked; layouts within the structure | full |
-| First-screen takes | 2 or 3 looks on the same layout | before and after of one screen | yes | yes | yes |
-| Everything else (3, 4, 7–14) | yes | yes | yes | yes | yes |
+| Scope | What changes | What stays |
+|---|---|---|
+| New look | colour, type, shapes, motion, sound | the layout and the parts |
+| Small changes | spacing, type, colour, states, motion, fixes | fonts and layout unless asked |
+| Keep the layout | the parts inside each section: form, controls, states | layout and navigation |
+| Change the layout | the layout of each screen | pages and navigation |
+| Full redesign | concept and structure | content and wiring |
 
-**Planning notes** go in your reply or in the project's design file (DESIGN.md or the brief), never in the shipped
-product. Write them down rather than keeping them in your head: the written steps are what make the output
-different.
+Nothing outside the scope changes without a yes.
 
-**Reference files.** Load them when the step needs them:
-- `references/motion.md`: before writing any animation, transition or gesture.
-- `references/sound.md`: when the user said yes to sound.
-- `references/review.md`: before the browser review, and for the scorecard.
-- `references/foundations.md`: when planning any screen, and in the rival critique. Hierarchy, Gestalt grouping,
-  OKLCH colour, type, tables, heuristics and why AI designs converge, from outside sources.
+## How to run
 
-## The philosophy
+1. **Read the room** (Phase 0): taste record, used log, design system, deploy target, real content.
+2. **Hold the usability bar** (Phase 1) from the first sketch to the last fix.
+3. **Interview** (Phase 2) as far as the tier says.
+4. **Plan on paper:** tasks or concepts (3), convergence check (4), context (5), feeling table (7), bold pass (8),
+   detail budget and life (9), rejection and tokens (10), sound map if there is sound (12).
+5. **Storyboard the whole page** (6S, sites): every section as a beat with its height, alignment, ground and
+   density, before any code. The creativity goes into the sequence, not only into the first screen.
+6. **Show takes** of the first screen and of the whole-page silhouette, and let the user pick or mix.
+7. **Build** (Phases 6 to 16) as seriously as a paid client build. Run the silhouette check after the first
+   full build, not only at the end: the left/right reflex comes back while you build.
+8. **Review in a real browser** (17), then **critique like a rival studio** (18).
+9. **Record and report** (19): the taste record, the used log with the silhouette, the scorecard.
 
-1. **Ask what they want, general first, don't pitch.** What it is, who it is for and what they want from it are the
-   user's ideas. Start by asking what kind of change they want, then a few open, general questions built from their
-   project that they answer in their own words; then grill the specifics, each with a recommended answer. Don't ask how it should feel: people can't answer
-   that. Read the feeling from what they want, and let them judge it in the takes. Claude's own ideas are the generic
-   ones.
-2. **Build for deploy, not for a demo.** People will rely on what ships: the data is real, the links go somewhere and
-   the copy is final. A good-looking demo with invented content isn't finished work.
-3. **Easy to use first, then as creative as possible.** Every screen first clears the usability bar (Phase 2A):
-   understood in five seconds, plain names, one obvious next action. Creativity then goes as far as it can in the
-   form, the materials and the motion, never in the words or the controls. When a creative choice hurts usability,
-   change the form of the idea until it serves the user. Don't throw the idea away for a template, and don't keep it
-   as it is at the user's expense.
-4. **People live in an interface.** Comfort beats rigour. A screen that impresses for five seconds and tires the eye
-   after an hour has failed. A feature nobody uses is clutter: "I don't use this" is a design verdict.
-5. **The content is the life, and the chrome recedes.** Faces, names, real things and the user's words carry the
-   warmth. Never override a content setting the user chose (their text colours, fonts, sizes).
-6. **Separate with space and surfaces, not lines.** Lines make a layout look like a form.
-7. **Warmth is a temperature, not a feature list.** It lives in the ground, the surfaces, the type and the voice. A
-   cool shell with a warm accent and a few friendly badges still reads cold.
-8. **Motion is physics, and sound is feedback.** Things come from somewhere and go back there, respond the moment
-   they're touched, and can be interrupted halfway. A sound confirms what the hand just did. If the user waits for
-   either one, or notices it on the hundredth use, it's wrong.
-9. **Behaviour and posture are design.** Where focus lands, what Escape does and what a button says while it works
-   are design decisions. A phone is held with a thumb, on a bus, in the dark: a narrower desktop is not a phone
-   design.
-10. **What the user sees is the real test.** That means their data, device, settings and network, judged detail by
-    detail rather than by impression.
-11. **One source, and taste is evidence.** One token file, one icon set, one motion language, one sound palette.
-    Every verdict the user gives is a rule for next time, so write it down.
-12. **Delight that lasts.** Judge every idea on the hundredth use, not the first. A gimmick that looks good once and
-    slows a power user down is worse than plain. Spectacle belongs where people look once; in tools people live in,
-    the craft is the character.
-13. **Be the bolder studio.** The first workable idea is the floor, not the answer. When a visual could clearly
-    extend into something unique, extend it without being asked, as far as the usability bar allows. Proposing the
-    bolder version and building it is part of the job; waiting to be told is not.
-14. **Lived in, not brand new.** The things people love show use: marks, notes, wear, stamps, dates, the owner's
-    hand, things slightly out of line. A screen with nothing to discover up close looks like a template, however
-    clean it is. Detail is information and character from the subject's world, never ornament.
-15. **Every mockup is a real build.** Build it as if a paying client will use it tomorrow: every state, real
-    interactions, the hard part built rather than faked. Then look at it critically, as a rival would. Interest
-    shows in the work; "good enough" is a reason to do another round.
+Planning notes go in your reply or the project's design file, never in the shipped product. Write them down: the
+written steps are what make the output different.
+
+References next to this file: `references/foundations.md` (read when planning a screen), `references/review.md`
+(the review script and the scorecard), `references/motion.md` (before any animation), `references/sound.md` (only if
+the user said yes). Scripts: `scripts/review.js` and `scripts/silhouette.js`.
+
+## Principles
+
+1. **People live in an interface.** Comfort beats rigour and beats spectacle. Judge every idea on the hundredth use.
+2. **Ask what they want, don't pitch.** What it is, who it is for and what they want from it are the user's ideas.
+3. **Build for deploy, not for a demo.** Real data, real links, final copy.
+4. **Creative in the form, plain in the words and the controls.** When a creative choice hurts usability, change
+   the form of the idea until it serves the user. Don't drop it for a template, and don't keep it at the user's
+   expense.
+5. **The content is the life, and the chrome recedes.** Never override a content setting the user chose.
+6. **Separate with space and surfaces, not lines.**
+7. **Temperature belongs to the ground,** not to an accent or a badge.
+8. **Motion is physics, sound is feedback.** If the user waits for either, or notices it on the hundredth use, it
+   is wrong.
+9. **Behaviour and posture are design.** Where focus lands, what Escape does, what a button says while it works. A
+   phone is held with a thumb, on a bus, in the dark.
+10. **Be the bolder studio, inside the bar.** The first workable idea is the floor. Extend it without being asked,
+    as far as the context allows (Phase 5).
+11. **Detail is information or the subject's character, never ornament,** and never a quota to fill.
+12. **One source.** One token file, one icon set, one motion language, one sound palette.
+13. **What the user sees is the real test.** Their data, device, settings and network. Measure, then look.
+14. **Taste is evidence.** Every verdict the user gives is a rule for next time. Write it down.
+15. **The page is a sequence, not a screen.** Most of a site is below the first screen. Proportion, scale, pacing,
+    grounds and emptiness across the scroll are a creative lever as strong as any interaction. A designed hero over
+    a template body is a template.
+16. **Calm in behaviour, not in composition.** Calm means nothing nags, blinks or blocks. It never means "fall back
+    to the default layout".
+17. **Lively means alive with real things.** Energy comes from the subject's own live facts, things the visitor can
+    do with their hands, and rewards for curiosity. Never from pressure, fake urgency or ornament.
 
 ## Phase 0. Read the room
 
-- **The taste record.** Look for PROJECT_MEMORY.md, DESIGN.md, PRODUCT.md, `.ui-craft/brief.md`, CLAUDE.md and notes
-  from earlier rounds. The user's recorded words outrank this skill. If they asked for something this skill bans,
-  build it. If they banned something this skill allows, it's banned.
-- **The existing design system.** Reuse its tokens, components and conventions, and use this skill to fill the gaps.
-  Precedence runs: the user's words, then the project's system, then this skill. Other design pipelines (Impeccable,
-  ui-craft) can run the process, and this skill's bans and checks apply on top.
-- **An existing project.** Before the interview, run it, take screenshots at 390 px and 1280 px, try its main tasks
-  and note the worst 3 to 5 problems. These answer the interview's redesign-or-fixes question with evidence.
-- **The deploy target.** Find out where it ships: a website, an app shell, a sandboxed embed or artifact, a webview,
-  an email. Then check what that target blocks:
-  - autoplay;
-  - motion sensors and other device APIs;
-  - pop-ups;
-  - external fonts and scripts;
-  - storage.
-
-  Plan a fallback for every interaction that depends on one of these. Put the tokens wherever the project keeps them:
-  CSS custom properties, the Tailwind theme, or a constants file for Framer Motion or a native app.
-- **The audience's language.** If the audience reads another script (Khmer, Thai, Arabic, Chinese, and so on), choose
-  faces that cover it, test the longest real words, and use the local currency, date and number formats.
-- **Real content, verified.** Build with the user's real content. When the product needs real-world facts (places,
-  products, prices, people, events), research them and check each one against at least one current, reliable source.
-  Keep the sources and give them to the user.
-  - **Never invent facts and present them as real:** ratings, review counts, opening hours, prices, quotes,
-    testimonials, statistics or people.
-  - **If a fact can't be verified, leave it out** and link to a live source instead (a maps link for hours, the
-    official site for prices). Say on the page that it can change.
-  - **If the user has the data, ask for it** rather than guessing.
-  - **Placeholder content is only for a mockup the user asked for.** Label it as a mockup, and never ship it.
-- **Pick the mode,** and write one line on why:
+- **The taste record.** Look for PROJECT_MEMORY.md, DESIGN.md, PRODUCT.md, CLAUDE.md, a brief and notes from
+  earlier rounds. If the user asked for something this skill bans, build it. If they banned something this skill
+  allows, it is banned.
+- **The used log.** Look for `UNSLOP_LOG.md` in the project, in the skill's own folder or repo, or pasted by the
+  user. It lists what earlier builds used (Phase 19 has the format). Nothing in its last five entries is reused:
+  not the fonts, the palette source, the main-view form, the hero mechanic or the signature details. If there is no
+  log and no way to keep one, say so in the report and print the new entry for the user to save.
+- **The existing design system.** Reuse its tokens, components and conventions. This skill fills the gaps.
+- **An existing project.** Run it, screenshot it at 390 px and 1280 px, try its main tasks, run the review script
+  on it, and note the worst 3 to 5 problems. These are the evidence for the first questions.
+- **The deploy target.** A website, an app shell, a sandboxed embed or artifact, a webview, an email. Check what it
+  blocks (autoplay, device APIs, pop-ups, external fonts and scripts, storage) and plan a fallback for each
+  interaction that depends on one.
+- **The audience's language.** If they read another script, choose faces that cover it, test the longest real
+  words, and use the local currency, date and number formats.
+- **Real content, verified.** Build with the user's content. Research real-world facts and check each against a
+  current, reliable source; keep the sources.
+  - Never invent facts and present them as real: ratings, hours, prices, quotes, testimonials, statistics, people.
+  - If a fact can't be verified, leave it out and link to a live source.
+  - If the user has the data, ask for it.
+  - Placeholder content is only for a mockup the user asked for, labelled as one.
+- **Pick the mode,** with one line on why. A product with both gets each surface in its own mode.
 
   | | Site | App |
   |---|---|---|
   | Who | a first-time visitor, for minutes | a returning user, often, for longer |
   | Their job | understand and act once | do the same few tasks fast, many times |
-  | You start from | real-world moments and concepts (2S) | tasks and how often they happen (2A) |
-  | Signature | one detailed, interactive hero | the core loop done beautifully, on the first screen |
+  | Start from | the subject's world and concepts (3S) | tasks and how often they happen (3A) |
   | Freshness test | "Did they see this layout on another site this week?" | "Is this annoying on the 100th use?" |
 
-  A product with both (an app plus its marketing page) gets each surface in its own mode.
-- **Reskinning an existing app.** List the hooks first: the IDs, classes, attributes and events its code binds to.
-  Change the appearance, keep the wiring, and test the original's interactions before and after. Turning the skin
-  off must restore the original look.
+- **Reskinning an existing app.** List the hooks its code binds to (IDs, classes, attributes, events). Change the
+  appearance, keep the wiring, test the original's interactions before and after. Turning the skin off restores the
+  original look.
 
-## Phase 1. Interview the user
+## Phase 1. The usability bar (sites and apps, every tier)
 
-The interview draws out what the user wants and helps them see it. It works like a grilling: map the decisions as a
-tree, start at the root with general questions, and work down the branches round by round until nothing is left
-undecided. It asks rather than proposes, and it never asks how the design should feel.
+Every screen clears this before any creative choice is judged. A take that fails it is reshaped before it is shown.
+
+**At first sight**
+- **The five-second test.** A first-time viewer can say what this is, what is happening now and what to do next.
+- **Plain names.** Headings, labels and buttons use the words people already use. The concept lives in the form,
+  never in renamed labels or jargon from a metaphor. If a label needs the concept explained, it fails.
+- **One obvious next action** per zone, and one primary action per screen where the screen allows it.
+- **Status is spelled out.** Every state has a word, every number a label and a unit. Nothing means something by
+  colour or metaphor alone.
+- **The metaphor explains or it goes.** A creative element must make the information easier to read than a plain
+  version would. If it has to be decoded, reshape it.
+- **Conventions where people expect them.** People spend most of their time in other products. Navigation where
+  navigation goes; links look like links; a control that behaves like a switch looks like one.
+- **Details on demand.** What the next decision doesn't need is one step away, not on screen.
+- **Count the steps.** A creative layout never adds a step to a top task.
+
+**On the hundredth hour** (apps, and any site people return to)
+- **Resume.** Reopening puts people where they left off: the same place, scroll position, filters, tab and draft.
+- **Nothing is lost.** Drafts save themselves and say so. A failed submit keeps everything typed. Going offline
+  keeps the work and says what will happen.
+- **Undo beats "are you sure?".** Destructive actions are undoable (a short undo, a trash). A confirmation dialog
+  is only for what truly can't be reversed, and it names the thing being destroyed.
+- **Good defaults.** The last-used or most common value is already chosen.
+- **Stable.** Nothing moves under the pointer. Layout doesn't shift when data arrives. Lists keep their order unless
+  the user sorts them. The same thing is in the same place under the same word on every screen.
+- **Quiet.** No badge, banner, tip or notification unless the user must act on it. Nothing nags twice.
+- **Fast paths.** The top tasks have keyboard shortcuts, shown where the action is. Rare things are found by
+  search. Repeated work can be done in bulk.
+- **Forms respect the person.**
+  - A visible label above every field; a placeholder is not a label.
+  - The right input type, `inputmode` and `autocomplete`, so keyboards and autofill help.
+  - Validate when the field is left, not on every keystroke; say what is wrong and how to fix it, next to the
+    field, in words.
+  - Never clear input on an error. Never block paste. Never disable submit without saying what is missing.
+  - Ask only for what is needed. Long forms are split into steps that save as they go.
+
+## Phase 2. Interview the user
+
+The interview draws out what the user wants. It asks rather than proposes, and it never asks how the design should
+feel: people can't answer that. The feeling is read from what they want (Phase 7) and judged in the takes.
 
 **The decision tree**
-- **The root is the kind of change.** For an existing project the very first question is whether the user wants a
-  redesign or a new look, and everything after is built off that answer (see "The first questions" below). A new
-  build, with nothing to change, skips straight to the general questions.
-- **Then general:** what this is for, who uses it and how often, the one job it must get right, and why it is being
-  made or changed now. Ask only what the project and the first answers don't already tell you.
-- **The branches get specific:** each answer opens the decisions that depend on it: a task's steps, a screen's main
-  action, what a status means, an edge case, what must stay.
-- **The frontier** is every open decision whose parent is already answered. Each round asks the whole frontier (3 to
-  5 questions, the ones that change the most work first), then waits. A decision whose parent is still open waits for
-  a later round. After each round, work out the new frontier.
-- **Done** when the frontier is empty and nothing is silently assumed. Confirm a short summary before building.
+- **Root (existing projects): what kind of change.** Show the worst 3 to 5 findings from Phase 0, then ask one at
+  a time: redesign or new look; how big or how far; what must stay (several picks, taken from what the project
+  has); for small changes, confirm the fix list worst first. The answers pick the scope.
+- **Then general.** What this is for, who uses it and how often and where, the one job it must get right, why now.
+  Ask only what the project and earlier answers don't already tell you.
+- **Then specific.** Each answer opens the decisions that depend on it: a task's steps, a screen's main action,
+  what a status means, an edge case.
+- **The frontier** is every open decision whose parent is answered. Each round asks the whole frontier (3 to 5
+  questions, the ones that change the most work first), then waits.
+- **Done** when the frontier is empty or the tier's limit is reached. Confirm a five-line summary in the user's own
+  words. Whatever was not asked is listed as an assumption.
 
-**Four kinds of question**
-- **Choice questions** (the first questions) decide what kind of change this is and what stays. Each offers 2 to 4
-  options with a one-line description, and always room for something else; "what stays" allows several picks. Ask
-  them with the host's question tool when there is one, so the user can tap an answer; otherwise as a numbered list
-  of options. Give no recommendation unless the user's own words already point to an option: then mark it and quote
-  those words.
-- **General questions** (after the first questions) are open and answered in the user's own words.
-  - Give no options, no recommended answer and no examples that lead. Don't suggest a subject, audience or concept.
-  - Ask, then stop and wait. Don't answer for them, and don't rephrase their answer into your own words. If an
-    answer is short or vague, the next round asks about that answer.
-- **Specific questions** (after the general ones) grow from their answers, and each one gets a ➡ recommended answer, worded
-  so that "yes" accepts it, with room to say something else.
-  - The recommendation comes from their own earlier answers and the Phase 0 evidence, never from taste. Say which
-    answer or finding it comes from.
-  - What belongs to the user alone gets no recommendation: names, their content, what must stay.
-- **Craft questions** (animation level, sound, where sounds come from) are specific questions too: each gets a
-  recommendation, and they come after the general questions.
-- **Never ask how it should feel.** No mood words to pick from ("calm, lively, cosy or sharp?"), no "what should it
-  feel like?", no "what style do you like?". Most people can't answer that, and the answer they give is a guess. The
-  feeling is read from what they want (Phase 5) and judged by the user in the takes.
+**Kinds of question**
+- **Choice questions** (the root): 2 to 4 options with a one-line description each, and room for something else.
+  Use the host's question tool when there is one. No recommendation unless the user's own words already point to
+  an option; then mark it and quote those words.
+- **General questions:** open, answered in their own words. No options, no recommended answer, no leading examples.
+  Ask, then wait. Don't rephrase their answer into your words.
+- **Specific and craft questions:** each gets a recommended answer, worded so that "yes" accepts it. The
+  recommendation comes from their earlier answers and the Phase 0 evidence, never from taste; say which. What
+  belongs to the user alone (names, content, what must stay) gets no recommendation.
+- **Craft questions to cover:** animation level (Calm, Standard, Expressive; recommend Calm for tools used daily,
+  Standard for most products, Expressive for marketing or anything game-like), and sound, asked as three plain
+  options: none, sound effects only, sound effects and background music (recommend none unless the subject is
+  playful, musical, a game or for children). Repeat the choice back in the summary ("effects and music"), because
+  it decides what gets built.
 
 **How to ask**
-- **Specialised, not generic.** Even general questions are built from their project: its name, a screen they have, a
-  task or a word they used. A good question could only be asked of this user. "What is Heang's Tool for, and what
-  would you lose if it disappeared tomorrow?" beats "What are your goals?"
-- **Make them think.** Ask about real moments and real decisions, not opinions or taste: the last time something
-  went wrong, what they did instead, what they would keep if they could keep only one thing. Each question is one
-  concrete thing, answered in a sentence or two. Never ask "describe your vision".
-- **Grow questions from answers.** For example, "a price filter" leads to "what counts as cheap for you?", which leads
-  to "riel, dollars or both? ➡ both, since you said your friends pay in riel". Stop when the answer would no longer
-  change what you build.
-- **Look up facts yourself.** Ask the user only for what only they know. Don't ask what you can check (the framework,
-  whether a file exists, how many steps a task takes now). When a fact takes digging, send a sub-agent with a fresh
-  context to find it, and keep asking the questions that don't depend on it.
-- **Number every question,** and add the ➡ line to specific and craft questions only:
+- **Built from their project.** A good question could only be asked of this user: it uses their project's name, a
+  screen they have, a word they used.
+- **About real moments, not opinions.** The last time something went wrong, what they did instead, what they would
+  keep if they could keep only one thing. One concrete thing per question. Never "describe your vision".
+- **Grow questions from answers.** Stop when the answer would no longer change what you build.
+- **Look up facts yourself.** Ask only for what only they know.
+- **Number every question.** Give the recommended answer on its own line under specific and craft questions.
+- **"Just build it"** means take the recommendations, list them as assumptions, and ask again with the takes.
 
-  ```
-  ❓ **Q1** - **<short title>**: <an open general question built from their project>
+**Help them see it.** Before the full build (Standard and Full), show quick takes of the first screen. Each reads
+the feeling a different way, each passes the usability bar, and at least one sits on the highest rung the context
+allows (Phase 8). They are rough but real screenshots. The user's pick decides the feeling.
 
-  ---
+## Phase 3A. App: start from the tasks
 
-  ❓ **Q2** - **<short title>**: <a specific or craft question>
-
-  ➡ <your recommended answer, and the answer or finding it comes from>
-  ```
-
-- **Help them see it.** Before the full build, always show 2 or 3 quick takes of the first screen, built from what
-  they want, the usability bar (Phase 2A), the feeling table and the rejection lists. Each take reads the feeling a
-  different way, and every take passes the usability bar. These are rough but real screenshots, and the user picks
-  or mixes: that pick is how the feeling gets decided, not a question. A "you decide" covers craft choices, not the
-  look.
-- **Stop when the frontier is empty.** Write a five-line summary in the user's own words and ask them to confirm it.
-  - If the user says "just build it", take the recommendations and list them as assumptions.
-  - General questions they skipped stay open: build from what they did say, and ask again with the takes.
-
-**The first questions: what kind of change** (existing projects). Look at the project first (Phase 0) and show
-the worst 3 to 5 findings, then ask, one at a time, building each question off the last answer:
-
-1. **Redesign or new look?**
-   - **Redesign:** change how it is laid out or how it works.
-   - **New look:** keep the layout and the parts, and give it a new visual style.
-2. **If redesign: how big?**
-   - **Full redesign:** a new concept and structure; the content and wiring are kept.
-   - **Change the layout:** the same pages and content, arranged differently on each screen.
-   - **Keep the layout:** the same layout and navigation, with the parts inside each section redesigned.
-   - **Small changes:** spacing, type, colour, states and fixes only.
-3. **If new look: how far?**
-   - **A whole new style:** new colours, fonts, shapes and motion.
-   - **Same brand, fresher:** keep the colours and logo, and change the rest.
-   - **Polish only:** the current style, made cleaner and more consistent.
-4. **What must stay?** (several picks) Options taken from what the project has: its logo, colours, fonts, light and
-   dark themes, its page names, a feature the user mentioned.
-5. **Small changes only:** confirm the fix list, worst first. Anything beyond it needs a yes.
-
-The answers pick the column in the scope table, and every later question is built off them. For example, "change the
-layout" leads to "which screen gets in your way most?", and "a whole new style" leads to what must stay and then the
-general questions.
-
-**Next: general, open.** Ask 2 to 4, in the user's terms, built off the first answers. Drop anything the prompt already answers.
-
-| What to learn | Ask it like this (fill in their project, screen or words) |
-|---|---|
-| What it is for | "In a sentence or two, what is <project> for, and what would you lose if it disappeared tomorrow?" |
-| Who and how often | "Who opens <project>, how often, and where are they when they do?" |
-| The one job | "If <screen> got only one thing right, what would it be?" |
-| Why now | "What made you want to change it now? What happened the last time it let you down?" |
-| What must stay | "Any colours, fonts, logo, words or content that must stay? Anything you already dislike?" |
-
-**Then: specific, with a recommendation.** Built from the general answers. For example:
-- **The top tasks they named:** "You said you check the running movie first. Should its progress be the biggest thing
-  on Home? ➡ Yes: it's the first thing you look at."
-- **Steps:** "Starting a movie takes 3 steps now (paste, Set up, Start). Should it take 2? ➡ Yes, if the preset you
-  picked is right most of the time, as you said."
-- **What they find hard:** "You said you lose track of which part is which. Should every part show its movie's title
-  next to its number? ➡ Yes."
-- **Animation level:** **Calm** (feedback and state changes) · **Standard** (adds menus, sheets, toasts and page
-  transitions) · **Expressive** (adds one choreographed signature moment and playful springs). ➡ Calm for tools used
-  daily, Standard for most products, Expressive for marketing or anything game-like.
-- **Sound:** ask as three plain options: **none** · **sound effects only** · **sound effects and background music**.
-  ➡ None, unless the subject is playful, musical, a game or for children. Then: their own files or synthesized; on or
-  off on first visit (➡ off). Repeat the choice back in the summary ("effects and music"), because it decides what
-  gets built.
-- **A reference they bring up** (an app, a place, an object): "What do you like about it?", then show takes on it.
-- **Music:** their track, a CC0 or royalty-free one you find, or a synthesized loop; whether it reacts to what the
-  user does. Its mood comes from what they want, shown as a short sample.
-- **Expressive motion:** which single moment gets the most motion.
-
-## Phase 2A. App: start from the tasks
-
-1. **Who and where.** The device, the posture (desk, sofa, one-handed phone), the session length, the lighting and
-   the network. Is it installed or opened in a tab?
-2. **The task table.** List the top five tasks, how often each happens, and its step count now and the target:
+1. **Who and where.** Device, posture (desk, sofa, one-handed phone), session length, lighting, network, installed
+   or in a tab.
+2. **The task table.** The top five tasks, how often each happens, its step count now and the target.
 
    | Task | How often | Steps now | Target |
    |---|---|---|---|
-   | Send a message | every turn | 2 | 1 |
 
-   The "How often" column also decides motion and sound: the more often an action happens, the less it animates and
-   the quieter it sounds.
-3. **Place by frequency.** What's used every turn stays visible and within reach. Daily tasks are one step away,
-   weekly tasks two, and rare ones go in a menu or search. Anything that stays on screen must serve a top task, or it
-   becomes on demand.
-4. **Put the main action where the hand is.** On a phone, that's the bottom third. On a desk, it's next to where the
-   eyes already are.
-5. **Take a real data inventory.** The longest name, a 200-item list, the empty state, a single item, an error and a
+   "How often" also decides motion, sound and decoration: the more often, the less of each.
+3. **Place by frequency.** Used every turn: visible and within reach. Daily: one step away. Weekly: two. Rare: a
+   menu or search. Anything that stays on screen serves a top task.
+4. **Put the main action where the hand is.** On a phone, the bottom third. On a desk, next to where the eyes are.
+5. **Take a real data inventory.** The longest name, a 200-item list, the empty state, a single item, an error, a
    slow load. Design for these, not for four tidy rows.
-6. **Design the dominant state first.** That's the state the app spends the most time in (a reply streaming in, a
-   list loading), because it's what the user stares at.
+6. **Design the dominant state first:** the one the app spends the most time in.
+7. **Walk the route.** Write how someone gets to every task from a cold start and back. Two to four top-level
+   places is plenty. Every place says where you are, and "back" always works the same way.
 
-**The usability bar.** Every screen clears this before any creative choice is judged. A take that fails it is
-reshaped before it is shown, however good it looks.
-- **The five-second test.** Someone opening the screen for the first time can say what it is, what is happening right
-  now and what to do next, without being told.
-- **Plain names.** Headings, labels and buttons use the words people already use for these things, and the app's own
-  names stay (Home, Now making, Needs you). The concept lives in the form, never in renamed labels or in jargon from
-  the metaphor ("On the program monitor", "day-break strip", "tally"). If a label needs the concept explained, it
-  fails.
-- **One obvious next action** per zone, and one primary action per screen where the screen allows it.
-- **Status is spelled out.** Every state has a word, every number has a label and a unit ("about 4 min left in this
-  part"), and nothing means something by colour or by metaphor alone.
-- **The metaphor explains or it goes.** A creative element must make the information easier to read than a plain
-  version would: progress you can see at a glance, a part you can find by its colour. If it has to be decoded, reshape
-  it until it reads at once, keeping its character.
-- **Conventions where people expect them.** Navigation where navigation goes, links that look like links, toggles that
-  look like toggles, the main action where the eye and the hand already are.
-- **Details on demand.** What the next decision doesn't need is one step away, not on screen.
-- **Count the steps.** The task table's targets hold. A creative layout never adds a step to a top task.
+## Phase 3S. Site: concept, then prototype
 
-## Phase 2S. Site: concept, then prototype
+1. **The subject's world.** Answer the generator questions in Phase 8 for this subject.
+2. **Sections from the subject, not the template.** Write the list of sections this site would have if no website
+   template had ever existed: what does a visitor of this world need to see, decide and do, in what order? Then
+   take the usual sections one by one (how it works, features in three cards, testimonials, FAQ, stats band, logo
+   cloud, call-to-action band, newsletter) and keep each only with a reason from this subject and real content to
+   fill it. Most go. Write which were dropped.
+3. **Concepts from the interview** (3 for Standard, 5 for Full). Start from the user's words, not your favourites.
+   Each is one idea the page is organised around, what the visitor does with their hands, and how each section
+   follows from it. At least one concept has no metaphor at all: its character comes from type, colour,
+   composition and the content itself.
+4. **Score and pick.** Rate 1 to 5 on clarity, accessibility, fit, freshness (against the used log and Phase 4),
+   fascination and feasibility. Clarity and accessibility under 4 disqualify. One line on why the runner-up lost.
+5. **Prototype the risky part first,** alone. It must run smoothly, read at phone width, pass Phase 4, and have a
+   keyboard path and a reduced-motion path.
+6. **The signature moment.** One main one, from the subject. It teaches or sells something real, has a full
+   keyboard and screen-reader path, and a pause control if it moves on its own for more than 5 seconds. A site
+   whose visitors come to do one thing quickly (book, pay, find the hours) may need none: then the craft is the
+   signature. The signature never excuses the rest of the page: every other beat still gets its own form (6S)
+   and, in a lively build, its own live detail (9).
+7. **Multi-page sites.** Shared header, footer, stylesheet and script; `aria-current="page"`; one job and one
+   `<title>` per page.
 
-1. **Real-world moments.** List 8 or more physical moments, objects or places from the subject's world that people
-   already have feelings about, across the senses. Sounds count: they become the sound palette.
-2. **Five concepts, built from the interview.** Start from the user's words and references, not from your own
-   favourites. Each concept is:
-   - one metaphor the page lives inside;
-   - its hero mechanic, meaning what the visitor does with their hands;
-   - how every section maps onto the metaphor.
-3. **Score and pick.** Rate each concept from 1 to 5 on fascination, fit, clarity, accessibility, feasibility and
-   freshness. Write one line on why the runner-up lost.
-4. **Prototype the risky part first.** Build the hero mechanic alone. It must:
-   - run smoothly;
-   - pass the ban list;
-   - read at phone width;
-   - have a keyboard path and a reduced-motion path.
-5. **The hero.** There is exactly one, and it comes from the subject: a tool, an object or a ritual from its world.
-   - It has many small states and teaches or sells something real.
-   - Its test: would someone play with it for 30 seconds without a reason?
-   - It has a full keyboard and screen-reader path, and a pause control if it moves on its own for more than 5
-     seconds.
-   - Around it, the controls and words stay calm, but the surfaces don't go plain: the signature details and the
-     lived-in layer (5B, 5C) run through every section.
-6. **Multi-page sites.** Use a shared header, footer, stylesheet and script, and mark the current page with
-   `aria-current="page"`. Each page has one job and its own `<title>`. The hero lives on the home page only.
+## Phase 4. Convergence: what to step away from
 
-## Phase 3. Ban list: the clichés, not the tools
+Models sample the middle of what they have seen. Four layers of default follow, from the web's to this skill's
+own. Check the plan against all four before building, and the first screenshot after.
 
-Never ship these unless the user asks for them. The right-hand column says when the underlying tool is fine.
+### 4.1 Clichés (never ship unless the user asks)
 
-| Banned cliché | The tool is fine when |
+| Cliché | The tool is fine when |
 |---|---|
-| **Lines as the main structure:** a hairline or `<hr>` between every row, section, header and sidebar | dense tables, an input's outline, a scroll edge that needs a hint |
-| **Boxes for everything:** every group a bordered card, boxes inside boxes | a card groups one thing the user acts on as a unit |
-| **A flat, even build:** every area the same weight, full-width bands stacked down the page | never |
-| **The template app, reskinned:** a header, rows of chips, a list of rounded cards and a bottom button, in the subject's colours | the user asked for plain, or the content is a dense working list (mail, files, logs) |
-| Generic site layouts: hero plus 3 cards, bento grid, centred stack of sections, split hero, logo cloud, testimonial carousel | never |
-| Generic app layouts: settings as one long ruled list, a dashboard of identical cards, everything one grey with borders between | never |
-| **Creativity hidden behind a button:** the one inventive idea lives in a sheet while the first screen stays generic | never: the first screen carries the idea |
-| **Decoration as life:** bunting, stickers, badges, coloured initials or meters on an unchanged generic structure | the element carries real information and the structure already carries the feeling |
-| **A cool shell under a warm subject:** grey, slate or grey-teal grounds for food, home, people, evenings, celebrations | the subject itself is cool (a lab, ice, the sea, a bank vault) |
-| Decorative gradients on backgrounds, text, buttons, borders or glows | a scrim over an image, or a fade at a scroll edge, so long as nobody sees it as a gradient |
-| Glow, pulsing or floating orbs and blobs, glossy particles | never (render particles flat) |
-| A shadow on every card, hover lift plus shadow | a soft shadow on something that really floats: menus, sheets, dialogs, a dragged item |
-| Pills on everything, `rounded-full` cards, a radius picked per element | toggles, chips, tags, round buttons and avatars, within a concentric scale |
-| Coloured accent bars on the side of cards, a sidebar in a loud accent | a small marker that carries meaning (unread, current, error) |
-| Italic as decoration | the content's own meaning: quotes, titles of works, narration, the user's own formatting |
-| Monospace for numbers, labels or "tech" flavour | code and anything typed exactly; numbers use `font-variant-numeric: tabular-nums` |
-| Eyebrows: a small uppercase category label above every heading | a lead-in that is part of the copy ("Tonight, I'd go for…") |
-| Motion "because": fade-up on every section, scroll-reveal from opacity 0 | the motion explains a change of state |
-| Janky motion: `ease-in` on UI, growing from `scale(0)`, `transition: all`, animating width, height, top or left, a bounce on everything, animations that block input | never |
-| Animating actions repeated 100+ times a day (shortcuts, command palette, typing, keyboard list navigation) | never |
-| Sound that autoplays, plays on hover, keystroke or scroll, music with no pause, or sound as the only signal | never |
+| Lines as the main structure: a hairline between every row, section, header and sidebar | dense tables, an input's outline, a scroll edge |
+| Boxes for everything: every group a bordered card, boxes inside boxes | a card groups one thing the user acts on as a unit |
+| A flat, even build: every section about one screen tall, the same weight, the same ground, the same alignment | never |
+| The alternating split: a heading or text block on one side and a picture, list or form on the other, section after section (silhouette `LR LR LR` or `LR G LR G`) | a split where two things are genuinely compared, at most a third of the beats |
+| The micro-split: every section head set as heading left, paragraph right | the paragraph is a real second thing (a live status, a price), not the heading's lead |
+| Creativity spent on the first screen, then the median below it | never |
+| Bands of equal weight: every section a full-width stripe of the same height and density | bands that change height, density and ground to pace the page (6S) |
+| The template app reskinned: header, chips, a list of rounded cards, a bottom button | the user asked for plain, or the content is a dense working list |
+| Generic site layouts: hero plus 3 cards, bento grid, split hero, logo cloud, testimonial carousel | never as the page's skeleton. The primitives themselves (a centred stack, three of something, a split) are allowed where proportion, scale and sequence make them this subject's; the silhouette decides, not the name |
+| Generic app layouts: a dashboard of identical cards, one grey with borders between everything | never |
+| Creativity hidden behind a button while the first screen stays generic | never |
+| Decoration as life: stickers, badges, meters or ornaments on an unchanged generic structure | the element carries real information |
+| A cool grey shell under a warm subject | the subject itself is cool |
+| Decorative gradients on backgrounds, text, buttons, borders, glows | a scrim over an image or a scroll-edge fade nobody sees as a gradient |
+| Glowing, pulsing or floating orbs and blobs, glossy particles | never |
+| A shadow on every card, hover lift plus shadow | something that really floats: menus, sheets, dialogs, a dragged item |
+| Pills on everything, a radius picked per element | within one concentric radius scale |
+| Coloured accent bars on the side of cards | a small marker that carries meaning (unread, current, error) |
+| Italic as decoration | the content's own meaning |
+| Monospace for numbers, labels or "tech" flavour | code and anything typed exactly; numbers use `tabular-nums` |
+| Eyebrows: a small uppercase label above every heading | a lead-in that is part of the copy |
+| Motion "because": fade-up on every section, scroll-reveal from opacity 0 | the motion explains a change of state, or a reveal on a few chosen elements that still read with motion off |
+| Rolling text: marquees and scrolling strips of words (a band of item names or slogans sliding across the page, an endless ticker under the header, outlined giant words drifting by) used as "energy" | almost never. Moving text can't be read, can't be scanned, and is now one of the surest signs of an AI-made page. Allowed only when the moving content is information people would wait for (a live departures board, a real feed of changes) or the subject literally is a ticker; then it is pausable, stops under reduced motion and the same content is readable as still text. Give energy with scale, colour, a live fact standing still, or a thing the visitor can move |
+| Janky motion: `ease-in` on UI, `scale(0)`, `transition: all`, animating width, height, top or left, input blocked | never |
+| Animating actions repeated 100+ times a day | never |
+| Sound that autoplays or plays on hover, keystroke or scroll; sound as the only signal | never |
 | Grey on grey: secondary text so dim the app reads as disabled | never |
-| **A list that scrolls forever on a phone:** the same tall card repeated for screen after screen | never; reshape it (Phase 10) |
-| **Invented facts shown as real:** made-up ratings, review counts, hours, prices, quotes, testimonials, statistics | never; leave it out or link to a live source |
-| **Demo leftovers:** "sample data", "demo", lorem ipsum, placeholder names, test notes, dead links | a mockup the user asked for, clearly labelled |
+| The same tall card repeated for screen after screen on a phone | never; reshape it (Phase 14) |
+| Invented facts shown as real; demo leftovers | a mockup the user asked for, clearly labelled |
 | Emoji as icons | never |
 | Purple-blue, cream plus terracotta, black plus one neon accent, brown on brown sold as "warm" | never |
 
-## Phase 3B. Claude's own habits (detect them in your plan and your screenshots)
+### 4.2 Claude's visual habits (each needs a written reason from this subject, or it goes)
 
-These are not wrong in themselves; they are the moves Claude reaches for by default, so a design built from them
-looks like every other Claude design. Each one needs a written reason from this subject, or it goes.
+- Grid, dot or graph-paper backgrounds; fine noise on every surface.
+- A cream, beige or parchment ground as the default "warm".
+- A serif display face over a grotesk body, by reflex.
+- Every item a rounded card with a soft shadow.
+- Chips and pills for every tag, filter and status.
+- The header formula: logo left, greeting, search pill, primary button right.
+- Three panes by reflex: nav list, content, inspector.
+- A legend, caption or "example data" label under everything.
 
-| Habit | What to do instead |
-|---|---|
-| Grid, dot or graph-paper backgrounds; fine noise "grain" on every surface | a plain ground; texture only where the subject's material really has it |
-| The paper costume: tilted sheets, pins, tape, stamps, handwriting fonts as "warmth" | lived-in signs taken from this subject's own use (5C), not from stationery |
-| The header formula: logo left, greeting, a search pill, a primary button right | ask what the top of this screen is for; often it needs one thing, or nothing |
-| Three panes: nav list left, content centre, inspector right | one dominant view; secondary views as places you go to, or drawers on demand |
-| A serif display face paired with a grotesk body, by reflex | pick faces for the reading task; a superfamily or a single family is fine |
-| Every item a rounded card with a soft shadow; chat bubbles with avatars | typeset content directly on the ground; separate with space and type |
-| A row of icon buttons under every item, always visible | actions appear where the eye already is, on hover and focus, as words |
-| Chips and pills for every tag, filter and status | words in the sentence, or a single quiet label |
-| Toggle-switch lists and slider-with-bubble settings | settings written as plain terms with exact values you can type |
-| The bottom-centre toast for every action | confirm in place, next to what changed |
-| A cream, beige or parchment ground as the default "warm" | temperature from the subject; warm can be dark, grey or saturated |
-| "Example data" pills, eyebrow labels, legend lines under bars | label once, in context, in sentence case |
+For each one found, don't swap in a stock replacement. Ask what this part is for on this screen, and whether it is
+needed at all.
 
-Audit: before building, list the habits your plan contains. After the first screenshot, list the ones that slipped
-in. Both lists go in the report.
+### 4.3 Conventions to keep (change the skin, never the behaviour)
 
-**Paradigms Claude overuses (banned).** Unless the subject *is* this thing, or the user asks for it, never use:
-- transit and metro maps, route lines with stations, "you are here" lines, tickets and boarding passes;
-- museum and gallery labels, plinths, exhibits;
-- the workshop-paper costume: order tickets on hooks, pinned papers, stamps, chalk, tape, receipts and spikes;
+These look familiar because they work. Restyle them freely; don't replace them with something cleverer.
+
+- **Switches** for settings that are on or off and apply at once. Exact typed values only where precision matters.
+- **Actions people need are visible** or behind one clearly marked "more" control. Hover may add shortcuts on a
+  desktop; it never hides the only way to do something, and touch always has the same actions.
+- **Who said what** is unmistakable in a conversation, by position, name or both.
+- **Confirm in place** when the change is on screen. A transient message is right for something with no place on
+  screen, and it carries Undo when the action can be undone.
+- **Standard gestures and keys** do the standard thing: Escape closes, Enter submits, back goes back.
+
+### 4.4 Paradigms Claude overuses (banned unless the subject is this thing, or the user asks)
+
+- transit and metro maps, route lines with stations, tickets and boarding passes;
+- museum labels, plinths, exhibits;
+- the paper costume: tilted sheets, pins, tape, stamps, chalk, receipts, handwriting fonts, torn or deckled edges;
 - terminals, CRT scanlines, blueprint grids, newspaper broadsheets;
-- a "hand-drawn" or "sketch" look applied to a digital product.
+- a "hand-drawn", "sketch" or wobbly-line look applied to a digital product.
 
 A paradigm is not a concept. If the first idea is a familiar real-world metaphor laid over the data, it is usually
-one of these; go back to the subject and the user's work.
+one of these.
 
-**Named looks to step away from (low priority, not banned).** These are the default looks Claude lands on for
-serious tools. They are usable, which is why they keep appearing, and generic, which is why they read as AI. If a
-plan or a first screenshot matches one, don't polish it: take a different path from the start (new surface model,
-new type, new colour roles), keeping only the layout logic that serves the task.
+### 4.5 This skill's own habits
 
-| Look | How to spot it | Usually lands on |
-|---|---|---|
-| **Civic admin** (the GOV.UK/USWDS descendant) | white panels on a light grey ground, each boxed with a 1px rule; a coloured square or band top-left with a crest or house icon; underline tabs with count badges and kbd chips; zebra table with a coloured selected-row bar; little status icons in front of coloured words; bordered selects, a black "pressed" segmented control; Franklin, Public Sans or Arial | government, council, compliance, case work, back office |
-| **SaaS starter pack** (the shadcn/Tailwind default) | dark or zinc sidebar with icon + label nav; a top bar with search pill and avatar; a row of KPI cards; rounded cards with soft shadows; Inter or Geist; zinc greys; one indigo, violet or blue accent | dashboards, admin, analytics, any "internal tool" |
+A skill that pushes away from the median creates a second median. These are the moves earlier versions of this
+skill pulled toward. Each is allowed only with a reason that comes from this subject and that would not apply to
+the last project:
 
-What "modern and clean" means instead, for a serious tool (`references/foundations.md`): structure felt, not seen
-(space and tone before lines); navigation that recedes so the work comes forward; tinted neutrals built in OKLCH
-from this product's own hue; one primary action per view; hierarchy from weight and colour, about three sizes per
-region; things that belong together joined visually rather than boxed. The character comes from a pinned design
-language (a type system, a colour model, one or two signature parts from the subject), not from a costume.
+- the main view turned into a physical object or place (skeuomorphism as the default answer to "be bold");
+- a warm dark ground with one earthy accent;
+- signs of wear, marks and "imperfection" added to make a screen feel lived in;
+- one interactive toy as the hero of every site;
+- settings and filters rewritten as sentences;
+- a characterful display face over a quiet body face;
+- a material texture on every surface;
+- the brand name or number set at full screen width with a photo cut into it;
+- a dot-matrix or LED ticker, or any scrolling strip of words, as the "live" layer (see rolling text in 4.1);
+- a 3D object to play with as the main moment;
+- confetti as the reward;
+- a thermometer, progress line or other scroll meter on the page edge.
 
-## Context decides how much spectacle
+### 4.6 Named looks for serious tools (don't polish them; take a different path from the start)
 
-| Context | Example | Spectacle | Where the character comes from |
+| Look | How to spot it |
+|---|---|
+| **Civic admin** | white panels on light grey, each boxed with a 1px rule; a coloured band top-left; underline tabs with count badges; zebra tables with a coloured selected-row bar; status icons in front of coloured words; a default system or civic sans |
+| **SaaS starter pack** | dark or zinc sidebar with icon and label nav; top bar with search pill and avatar; a row of KPI cards; rounded cards with soft shadows; a default geometric sans; zinc greys; one indigo, violet or blue accent |
+
+"Modern and clean" for a serious tool means: structure felt, not seen; navigation that recedes; tinted neutrals
+built from this product's own hue; one primary action per view; hierarchy from weight and colour; things that
+belong together joined rather than boxed. The character comes from a pinned design language (a type system, a
+colour model, one or two signature parts), not from a costume.
+
+### 4.7 The two-column reflex (why pages converge on left/right)
+
+The chain is mechanical, not taste: prose is capped at a readable line length, so on a wide screen half the width
+is empty; the empty half gets filled with a paired thing; repeated per section, the page becomes `LR LR LR`.
+Banning "split hero" doesn't stop it, it only gets renamed (photos turned into radio buttons are still a split).
+
+Solve the empty half without a second column:
+- **scale:** the one thing gets bigger (type as the layout, a full-bleed picture, a giant number);
+- **emptiness:** a narrow column with real margins, off-centre or centred, is a decision, not a gap;
+- **overlap and pinning:** put the text, controls or cards onto the object they belong to (labels on a map,
+  a score panel over the game, prices on the photo of the counter);
+- **stacking:** heading, then the line under it, then the thing, each at its own width;
+- **the content's own form:** a timeline, a ruler, a plan, a calendar strip that wants the full width.
+
+A split stays when two things are genuinely being compared or used together and the eye needs both at once.
+
+**The audit.** Before building, list which items from 4.1 to 4.7 your plan contains. After the first screenshot,
+run the review script and read its census (borders, shadows, gradients, pills, families, sizes, radii, small
+uppercase labels, emoji) against the plan, and run the silhouette check (17). All three go in the report.
+
+## Phase 5. Context decides everything else
+
+Pick the context. It sets the ceiling for spectacle, the bold pass (8), the detail budget (9) and the critique
+weights (18).
+
+| Context | For instance | Spectacle | Where the character comes from |
 |---|---|---|---|
-| Seen once | poster, invitation, launch page, a campaign | as much as the idea can carry: 3D, kinetic type, a world to play in | the concept, the motion, the materials |
-| Occasional | marketing site, a report, onboarding | one signature moment, then calm | the concept on the first screen, type and colour throughout |
-| Daily | a student portal, a chat client | none in the path of a task | type, colour, rhythm, detail, the voice |
-| All day, power users | case work, dashboards, editors, admin | none; speed is the delight | precise typography, density done well, a colour system, perfect states, shortcuts |
+| Seen once | a poster, an invitation, a launch page | as much as the idea can carry | concept, motion, materials |
+| Occasional | a marketing site, a report, onboarding | one signature moment; calm in behaviour after it, never in composition | the first screen's idea; a page sequence with varied beats; type and colour throughout |
+| Daily | a portal, a chat client | none in the path of a task | type, colour, rhythm, voice, perfect states |
+| All day | case work, dashboards, editors, admin | none; speed is the delight | typography, density done well, a colour system, states, shortcuts |
 
-**The long-use test (the gimmick check).** For every metaphor, signature form or unusual component, answer in the
-plan:
-- **Day 1:** is it clear and delightful?
-- **Day 30, the 50th use:** is it at least as fast as the plain version? Can it be scanned in a second?
-- **Real data:** does it hold 200 items, long names, empty and error states, without breaking its form?
+**The long-use test.** For every metaphor, signature form or unusual component, answer in the plan:
+- **Day 1:** is it clear?
+- **Day 30:** is it at least as fast as the plain version? Can it be scanned in a second?
+- **Real data:** does it hold 200 items, long names, empty and error states without breaking its form?
 - **Power user:** can it be driven entirely by keyboard, with no animation in the way?
 
-If it only wins on day 1, it belongs in a one-time context or behind a toggle; the working view is the fast plain
-one, and its character comes from craft. A metaphor the user has to translate back into data is a gimmick.
+If it only wins on day 1, it belongs in a seen-once context. A metaphor the user has to translate back into data
+is a gimmick.
 
-## Navigation and the 10-minute test
+**The liveliness dial.** Separate from the context: how much energy the user asked for. Quiet (the default for
+daily and all-day tools), Warm (most sites), Lively (the user asked for energy, play, "addictive", "fun", or the
+subject is food, entertainment, a game, children). The dial sets the life budget in Phase 9. It never lowers the
+usability bar, and Lively in a daily tool still keeps every task path quiet.
 
-- **Walk the route.** Write how someone gets to every task from a cold start, and back: how many places there are,
-  what each is called, and the keyboard path. Two to four top-level places is plenty. Every place says where you
-  are, and "back" always works the same way.
-- **The 10-minute test.** Imagine the screen in front of you for 10 minutes straight, the way it is really used
-  (reading, writing, waiting). Check: is the body text at a comfortable size and contrast, not maximum contrast? Is
-  anything moving, blinking or pulsing that you would want to switch off? Are the margins quiet until needed? Is
-  there a mode that removes everything but the task? Fix what fails before adding detail.
+**The 10-minute test.** Imagine the screen in front of you for 10 minutes of real use. Is the body text
+comfortable, not maximum contrast? Is anything moving, blinking or pulsing that you would want to switch off? Are
+the margins quiet? Fix what fails before adding detail.
 
-## Phase 4. Structure: space first, lines last
+## Phase 6. Structure: space first, lines last
 
-**The separation ladder.** To separate two things, climb the ladder and stop at the first rung that works:
-1. **Space.** Keep the gap inside a group at most half the gap between groups. Most "needs a line" problems are
-   really "all the gaps are the same size".
-2. **Alignment.** Shared edges and baselines make groups visible without drawing anything.
-3. **Tonal surface.** A surface one step off the ground needs a lightness gap of at least 5 L\* (CIELAB). Cards step
-   up and inputs step down.
+**The separation ladder.** Stop at the first rung that works:
+1. **Space.** The gap inside a group is at most half the gap between groups.
+2. **Alignment.** Shared edges and baselines.
+3. **Tonal surface.** One step off the ground, a lightness gap of at least 5 L\*.
 4. **Elevation.** A soft, wide, low-opacity shadow, only for something that overlaps other content.
-5. **Line.** Only for dense tables, input outlines and scroll edges. Derive it from its parent surface (about +6 L\*
-   subtle, +14 L\* strong).
+5. **Line.** Only for dense tables, input outlines and scroll edges, derived from its parent surface.
 
-Every `border`, `outline` used as a border, `<hr>` and `box-shadow` needs a reason you could write down. Grep for
-them before you finish.
+Every `border`, `<hr>` and `box-shadow` needs a reason you could write down.
 
 **Layout from content geometry**
-- **Reading width.** Prose runs at 60–75 characters (`max-width` in `ch`) at any viewport.
-- **Lists are as wide as their names.** Truncate long names, with the full name still available.
-- **Zones.** Use 3–5 zones of different weight: one dominant zone for what the user came to do, the rest receding.
-- **Placement.** The task table decides what is visible, what is one step away and what is hidden.
-- **Blur test.** Blur a screenshot by about 8 px. You should see a few shapes of different sizes, not stripes of
-  equal height.
+- **Zones.** 3 to 5 zones of different weight per screen: one dominant, the rest receding. This is a rule for
+  one screen, not a reason to put several things side by side in every section.
+- **Lists are as wide as their names.** Truncate long names, with the full name available.
+- **Blur test.** Blur a screenshot by about 8 px. You should see a few shapes of different sizes, not stripes.
 
-## Phase 5. Feeling, warmth and life
+**One set of numbers** (used everywhere in this file)
 
-A design can pass every ban and still feel like a template with the subject's colours poured in. This phase stops
-that.
+| | Floor (never below) | Comfort target |
+|---|---|---|
+| Body text size | 16 px | 16 to 18 px |
+| Line height, body | 1.4 | 1.45 to 1.6 |
+| Line length, prose | 45 to 90 characters | 60 to 75 (`max-width` in `ch`) |
+| Contrast, body text | 4.5:1 | about 10:1 primary, 7:1 secondary, never pure black on pure white for long reading |
+| Contrast, large text and UI parts | 3:1 | 4.5:1 |
+| Targets | 24 px | 44 px on touch |
+| Type sizes | | about 6 in the product, about 3 per region |
 
-**The feeling table.** The user doesn't name the feeling; you read it from what they want. Before any code, write 2
-or 3 feeling words taken from their answers (the first job, what gets in the way, what finished looks like, who and
-where), and quote the answer each word comes from. Then write how they change the base of every layer, not what gets
-added on top. The takes test the reading: each take reads it a little differently, and the user's pick confirms it.
+## Phase 6S. The page storyboard (sites; before any code)
+
+Plan the scroll as a sequence of beats, the way an editor paces a magazine or a film. One table, one row per
+section, every row filled:
+
+| # | Beat: the one thing it shows | Height | Alignment | Ground | Density | Its live detail (9) |
+|---|---|---|---|---|---|---|
+
+- **Height:** S (under half a screen), M (half to one), L (one to one and a half), XL (more than one and a half, or
+  one full screen of a single thing).
+- **Alignment:** centred, left-heavy, full-bleed, side-by-side pair, grid of three or more, overlapping or pinned.
+- **Ground:** the surface colour; bands are allowed and are the main pacing tool.
+- **Density:** sparse, medium, dense.
+
+**Rules** (they force variation; they are not a menu of approved moves)
+1. No two neighbouring beats share alignment **and** ground.
+2. No alignment three times in a row.
+3. At least one XL beat that is a single thing at full size, and at least one S beat. Heights vary.
+4. Side-by-side pairs only where two things are genuinely compared or used together, at most a third of the beats.
+5. At least three grounds across the page unless the subject has one colour; write the reason if so.
+6. Each beat's form comes from its content (a counter is a counter, a schedule is a timeline). Write where it
+   comes from in one line. If the answer is "it's a section", redo the row.
+7. Section heads vary too: not every head is heading-left, paragraph-right.
+
+Do not write the vocabulary into a house style. If two projects in the used log share a silhouette, change this one.
+
+**Whole-page takes** (Full tier; Standard when the user wants to compare): show each take as a strip of
+thumbnails of the whole page next to its silhouette, not only the first screen. The humans' advantage is the
+scroll.
+
+## Phase 7. Feeling, warmth and life
+
+**The feeling table.** Before any code, write 2 or 3 feeling words taken from the user's answers, and quote the
+answer each comes from. Then write how they change the base of every layer, not what gets added on top.
 
 | Layer | What the feeling decides |
 |---|---|
-| Temperature and colour | the ground and surfaces, not only the accent; saturation; how much colour the content brings |
-| Type | the display face, its size, weight and width; how loud headings are against the body |
-| Rhythm and density | tight and bustling, or airy and slow; regular or deliberately uneven |
-| Shape language | soft, cut, hand-drawn, stamped, printed, taken from the subject's own objects |
-| The first screen's form | what the main view *is* |
-| Motion character | snappy, bouncy or drifting; which one moment gets the most motion |
+| Temperature and colour | the ground and surfaces, not only the accent; saturation |
+| Type | the faces, their size, weight and width; how loud headings are against the body |
+| Rhythm and density | tight or airy; regular or deliberately uneven |
+| Shape language | where its shapes come from in this subject |
+| The first screen's form | what the main view is |
+| Motion character | which one moment gets the most motion |
 | Copy voice | how someone from this world would say it, plain and clear |
 | Sound | the material the sounds are made of |
 
+- **One feeling, every layer.** If a row doesn't change, say why in one line.
 - **Decoration is not life.** Remove every ornament: if the feeling disappears with them, it was never built in.
-- **One feeling, every layer.** If a row doesn't change, explain why in one line.
-
-**Warmth**
-- **Temperature matches the subject.** For a warm subject, the ground and surfaces lean warm too. Keep the neutrals'
-  hue within about 40° of the accent's hue, or write the reason.
-- **Lift warm darks.** Neutrals never sit at pure mid-grey. Brown and wine surfaces below about L\* 12 read as black,
-  so lift the reading surface to around L\* 19–22. Low-opacity noise or a paper grain adds material warmth; a
-  gradient can't.
-- **Text is comfortable for hours.** Body text is 16–17 px with a line height near 1.5. In apps, aim for about 10:1
-  contrast for primary text, 7:1 for secondary and 4.6:1 for tertiary. Body prose is never the dimmest thing on
-  screen.
-- **Both themes are designed,** not inverted, and both are warm.
-
-**Life**
-- **The subject's own material** is on the first screen: drawings of its real objects, the user's real photos,
-  textures, and the words of that world.
-- **Signs of life carry information:** real faces and names, relative times, unread dots, typing indicators, and empty
-  states that say what to do next.
-- **Human copy.** Buttons are verbs ("Save changes"), and messages say what happened and what to do, in the feeling
-  table's voice.
-
-**Creativity lives on the first screen**
-- **The first screen carries the idea.** Inventive moments behind a button are welcome extras.
-- **Creative in the form, plain in the words.** Push the form, the materials, the shapes and the motion as far as the
-  subject allows. Keep every heading, label, button and status in the plain words the usability bar asks for.
-- **Apps change the form, not the step count.** The main view can become something from the subject's world while
-  every top task keeps its target step count.
 - **The template test.** Swap in a different subject's name and content. If the screen still works unchanged, it
   isn't designed yet.
 
-## Phase 5B. The bold pass: push the idea further
+**Warmth**
+- Temperature matches the subject. Warm can be dark, grey or saturated. Keep the neutrals' hue within about 40° of
+  the accent's, or write the reason.
+- Neutrals carry a little of the product's hue. Very dark warm surfaces read as black; lift the reading surface.
+- Both themes are designed, not inverted.
 
-Run this after the feeling table and before any code. Write it in the planning notes.
+**Life**
+- The first screen carries the subject's own material: its real things, the user's real content, its words.
+- Signs of life carry information: real names, relative times, what changed since last time, empty states that
+  say what to do next.
+- Copy is human. Buttons are verbs. Messages say what happened and what to do.
 
-1. **The world inventory.** List 15 or more nouns from the subject's world: objects, tools, materials, marks, rituals,
-   containers, signage, sounds. Mark the ones with visible craft (a stamp, a stitch, a fold, a gauge, a ledger).
-   These are the raw material for the form, the detail and the controls. Things only this subject has come first.
-2. **The escalation ladder.** For the first screen, write four rungs:
-   - **Rung 0, the safe version:** what a competent template would do.
-   - **Rung 1:** the subject's material on a normal layout.
-   - **Rung 2:** the main view *is* an object or place from the world, and the data lives on it.
-   - **Rung 3:** the whole interaction is the world's ritual: you do the task the way people in that world do it,
-     with plain labels and a plain alternative for every gesture.
+## Phase 8. The bold pass
 
-   **The ladder depends on the context** (3B, "Context decides how much spectacle"). For one-time and occasional
-   contexts it climbs as written. For daily and all-day tools it climbs in craft instead of metaphor: rung 1 a
-   distinctive type and colour system; rung 2 information design that makes the user faster (density, alignment,
-   states you can read at a glance); rung 3 an interaction model built around the power user's real rhythm
-   (keyboard flow, batch actions, zero waiting), with the subject's character in the details. Every rung passes the
-   long-use test.
+Run after the feeling table, before code (Standard and Full).
 
-   Build the highest rung that clears the usability bar (2A). If you stop below rung 2, write for each higher rung
-   the specific usability failure that stopped it, and try one reshaping first. "Simpler", "cleaner" or "safer"
-   are not reasons.
-3. **Three signature details, not one.** Beyond the hero or main view, at least three more places get an inventive
-   move taken from the inventory: a control drawn from a real tool, data shown as a real object, a transition that
-   is a real action (tear, fold, stamp, pour, pin), an empty state that is a scene.
-4. **Unprompted extras.** List five things the user didn't ask for that would make them say "oh, nice": a hidden
-   detail at close zoom, a time-of-day or seasonal change, a thank-you moment, an object that reacts when you hover
-   it, a status that's told the way the world tells it. Build at least two, and say which in the report.
-5. **The studio test.** For each first screen, ask: would a design studio post this screenshot? Would a stranger
-   guess the subject with the text hidden? If not, climb the ladder or deepen the material before building more.
-6. **Boldness never costs usability.** Plain names, one obvious next action and the step counts from 2A still hold.
-   A bold idea that hurts a task gets reshaped, not dropped.
+1. **The world inventory.** Don't list what a designer would associate with the subject. Answer these for this
+   subject, with at least two answers each, and prefer answers an insider would give and an outsider would miss:
+   - What do people here hold, wear out, count, sign or pass to each other?
+   - What leaves a mark here, and what does the mark record?
+   - How are things ordered, numbered, named and dated here, in what format?
+   - What changes between busy and quiet, morning and night, one season and the next?
+   - What do people here check first, and what do they do when it is wrong?
+   - What is this world's own way of showing that something is done, late, urgent or broken?
 
-## Phase 5C. Lived-in: warmth, intricacy and detail
+   If an answer would be equally true of ten other subjects, it is not specific enough.
+2. **The ladder,** for the first screen. Which ladder depends on the context.
 
-A clean screen with nothing small in it reads as new, generic and cold. This phase builds the layer people discover.
+   | Rung | Seen once and occasional | Daily and all day |
+   |---|---|---|
+   | 0 | what a competent template would do | what a competent template would do |
+   | 1 | the subject's material on a normal layout | a type and colour system no other product has |
+   | 2 | the layout itself comes from how this world organises things | information design that makes the user faster: density, alignment, states readable at a glance |
+   | 3 | the visitor does something the way people in this world do it, with plain labels and a plain alternative | an interaction model built around the power user's real rhythm: keyboard flow, bulk actions, no waiting |
 
-**The zoom inventory.** For every main screen, list at least 12 details, at least 4 at each distance, every one taken
-from the world inventory:
+   Build the highest rung that clears the usability bar and the long-use test. If you stop below rung 2, write the
+   specific failure that stopped each higher rung, and try one reshaping first. "Simpler", "cleaner" or "safer"
+   are not reasons. Turning the main view into a physical object is one way up the left ladder, never the default
+   (4.5).
+   **Climb in composition too.** For every beat in the storyboard ask: what is the biggest this one thing could
+   be, and what would it look like if the layout came from the thing itself? A page whose only high rung is the
+   hero is at rung 0 everywhere else.
+3. **Signature details,** within the context's budget (Phase 9). Each comes from the inventory and does a job: a
+   control, a way of showing data, a transition or an empty state that only this subject would have.
+4. **Unprompted extras.** List things the user didn't ask for that would make their day easier or make them smile
+   once: seen once and occasional contexts lean to delight; daily and all-day contexts lean to help (a shortcut, a
+   smarter default, a remembered choice, a better empty state). Build at least two; say which in the report.
+5. **The studio test.** Would a design studio post this screenshot? Would a stranger guess the subject with the
+   text hidden? For daily and all-day tools, ask instead: would a designer screenshot this table, this form or
+   this state to learn from it?
 
-| Distance | What it is | Examples |
-|---|---|---|
-| Arm's length | composition and big shapes | the main object, overlaps, a dominant material, a rhythm of repeated items |
-| Reading | the second and third typographic voices | index numbers, stamps, units, small captions, handwritten notes, labels in the world's own format |
-| Magnifier | texture and edges | paper grain, weave, perforations, deckled or torn edges, pin heads, worn corners, ink bleed, tiny marks |
+## Phase 9. Detail, inside a budget
 
-**Signs of life and time.** Use at least four:
-- handwriting or marks by the owner (notes, ticks, circles, chalk);
-- wear where use happens (a softened corner, a faded tab, a smudge near the most-used control);
-- stamps, numbering and dates in the world's format;
-- the time of day or the season showing (light, a greeting, what's open);
-- real-object edges: perforated, pinned, folded, taped, stacked;
-- overlap and stacking instead of a perfect grid of separate boxes;
-- small imperfection inside a strict system: a 0.5–1.5° tilt on a pinned paper, an uneven stamp, a hand-drawn line.
+A clean screen with nothing in it reads as generic. A screen with detail added to hit a number reads as costume.
+The budget is a ceiling, not a target; the floor is the template test.
 
-**Material, not flat.** Every surface says what it is made of through texture, edge and how it holds light (SVG
-patterns, fine noise, real edge shapes), at low contrast so text stays comfortable. Body text always sits on a calm
-area of the material.
+| Context | Signature details | Material and texture | "Lived in" means |
+|---|---|---|---|
+| Seen once | as many as the idea holds | welcome wherever the subject really has it | the subject's world, shown richly |
+| Occasional | up to 3 signature details, plus the life budget for the dial | at the edges and in transitions, never under body text | the subject's world, lightly; live facts on every beat when Lively |
+| Daily | up to 2, outside the path of any top task | almost none | the user's own traces |
+| All day | at most 1 | none | the user's own traces |
 
-**Voices.** Besides the display and body faces, give the world its own vernacular voice where it has one (a
-stamp face, a hand, a gauge's numerals, a script the audience reads). Use it for labels and marks, never for body
-text or controls.
+**The life budget** (the liveliness dial, Phase 5). Lively builds give **every beat** one live detail, each tied
+to a real fact or decision of this subject. Warm builds give most beats one. Quiet builds keep life to the user's
+own traces. Kinds of life, with the job each must do (find this subject's version, never copy the example):
+- **Live facts:** what is true right now: open or closed, today's price, the local time, what's left, what changed.
+- **Toys that answer a real question:** the visitor does the subject's own job (works out the bill, plans the
+  room, mixes the order, cooks the thing) and gets a real answer with plain labels.
+- **Physics and response:** things that answer the pointer, press, settle, swing, fill; motion that shows cause.
+- **Counts and reveals:** numbers that count up to the real figure; a chart that draws when reached.
+- **One reward per real milestone,** once: a small celebration when the visitor reaches something true (a form
+  sent, a total that proves the point). Never repeated, never for nothing.
+- **Memory:** the page remembers what the visitor did (choices, drafts, what they built) and is there on return.
+- **Live facts stand still.** Show them where they apply (a status next to the branch, a price on the price), not in
+  a scrolling ticker.
+- **Ambient motion,** only with a pause control and off under reduced motion; **sound** only opt-in (12).
 
-**Warm copy.** Microcopy is written by someone from this world: how they greet, what they call things, how they say
-"done". It stays plain and clear.
+**Addictive by curiosity, never by pressure.** No fake scarcity or countdowns, no streak guilt, no confirmshaming,
+no nag that returns, no autoplay sound, no infinite feed, no hidden costs. The pull is "what happens if I touch
+that?" and "it remembered me", not anxiety. Every live detail passes the 10-minute test (5) or gets a pause.
 
-**Rules that keep detail honest.**
-- Structure first, then detail: the 1.6 test still holds. Strip the details and the structure must still carry the
-  feeling; the details then make it lived-in.
-- Every detail carries information or the subject's character. A generic flourish (a random squiggle, sparkles,
-  stock ornaments) is decoration and is banned.
-- Detail sits at the edges and in the materials. The task area keeps its contrast, its plain words and its calm.
-- Frequency rule: what is used 100 times a day gets the least decoration, what is looked at once a day gets the most.
+**The user's own traces** are what make a tool feel lived in without costume: where they left off, what they
+opened last, what changed since they were here, their names for things, their drafts, their pinned and frequent
+items, their density and theme choices. These are real, they are useful, and no template has them.
 
-## Phase 6. Rejection protocol and the detail system
+**Three distances.** Check each main screen at arm's length (composition, a few big shapes), at reading distance
+(a second typographic voice: numbers, units, captions, the formats from the inventory) and up close (edges,
+alignment, icon detail, how states are drawn). Each distance should hold something considered. That something can
+be pure craft; it does not have to be an object.
+
+**Rules that keep detail honest**
+- Structure first. Strip the details and the structure must still carry the feeling.
+- Every detail carries information or comes from an answer in the world inventory. Name the answer.
+- No simulated wear, dirt, tilt or handwriting unless the subject is literally that object and the context is
+  seen once or occasional.
+- The task area keeps its contrast, its plain words and its calm.
+- Frequency rule: what is used 100 times a day gets no decoration; what is seen once a day can carry some.
+
+## Phase 10. Rejection with memory, and the token system
 
 **Rejection** (write it down before any code)
-1. **Fonts.** List the first 10 fonts that come to mind. All 10 are out.
-   - Pair a display face with character (for the name, headings and the signature moment) with a calm body face.
-     One family is allowed only if it carries the feeling on its own.
-   - Each face reads well at 16 px, with clear `Il1` and `0O`, and covers the weights and scripts you need.
-2. **Layouts.** List the first 5 layout ideas and reject them all. For an app, the template (a header, chips, a list
-   of cards and a bottom button) always counts as one of the five.
-   - An app's candidate keeps the task table's step counts by changing the form, not by adding steps. "A fresh layout
-     would add steps" is never a reason to fall back to the template.
-   - A site's candidate comes from the subject's own world.
-3. **Paradigm (sites).** Pick one not used in the last design and not on the overused list in 3B: tabletop,
-   isometric, page-as-a-place, paper cut-out, signage, instrument panel, cartographic, packaging dieline,
-   or another.
-4. **Theme.** Take the palette from a real material in the subject (a broth, a metal, a paper stock, a painted sign)
-   or from the content. Use 4–6 colour tokens.
+1. **Fonts, from requirements.** Write the requirements first: the reading task, the scripts and weights needed,
+   the subject's era, place and materials, how it must behave at 16 px (clear `Il1` and `0O`). Then find three
+   candidates per role from a real catalogue (search one when you can) and pick with a reason tied to a
+   requirement. Out: anything in the used log's last five entries, and whatever came to mind before the
+   requirements were written. One family is fine. A superfamily is fine.
+2. **Layouts.** Write the first three layout ideas and set them aside, the template included. Do it per beat, not
+   only for the first screen. The candidate comes
+   from the task table (app) or from how the subject's world organises things (site), and keeps the step counts.
+   "A fresh layout would add steps" is a reason to reshape the layout, not to fall back to the template.
+3. **Colour.** Take the palette from something real in the subject or from the content, and build it in OKLCH
+   (`references/foundations.md`). 4 to 6 colour tokens plus a neutral scale. Not a palette family from the used log.
+4. **Check against memory.** Compare the plan with the used log and Phase 4.5. Anything repeated is replaced.
 
-**Detail system** (define as tokens before building)
-- **Scales, not noise.** About 6 type sizes, 5 radii, 3 control heights and one spacing scale, all of them used.
-- **Concentric radius.** A child's radius equals the parent's minus the padding between them, for example
-  24 → 16 → 10 px.
-- **One meaning per token.** Reserve a hue for errors. An accent that means selection, brand and error at once means
+**Token system** (define before building)
+- **Scales, not noise.** About 6 type sizes, 5 radii, 3 control heights, one spacing scale, all of them used.
+- **Concentric radius.** A child's radius is the parent's minus the padding between them.
+- **One meaning per token.** Reserve a hue for errors. An accent that means selection, brand and error means
   nothing.
-- **Consistent edges and hidden symmetry.** Siblings share padding, baseline and alignment. Build on a module tied to
-  the subject.
-- **Icons.** Use one set with one stroke width and one grid, and give every icon button a visible label or tooltip.
-  Draw custom icons from simple geometry, then check each one twice: trace the coordinates, and ask what a stranger
-  would call it.
-- **Illustrations.** Draw them from simple shapes in one consistent hand: the same stroke, palette and finish
-  throughout. For a hand-made feel, an ink outline plus a slight displacement wobble works well. Check each drawing
-  shows what it claims to.
+- **Icons.** One set, one stroke width, one grid; every icon button has a visible label or tooltip. Check custom
+  icons by asking what a stranger would call them.
+- **Illustrations.** One consistent hand throughout. Check each shows what it claims to.
 - **Images are only of real content.** No stock filler.
 
-## Phase 7. Motion
+## Phase 11. Motion
 
 Read `references/motion.md` before writing any animation. The essentials:
-- **Use the tokens.** Three curves (ease-out to enter and leave, ease-in-out to move, a drawer curve for sheets) and
-  set durations. Controls stay under 300 ms, sheets under 400 ms. Never `ease-in` on UI.
-- **The frequency rule.** Actions done 100+ times a day don't animate. Tens of times a day get colour or opacity
-  only. The animation level sets how far the rest goes.
-- **Physical.** Things enter from where they came and leave the same way, scale from their trigger, press on
-  pointer-down, follow the finger 1:1, and stay interruptible. Nothing ever blocks input.
-- **Reduced motion** keeps fades and drops movement. Long sequences jump to their result.
+- **Use the tokens.** Controls stay under 300 ms, sheets under 400 ms. Never `ease-in` on UI.
+- **The frequency rule.** Actions done 100+ times a day don't animate.
+- **Physical.** Things enter from where they came and leave the same way, respond on pointer-down, follow the
+  finger 1:1 and stay interruptible. Nothing blocks input.
+- **Reduced motion** keeps fades and drops movement.
+- **Ambient loops** (steam, bobbing, 3D; rolling text only where 4.1 allows it) pause when off screen and when the tab is hidden, and have a
+  visible pause where they run for more than 5 seconds.
 
-## Phase 8. Sound
+## Phase 12. Sound
 
-Only if the user said yes. Read `references/sound.md`. The essentials:
-- **Opt-in.** Sound is off on first visit, behind a visible toggle, and nothing plays before the first gesture.
-  Music has its own play button and volume.
-- **Music is a deliverable when chosen.** If the user picked "effects and background music", the build must ship a
+Only if the user said yes. Read `references/sound.md`. Opt-in, off on first visit, a sound map tied to actions, never the
+only signal.
+- **Music is a deliverable when chosen.** If the user picked "effects and background music", the build ships a
   working music player and a track (their file, a found CC0 file, or the synthesized loop in `references/sound.md`),
   with a play button the user can press. Effects without a music player is a failed build, not a smaller one. If
   they picked effects only, ship no music code.
-- **A sound map.** Every sound belongs to an action, plays at the same moment as the visual, and follows the
-  frequency rule. There is no sound for typing, scrolling or hover.
-- **The sources.** Synthesized by default; the user's files if they have them; found files only on request, with
-  their licences recorded.
-- **Never the only signal.**
 
-## Phase 9. Behaviour: every action answers back
+## Phase 13. Behaviour: every action answers back
 
-Write down the four states of every interactive element before building it:
-- **Idle:** it looks interactive, with a clear label and a visible focus ring.
-- **Working:** anything over about 300 ms shows it is happening (the label changes, the control disables).
-- **Success:** a visible confirmation, in place, near where the user acted.
-- **Failure:** what failed and how to fix it, next to the control. It never fails silently.
+Write the four states of every interactive element before building it:
+- **Idle:** looks interactive, clear label, visible focus ring.
+- **Working:** anything over about 300 ms shows it is happening.
+- **Success:** a visible confirmation, in place, with Undo when the action can be undone.
+- **Failure:** what failed and how to fix it, next to the control, with the user's input intact.
 
 Also:
-- **Openings and closings are decided.** When something opens, focus moves into it. When it closes, focus returns to
-  what opened it. Escape, the X, a tap on the scrim and the back gesture all close it the same way.
-- **Focus shows a focus ring,** not the hover shade.
-- **Limits are visible.** For example, a stepper at its minimum shows it can't go lower.
-- **The user always knows where they are,** and how to get back.
-- **No faked outcomes.** If nothing was saved, say so, and play no success sound.
-- **Every control has a pressed state,** and everything clickable is a real `<button>` or link.
+- **Openings and closings are decided.** Focus moves into what opens and returns to what opened it. Escape, the X,
+  a tap on the scrim and the back gesture close it the same way.
+- **Limits are visible** (a stepper at its minimum shows it).
+- **No faked outcomes.** If nothing was saved, say so.
+- **Everything clickable is a real `<button>` or link,** with a pressed state.
+- **The hundredth-hour rules of Phase 1 are built, not assumed:** resume, autosave, undo, defaults, forms.
 
-## Phase 10. Phone posture
+## Phase 14. Every size, not two
 
-- **Thumb reach.** Primary actions sit in the bottom third. Secondary panels open as bottom sheets that drag down to
-  close, and navigation goes in a drawer or a bottom bar.
-- **Gestures always have a visible alternative.**
-- **Safe areas and the keyboard.** Respect `env(safe-area-inset-*)` and the on-screen keyboard, so forms stay visible
-  above it.
-- **Target size.** Targets are at least 44 px, including the visible part of anything that overlaps.
-- **Measure the scroll.** If one repeated item fills more than about three phone screens, change its form, keeping
-  the item's character in the new form:
-  - a compact row;
-  - groups the user can open;
-  - a horizontal row that snaps one item at a time, with a visible swipe hint and position dots.
-- **Test at the real device size,** or at 390 px if you don't know it.
+- **Phone.** Primary actions in the bottom third. Secondary panels as bottom sheets. Gestures always have a
+  visible alternative. Respect safe areas and the on-screen keyboard.
+- **Measure the scroll.** If one repeated item fills more than about three phone screens, change its form (a
+  compact row, groups that open, a snapping horizontal row with a visible hint), keeping its character.
+- **In between** (around 768 px). Decide the layout; don't let it be a stretched phone or a squeezed desktop.
+- **Wide** (1920 px and up). Content does not stretch to fill; reading width holds; extra space goes to margins or
+  to a second useful zone.
+- **Zoom and reflow.** At 320 CSS px wide (a desktop at 400% zoom) everything works with no sideways scroll. Sizes
+  use rem. Text spacing can be increased without clipping.
+- **Components adapt to their container,** not only to the viewport.
 
-## Phase 11. Accessibility (WCAG 2.2 AA minimum)
+## Phase 15. Accessibility (WCAG 2.2 AA is the floor)
 
-- **Contrast:** text is at least 4.5:1, and large text and UI borders 3:1, in both themes, accent pairs included.
-- **Keyboard:** every task works by keyboard alone, in a logical order, with a visible focus ring. Sites get a skip
-  link.
-- **Equivalents:** anything visual-only (canvas, 3D, an SVG scene) has a text or control equivalent.
-- **Never colour alone:** pair state colours with a word or an icon.
-- **Announcements:** dynamic results are announced through `aria-live` or `role="status"`.
-- **Labels:** every input has one. Errors are tied to the input with `aria-describedby`, and the input gets
-  `aria-invalid`.
-- **Text zoom:** sizes use rem so it works.
-- **Motion:** honour reduced motion, and give a moving hero an in-page Effects toggle.
-- **Sound:** never the only signal.
+- **Structure.** One `<h1>`, headings in order, landmarks (`header`, `nav`, `main`, `footer`), `lang`, a real
+  `<title>`. A screen-reader user should be able to do every top task from the accessibility tree alone.
+- **Names.** Every control and input has an accessible name that matches its visible label. Images have `alt`
+  (empty when decorative).
+- **Contrast.** The floors in Phase 6, in both themes, accent pairs included. De-emphasise with a lighter colour
+  that still passes, not with opacity.
+- **Keyboard.** Every task works by keyboard alone, in a logical order, with no trap. Sites get a skip link.
+- **Focus.** Always visible, at least 3:1 against what is around it, and never hidden under a sticky header, a
+  sheet or a banner.
+- **Targets.** At least 24 px, 44 px on touch.
+- **No dragging required.** Anything done by dragging can also be done with single taps or keys.
+- **Never colour alone.** Pair state colours with a word or an icon.
+- **Announcements.** Dynamic results go through `aria-live` or `role="status"`. Errors are tied to their input
+  with `aria-describedby` and `aria-invalid`.
+- **Equivalents.** Anything visual-only (canvas, 3D, an SVG scene) has a text or control equivalent.
+- **Motion and sound.** Honour reduced motion; a moving hero has a pause control. Sound is never the only signal.
+- **Don't make people repeat or remember.** Don't ask twice for what was already entered. Never block paste or
+  password managers. Help is in the same place on every page.
+- **Forced colours and high contrast.** The product stays usable in `forced-colors: active`: don't convey state
+  with background colour alone, and keep real borders on controls there.
+- **Plain language.** Short sentences, common words, one idea per message.
 
-## Phase 12. Feel and performance
+## Phase 16. Performance: loading and feel
 
-- **Animate only `transform` and `opacity`** (plus `clip-path` and `filter` where they are composited). Swap size for
-  `scale()` and position for `translate()`. Animate height only for an accordion. Never `transition: all`.
-- **Budget for 120 Hz.** One frame is 8 ms.
-- **Keep the main thread free during motion.**
-  - Don't set framework state on every frame. Write the transform on the element itself.
-  - A CSS variable changed on a parent restyles every child.
-  - Use `will-change` only where you measured dropped frames.
-- **SVG filters are expensive.** Displacement, turbulence and blur cost a lot. Put them on static elements, not on
-  things that scroll or animate every frame.
-- **Measure, don't assume.** On the longest real data, with 4x CPU throttling, measure frame time while scrolling and
-  dragging, and the cost of one typical interaction. One bad selector can restyle the whole page on every write.
-- **Feel fast.** Respond at once (optimistic updates, skeletons in the real layout) and never block input. Audio must
-  not delay the visual response.
+**Loading**
+- **Budget.** On a mid-range phone on a normal connection: main content visible within about 2.5 s, layout shift
+  under 0.1, response to a tap under 200 ms. A tool opened many times a day should feel instant on return.
+- **Fonts.** As few files as the design needs, WOFF2, `font-display: swap` with a fallback matched in metrics so
+  text doesn't jump.
+- **Images.** Sized to their slot, with width and height set, lazy below the fold.
+- **Heavy libraries** (3D, timelines, charts) load only for the moment that needs them, after the first paint,
+  with a static fallback. They are never the price of reading the page.
 
-## Phase 13. Review in a real browser
+**Feel**
+- **Animate only `transform` and `opacity`** (plus `clip-path` and `filter` where composited). Never
+  `transition: all`.
+- **Keep the main thread free during motion.** Write transforms on the element; don't set framework state every
+  frame. Use `will-change` only where you measured dropped frames.
+- **SVG filters are expensive.** Keep them on static elements.
+- **Measure, don't assume.** On the longest real data, with 4x CPU throttling.
+- **Feel fast.** Respond at once (optimistic updates, skeletons in the real layout) and never block input.
 
-Read `references/review.md` for the full loop, the scripts and the scorecard. The loop must cover:
-- **The top tasks,** done yourself, with the steps counted.
-- **The cold read.** Give a screenshot of each first screen to a sub-agent with a fresh context and no explanation,
-  and ask what the screen is, what is happening and what to do next. Every answer it gets wrong is a usability
-  finding, worst first.
-- **Screenshots** at phone and desktop width, both themes, every state you changed. Look at each one yourself:
-  overlaps, clipping and wrapping only show up to the eye.
-- **The feeling check:** the feeling table, the blurred screenshot and the template test.
-- **Motion slowed down,** and sound if there is any.
-- **Phone one-handed, keyboard only, the extremes,** and the user's real setup.
-- **Ready to ship:** no demo leftovers, links open, facts match their sources, the page height on a phone is
-  reasonable, no console errors.
-- **A findings table,** worst first, then fixes, then the loop again until nothing serious is left. Under "Fixes
-  only", anything new goes to the user as a proposal.
-- **What couldn't be checked,** such as how the sound actually sounds or touch on a real device, stated plainly in the
-  report.
+## Phase 17. Review in a real browser
 
-## Phase 13B. Critique like a rival studio, then build seriously
+Read `references/review.md` for the script and the scorecard. The loop:
+1. **Run the review script** (`scripts/review.js`). Fix every finding in capitals. Read the census against
+   Phase 4.
+2. **Run the silhouette check** on sites: `node scripts/silhouette.js <url> 1280`, and again at 390 if the phone
+   layout was planned separately. It prints the page as beats (`C` centred, `L` left-heavy, `F` full-bleed, `LR`
+   side-by-side pair, `G` grid of three or more, with S/M/L/XL height and the ground) and flags neighbours with the
+   same alignment and ground, an alignment three times in a row, splits on over a third of beats, no XL beat and a
+   single ground. Compare it with the storyboard; every flag is fixed or explained. It is a heuristic: a marquee's
+   two halves, a page built in one wrapper, or a centred heading over a list can misread. Read its per-beat output
+   before arguing with it, and never "fix" the classifier instead of the page.
+3. **The scroll test.** Look at a thumbnail strip of the whole page (full-page screenshot scaled to about 260 px
+   wide) at both sizes. You should see shapes of different sizes, grounds that change, and one or two moments that
+   stop the eye. Stripes of the same shape are a finding.
+4. **Look at every screenshot yourself:** each size, both themes, every state you changed. Overlaps, clipping and
+   wrapping only show up to the eye.
+5. **Do the top tasks yourself,** scripted, and count the steps against the task table.
+6. **The cold read.** Give a first-screen screenshot to a sub-agent with a fresh context and no explanation. Ask
+   what this is, what is happening and what to do next. Every wrong answer is a finding.
+7. **The task walk.** Give a fresh sub-agent the running page and one top task in the user's own words, nothing
+   else. It reports every click and every hesitation. Each wrong click is a finding, worst first.
+8. **The blind walk.** Give a fresh sub-agent only `a11y-tree.txt` from the script and the same task. If it can't
+   say how to do the task from the tree, a screen-reader user can't either.
+9. **The feeling check:** the feeling table row by row, the blur test, the template test.
+10. **Use it the way people do:** phone one-handed, keyboard only, the obvious wrong moves (Escape, back,
+    double-tap submit), the extremes (empty, error, slow network, longest name, 200 items).
+11. **The return visit.** Reload in the middle of a task. Is the work still there, in the same place?
+12. **Ready to ship:** no demo leftovers, links open, facts match their sources, no console errors.
+13. **A findings table,** worst first; fix; repeat until nothing serious is left.
 
-After the first full build and its browser review, and before showing the user:
+    | Issue | Where | Who it hurts | Fix |
+    |---|---|---|---|
 
-1. **Screenshot every main screen and state,** then crop four regions of each at 2x. Each crop should hold something
-   worth looking at. A blank or generic crop is a finding.
-2. **Write the rival's critique.** Play a design director at a rival studio who wants this to fail. List at least
-   five things that look default, cheap, timid, unfinished or generic, worst first, each with a concrete fix. Name
-   what the generic version of each part would be; if a part matches it, that part is a finding.
-3. **Score** with evidence, 1 to 10: boldness, warmth and lived-in-ness, detail and intricacy, craft and finish,
-   usability. Anything under 8 gets another round. Usability under 8 is fixed first.
-4. **Fix and repeat.** At least two rounds. Each round's screenshots are looked at again, not assumed.
-5. **The serious-build bar.** Before reporting, everything here is true:
+14. **What couldn't be checked** (how sound actually sounds, touch on a real device, a real screen reader) is
+    stated plainly in the report.
+
+Where sub-agents aren't available, do the cold read, task walk and blind walk yourself from the screenshot or the
+tree alone, before looking at your own code, and say so in the report.
+
+## Phase 18. Critique like a rival studio
+
+After the browser review, before the user sees it.
+
+1. **The usability gate.** The cold read, the task walk, the blind walk and the script's capital findings must be
+   clean first. Nothing below is scored until they are.
+2. **Crop four regions of each main screen at 2x.** Each should hold something considered. A generic crop is a
+   finding.
+3. **Write the rival's critique.** A design director at a rival studio who wants this to fail lists at least five
+   things that look default, cheap, timid, unfinished, generic or tiring to use, worst first, each with a concrete
+   fix. At least one item is about the page below the first screen: the beat that is most template. Add a second voice: someone who has used the product for a month lists what now annoys them.
+4. **Score with evidence, 1 to 10,** on what the context asks for:
+
+   | Context | Scored on |
+   |---|---|
+   | Seen once, occasional | clarity, boldness, detail, craft and finish, freshness against Phase 4 and the used log |
+   | Daily, all day | speed of the top tasks, clarity at a glance, calm over ten minutes, craft and finish, a character of its own in type and colour |
+
+   Anything under 8 gets another round.
+5. **The serious-build bar.** Before reporting, all of this is true:
    - every interactive element has hover, focus, pressed, working, success and failure where they apply;
-   - empty, loading, long-data and error states are built and designed, not left to the browser;
+   - empty, loading, long-data and error states are designed, not left to the browser;
    - the interactions are real: data changes, persists for the session, and the screen answers;
    - the hardest part of the idea is built, not replaced by a picture of it;
    - no placeholder boxes, no lorem, no "coming soon" in place of a feature the design shows.
-6. **Report the rounds:** the critique lists, the scores before and after, and what changed.
+6. **Report the rounds:** the critique lists, the scores before and after, what changed.
 
-## Toolbox: reach for these when they raise the quality
+## Phase 19. Record, log, report
 
-The baseline is hand-written HTML, CSS and SVG. Go further when the idea needs it:
-- **3D and shaders:** three.js (inflatable or extruded type with `TTFLoader`, physical materials with
-  `RoomEnvironment` reflections, post-processing, custom GLSL), for one-time and occasional contexts.
-- **Timelines and physics:** the Web Animations API or GSAP for choreographed sequences; spring maths written by
-  hand for anything the pointer touches; FLIP for layout changes.
+**The taste record.** Write every verdict the user gives into the project's memory file, in their words, with the
+date and the rule it implies. When a verdict says the design lacks life or creativity, go back to the feeling
+table, the storyboard (6S) and the first screen's form; more ornament on the same structure is not a fix. When a
+verdict praises one part and calls the rest bland, carry that part's initiative into every beat (6S, 9) instead of
+polishing the part they liked. When a verdict says it is
+tiring, confusing or slow, go back to Phase 1.
+
+**The used log.** Append one entry to `UNSLOP_LOG.md` (create it if the project allows; otherwise print it):
+
+```
+## <date> · <subject> · <context>
+- Fonts: <families and roles>
+- Colour: <what the palette was taken from; ground and accent hues in OKLCH>
+- Main view / layout: <one line>
+- Silhouette at 1280: <sequence from scripts/silhouette.js>, flags: <none or list>
+- Signature moment and details: <one line each>
+- Ladder rung built: <n>, <one line>
+- Phase 4 items present, with reasons: <list>
+- User verdicts: <their words>
+```
+
+**Report** the scorecard from `references/review.md` with evidence, then the link or files, the sources for real content, the
+assumptions made, and what couldn't be checked.
+
+## Toolbox
+
+The baseline is hand-written HTML, CSS and SVG. Go further when the idea and the context call for it:
+- **3D and shaders** (three.js, custom GLSL) for seen-once and occasional contexts, loaded late with a fallback.
+- **Timelines and physics:** the Web Animations API or a timeline library for choreography; hand-written spring
+  maths for anything the pointer touches; FLIP for layout changes.
 - **Data:** D3 scales and shapes for honest charts; never a chart library's default look.
-- **Generative and texture:** canvas or SVG filters, rendered once and cached, never every frame on scroll.
-- **Type:** variable fonts animated on their axes; real small caps, tabular figures, hanging punctuation.
-- **Review scripts:** Playwright for screenshots at several sizes, frame captures of motion, contrast and target-size
-  audits, and scripted walks through every task. Measure; don't eyeball.
-- **Sandboxed deploys** (artifacts, embeds): bundle libraries and fonts into the page or load them from the allowed
-  CDNs; binary assets go inside the bundle as base64 if the host refuses their file type.
-
-## Phase 14. Record taste, then report
-
-**Write down every verdict** in the project's memory file (PROJECT_MEMORY.md, DESIGN.md or the brief): the interview
-answers, the user's words, the date and the rule each one implies. Verdicts like these are worth more than any rule
-in this skill:
-- "I don't use this"
-- "brown isn't warm"
-- "too many lines"
-- "it lacks life and warmth"
-- "the scroll is way too long"
-- "the animation is too slow"
-- "the click sound is annoying"
-
-When a verdict says the design lacks life or creativity, go back to the feeling table and the first screen's form.
-More ornament on the same structure is not a fix.
-
-**Report** the scorecard from `references/review.md`, with evidence for each row. Then give the link or files, the
-sources used for real content, and anything that couldn't be checked.
+- **Generative texture:** canvas or SVG filters, rendered once and cached.
+- **Type:** variable fonts, real small caps, tabular figures.
+- **Modern CSS:** container queries, `:has()`, view transitions, anchor positioning, native `<dialog>` and
+  popover, where the deploy target supports them.
+- **Sandboxed deploys:** bundle libraries and fonts into the page or load them from allowed CDNs.
