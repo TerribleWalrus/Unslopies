@@ -1,5 +1,5 @@
 ---
-name: unslop-design-1-7
+name: unslop-design
 description: Unslop Design 1.7. Design and build front ends that look like a bold, specific studio made them for this subject, feel warm, lived-in, detailed and easy to use, and move and sound smooth and calm in the spirit of Apple's design, built to ship with real content. Covers websites and apps alike, including landing pages, web apps, app shells, chat UIs, dashboards, settings screens, mobile layouts, skins and themes for existing apps, redesigns, design reviews, animation passes and adding sound effects or music. It replaces unslop-design 1.65, 1.6, 1.5 and 1.0. Also use it when the user only says "make it look good", "it looks AI-made", "it feels lifeless", "too many lines", "it's cold", "restyle this", "it's hard to use", "it's not creative enough", "make the animations smoother", "it feels janky", "it looks mundane", "it's too safe", "it lacks detail" or "add sounds".
 ---
 
@@ -279,8 +279,10 @@ general questions.
 - **Animation level:** **Calm** (feedback and state changes) · **Standard** (adds menus, sheets, toasts and page
   transitions) · **Expressive** (adds one choreographed signature moment and playful springs). ➡ Calm for tools used
   daily, Standard for most products, Expressive for marketing or anything game-like.
-- **Sound:** no · sound effects · effects and background music. ➡ No, unless the subject is playful, musical, a game
-  or for children. Then: their own files or synthesized; on or off on first visit (➡ off).
+- **Sound:** ask as three plain options: **none** · **sound effects only** · **sound effects and background music**.
+  ➡ None, unless the subject is playful, musical, a game or for children. Then: their own files or synthesized; on or
+  off on first visit (➡ off). Repeat the choice back in the summary ("effects and music"), because it decides what
+  gets built.
 - **A reference they bring up** (an app, a place, an object): "What do you like about it?", then show takes on it.
 - **Music:** their track, a CC0 or royalty-free one you find, or a synthesized loop; whether it reacts to what the
   user does. Its mood comes from what they want, shown as a short sample.
@@ -666,6 +668,10 @@ Read `references/motion.md` before writing any animation. The essentials:
 Only if the user said yes. Read `references/sound.md`. The essentials:
 - **Opt-in.** Sound is off on first visit, behind a visible toggle, and nothing plays before the first gesture.
   Music has its own play button and volume.
+- **Music is a deliverable when chosen.** If the user picked "effects and background music", the build must ship a
+  working music player and a track (their file, a found CC0 file, or the synthesized loop in `references/sound.md`),
+  with a play button the user can press. Effects without a music player is a failed build, not a smaller one. If
+  they picked effects only, ship no music code.
 - **A sound map.** Every sound belongs to an action, plays at the same moment as the visual, and follows the
   frequency rule. There is no sound for typing, scrolling or hover.
 - **The sources.** Synthesized by default; the user's files if they have them; found files only on request, with
