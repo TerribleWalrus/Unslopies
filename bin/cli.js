@@ -8,7 +8,7 @@ const readline = require('readline');
 
 const SKILL = 'unslop-design';
 const SRC = path.join(__dirname, '..', 'skills', SKILL);
-const LEGACY = ['unslop-design-1-7', 'unslop-design-1-65', 'unslop-design-1-6', 'unslop-design-1-5', 'unslop-design-1-0'];
+const LEGACY = ['unslop-design-1-76', 'unslop-design-1-75e', 'unslop-design-1-7e', 'unslop-design-1-7', 'unslop-design-1-65', 'unslop-design-1-6', 'unslop-design-1-5', 'unslop-design-1-0'];
 
 const home = os.homedir();
 const codexHome = process.env.CODEX_HOME || path.join(home, '.codex');
@@ -25,10 +25,10 @@ const AGENTS = {
   copilot:  { label: 'Copilot',     project: '.github/skills',   global: path.join(home, '.copilot/skills'),  detect: path.join(home, '.copilot') },
 };
 
-const HELP = `unslop-design: install the Unslop Design skill into your coding agents
+const HELP = `unslopies: install the Unslop Design skill into your coding agents
 
 Usage
-  npx unslop-design [options]
+  npx unslopies [options]
 
 Options
   -a, --agent <list>   Agents to install into, comma separated, or "all".
@@ -42,10 +42,10 @@ Options
   -h, --help           Show this help.
 
 Examples
-  npx unslop-design                    detect agents, confirm, install globally
-  npx unslop-design -a claude,codex    just those two
-  npx unslop-design --project --all    into ./.claude, ./.agents, ./.cursor, ...
-  npx unslop-design --remove -a codex
+  npx unslopies                    detect agents, confirm, install globally
+  npx unslopies -a claude,codex    just those two
+  npx unslopies --project --all    into ./.claude, ./.agents, ./.cursor, ...
+  npx unslopies --remove -a codex
 `;
 
 function fail(msg) {
@@ -136,7 +136,7 @@ async function main() {
       : found;
     if (!ids.length) {
       if (o.project) ids = ['claude', 'codex'];
-      else fail('No supported agents detected. Pick some with --agent, for example:\n  npx unslop-design --agent claude,codex\nSee --help for the list.');
+      else fail('No supported agents detected. Pick some with --agent, for example:\n  npx unslopies --agent claude,codex\nSee --help for the list.');
     }
   }
   ids = dedupe(ids, o.project);
