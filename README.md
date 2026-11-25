@@ -1,4 +1,4 @@
-# Unslop Design (v1.76)
+# Unslop Design (v1.77)
 
 A foundation skill for front-end design and web page builds. Its goal is output that looks designed by a specific studio for a specific subject, with no recognizable AI design patterns, and that stays easy to use for a first-time visitor and for a power user on their hundredth hour.
 
@@ -31,6 +31,16 @@ Every rule serves three things at once:
 1. **Unique to the subject.** The result could not be reskinned for another product unchanged, and it doesn't look like Claude's other work.
 2. **Good taste when you bring none.** Most people can't describe what they want visually, so the skill makes confident choices on type, colour, rhythm, motion and detail.
 3. **Good to live with.** A look that wins on day one and slows people down on day thirty counts as a failure, not a style.
+
+## What's new in 1.77
+
+1.77 makes the skill's own rules impossible to skip, after a "full redesign" came back as the same layout with a theme switcher, no questions and no music.
+
+- **The question gate.** Redesigns, new sites and apps, and anything made for one person start with questions and no code. Animation level and sound are always asked, even after "just build it".
+- **A redesign has to change the structure.** Same sections plus new colours is a reskin, and counts as a failed build.
+- **Gifts are seen-once and lively by default,** with Expressive animation and music as the recommended answers.
+- **An Expressive floor:** a choreographed signature moment, three or more things to touch with real physics on a phone, and motion with a cause on every section.
+- **Found music that works on iPhone,** with CC0 sources that are still online.
 
 ## What's new in 1.76
 
@@ -85,7 +95,7 @@ See `skills/unslop-design/CHANGELOG.md` for every change.
 - `skills/unslop-design/scripts/review.js` and `scripts/silhouette.js`: the browser review and the page silhouette check (Node with Playwright; set `CHROME=` to use another Chromium).
 - `skills/unslop-design/CHANGELOG.md`: what changed from 1.7e.
 
-The skill lives in `skills/unslop-design/`. Keep that folder together so the reference files are found. It replaces 1.75e, 1.7e, 1.7, 1.65, 1.6, 1.5 and 1.0, so delete older versions (`unslop-design-1-76`, `unslop-design-1-75e`, `unslop-design-1-7e`, `unslop-design-1-7` and earlier) to stop them competing. The installer warns when it finds them.
+The skill lives in `skills/unslop-design/`. Keep that folder together so the reference files are found. It replaces 1.76, 1.75e, 1.7e, 1.7, 1.65, 1.6, 1.5 and 1.0, so delete older versions (`unslop-design-1-76`, `unslop-design-1-75e`, `unslop-design-1-7e`, `unslop-design-1-7` and earlier) to stop them competing. The installer warns when it finds them.
 
 ## What the foundation provides
 

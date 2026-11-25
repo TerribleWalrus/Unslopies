@@ -1,12 +1,13 @@
 ---
 name: "unslop-design"
-description: "Unslop Design 1.76: usability first, then bold, lively, human-made front ends whose whole-page composition (not only the hero) comes from the subject, checked with a page storyboard and a silhouette script so pages stop converging on alternating left/right sections. Use when the user asks for 1.76, Unslop Design, or wants a site or app designed, restyled or reviewed so it does not look AI-made, generic or bland."
+description: "Unslop Design 1.77: usability first, then bold, lively, human-made front ends whose whole-page composition (not only the hero) comes from the subject, checked with a page storyboard and a silhouette script so pages stop converging on alternating left/right sections. Use when the user asks for 1.77 or 1.76, Unslop Design, or wants a site or app designed, restyled or reviewed so it does not look AI-made, generic or bland."
 ---
 
-# Unslop Design 1.76
+# Unslop Design 1.77
 
-Built on 1.7e, with the layout and liveliness directives learned from comparing AI builds with human-made
-ones. Run it instead of 1.7, 1.7e or 1.75e, never together with them. `CHANGELOG.md` says what changed.
+Built on 1.76, which was built on 1.7e. 1.77 adds hard gates for the interview, for redesign depth, for the
+Expressive animation floor and for music, after a redesign shipped with no questions, no music and no new
+structure. Run it instead of 1.76, 1.7, 1.7e or 1.75e, never together with them. `CHANGELOG.md` says what changed.
 
 It covers websites and apps alike: landing pages, web apps, app shells, chat UIs, dashboards, settings screens,
 mobile layouts, posters, skins and themes for existing apps, redesigns, design reviews, animation passes and sound.
@@ -60,6 +61,20 @@ questions for this subject.
 | Full redesign | concept and structure | content and wiring |
 
 Nothing outside the scope changes without a yes.
+
+**The question gate (Standard and Full, no exceptions).** The first reply to a redesign, a new site or app, or
+anything made for one person is questions, not code. In that turn no files are written, no artifact is published
+and no build starts. Use the host's question tool when there is one. The first round always includes the scope
+question (existing projects) and both craft questions (animation level and sound, Phase 2), even when the request
+looks clear. "Just build it" skips the open questions, never the craft ones: ask those two in one short message,
+then build. If an earlier round in this conversation built without asking, say so and ask now. Skipping the
+gate is the most common way this skill fails, so check it before every first build.
+
+**"Redesign" means the structure can change.** A build that keeps the old section order and the old components
+and changes only colour, type, texture or adds a theme switcher is a reskin. Delivering a reskin when the user
+said redesign is a failed build, however polished. If it is unclear which they mean, that is the scope question.
+For a Full redesign, compare the silhouette (17) of the old page with the new one in the report: if they match
+beat for beat, it is not done.
 
 ## How to run
 
@@ -213,11 +228,14 @@ feel: people can't answer that. The feeling is read from what they want (Phase 7
 - **Specific and craft questions:** each gets a recommended answer, worded so that "yes" accepts it. The
   recommendation comes from their earlier answers and the Phase 0 evidence, never from taste; say which. What
   belongs to the user alone (names, content, what must stay) gets no recommendation.
-- **Craft questions to cover:** animation level (Calm, Standard, Expressive; recommend Calm for tools used daily,
-  Standard for most products, Expressive for marketing or anything game-like), and sound, asked as three plain
-  options: none, sound effects only, sound effects and background music (recommend none unless the subject is
-  playful, musical, a game or for children). Repeat the choice back in the summary ("effects and music"), because
-  it decides what gets built.
+- **Craft questions to cover (always, Phase 2 gate):** animation level (Calm, Standard, Expressive; recommend Calm
+  for tools used daily, Standard for most products, Expressive for marketing, anything game-like, and anything made
+  for one person: an anniversary, a birthday, a proposal, an invitation, a memorial), and sound, asked as three
+  plain options: none, sound effects only, sound effects and background music. Recommend none for tools; recommend
+  effects and music for gifts, celebrations, invitations and memory pages, and for anything playful, musical, a
+  game or for children. Ask where the music comes from (their own file, a free CC0 track you find, or a
+  synthesized loop). Repeat the choices back in the summary ("Expressive, effects and music"), because they decide
+  what gets built and what the build is checked against.
 
 **How to ask**
 - **Built from their project.** A good question could only be asked of this user: it uses their project's name, a
@@ -360,6 +378,8 @@ A skill that pushes away from the median creates a second median. These are the 
 skill pulled toward. Each is allowed only with a reason that comes from this subject and that would not apply to
 the last project:
 
+- a theme or style switcher offered instead of a decision (three skins of one layout is a reskin, not a
+  redesign; pick one direction and commit, and put the other ideas in the takes);
 - the main view turned into a physical object or place (skeuomorphism as the default answer to "be bold");
 - a warm dark ground with one earthy accent;
 - signs of wear, marks and "imperfection" added to make a screen feel lived in;
@@ -425,6 +445,12 @@ weights (18).
 
 If it only wins on day 1, it belongs in a seen-once context. A metaphor the user has to translate back into data
 is a gimmick.
+
+**Made for one person.** An anniversary page, a birthday, a proposal, a wedding invitation, a memorial, a
+"made this for you" gift is Seen once and Lively by default, however many photos or words it holds. It is read
+slowly, once or twice, by the person it is for, and the waiting and discovering are part of the gift. A long list
+of photos with a fade-in is the template for this context; the subject's own world (how these memories were
+made, kept and found) decides the sequence instead.
 
 **The liveliness dial.** Separate from the context: how much energy the user asked for. Quiet (the default for
 daily and all-day tools), Warm (most sites), Lively (the user asked for energy, play, "addictive", "fun", or the
@@ -648,13 +674,24 @@ Read `references/motion.md` before writing any animation. The essentials:
 - **Physical.** Things enter from where they came and leave the same way, respond on pointer-down, follow the
   finger 1:1 and stay interruptible. Nothing blocks input.
 - **Reduced motion** keeps fades and drops movement.
+- **Expressive has a floor.** If the user picked Expressive, the build fails unless it has all of these, each
+  written in the report with its purpose:
+  - one choreographed signature moment: several elements in sequence over about 1 to 3 seconds, with sound if
+    sound was chosen, at the moment that matters most (an unlock, an arrival, the ending);
+  - at least three things the visitor can touch that answer with physics on a phone (drag, flick, throw, swing,
+    pull, rub, tilt), each with a tap or key alternative;
+  - on every beat of the storyboard, motion that shows cause: something reacts to the visitor or to a real fact.
+    Scroll-reveal fades, hover lifts and a typing effect do not count toward the floor.
+  Standard and Calm have no floor; they are the ceiling for those levels.
+- **Seen-once pieces** may run longer than the UI tokens: see "Seen-once moments" in `references/motion.md`.
 - **Ambient loops** (steam, bobbing, 3D; rolling text only where 4.1 allows it) pause when off screen and when the tab is hidden, and have a
   visible pause where they run for more than 5 seconds.
 
 ## Phase 12. Sound
 
 Only if the user said yes. Read `references/sound.md`. Opt-in, off on first visit, a sound map tied to actions, never the
-only signal.
+only signal. One exception: in a seen-once piece with a natural first gesture (an unlock, opening an envelope,
+pressing start), the sound the user chose may start on that gesture, with the music control on screen from then on.
 - **Music is a deliverable when chosen.** If the user picked "effects and background music", the build ships a
   working music player and a track (their file, a found CC0 file, or the synthesized loop in `references/sound.md`),
   with a play button the user can press. Effects without a music player is a failed build, not a smaller one. If
@@ -793,6 +830,9 @@ After the browser review, before the user sees it.
 
    Anything under 8 gets another round.
 5. **The serious-build bar.** Before reporting, all of this is true:
+   - the interview's choices are in the build, checked item by item: the scope (a redesign changed the structure),
+     the animation level's floor (11) and the sound choice (12, a working play button with a real track behind it
+     when music was chosen);
    - every interactive element has hover, focus, pressed, working, success and failure where they apply;
    - empty, loading, long-data and error states are designed, not left to the browser;
    - the interactions are real: data changes, persists for the session, and the screen answers;
@@ -805,6 +845,8 @@ After the browser review, before the user sees it.
 **The taste record.** Write every verdict the user gives into the project's memory file, in their words, with the
 date and the rule it implies. When a verdict says the design lacks life or creativity, go back to the feeling
 table, the storyboard (6S) and the first screen's form; more ornament on the same structure is not a fix. When a
+verdict says "too static", "too simple" or "not enough redesign", go back to the question gate and the scope:
+the fix is a new structure and new things to touch (the Expressive floor), never more effects on the old layout. When a
 verdict praises one part and calls the rest bland, carry that part's initiative into every beat (6S, 9) instead of
 polishing the part they liked. When a verdict says it is
 tiring, confusing or slow, go back to Phase 1.

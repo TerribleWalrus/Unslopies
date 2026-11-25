@@ -67,6 +67,24 @@ animation level sets how much of them to use, and the user's words override them
 - **Expressive:** Standard plus the signature moment's choreography, onboarding moments and springs with a little
   bounce. One moment gets the most motion; everything around it stays calm.
 
+### Seen-once moments (gifts, invitations, launch moments)
+
+The tokens above are for controls and UI people use again and again. A piece seen once or twice (Phase 5) can
+give its content moments more time, because the moment is the content:
+
+- **The signature moment** may run 1 to 3 seconds of choreography: several elements in sequence, each with its own
+  curve, with sound on the same beats. It can be skipped with a tap and never blocks scrolling once it ends.
+- **Reveals that are the subject's own process** (something developing, filling, printing, blooming) may take up to
+  about 8 seconds, as long as the visitor can keep scrolling, can tap to finish it, and sees the result straight
+  away under reduced motion.
+- **Things that hang, swing, fall or float run on physics,** not keyframes: a spring with damping, impulses from the
+  pointer or from scroll velocity, settling to rest. Run the loop only while the section is on screen.
+- **Springs may bounce (0.2 to 0.4)** where a real object would: a card snapping back, a cord released, a print
+  landing.
+- **Every touchable thing follows the finger 1:1** and carries the release velocity into the throw or the settle.
+- **Each beat gets its own kind of motion.** If every section moves the same way (all fade up, all slide in), the
+  motion is decoration. Pick the motion from what the thing on that beat would do in the subject's world.
+
 ### Reduced motion
 
 `prefers-reduced-motion: reduce` means fewer and gentler animations, not none. Keep opacity and colour changes.

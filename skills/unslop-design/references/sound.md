@@ -10,7 +10,9 @@ summary before you build, and again before you report.
 
 - **A visible sound button** sits in the header or where settings live.
   - It has an icon, a label ("Sound on" or "Sound off") and `aria-pressed`.
-  - Sound is **off on the first visit** unless the user chose otherwise.
+  - Sound is **off on the first visit** unless the user chose otherwise. In a seen-once piece with a natural first
+    gesture (an unlock, opening an envelope, pressing start), the sound the user chose may start on that gesture;
+    the controls are on screen from that moment.
   - The choice is remembered in `localStorage`, with every read and write wrapped in `try`/`catch`.
 - **Music has its own control,** separate from sound effects, with play or pause and a volume slider. A user can
   keep effects and silence music, or the other way round.
@@ -76,7 +78,7 @@ Every sound is tied to an action and follows the same frequency rule as motion:
 If they chose it, it ships. Never leave it out, never reduce it to a note in the report, and never ship the button
 without a track behind it.
 
-- **It never autoplays.** It starts when the user presses play, fades in over about 600 ms and fades out over about
+- **It never autoplays.** It starts when the user presses play (or on the first-gesture exception above), fades in over about 600 ms and fades out over about
   300 ms. It starts at about 30% volume.
 - **A visible music control,** next to the sound toggle but separate from it: a play/pause button with `aria-pressed`
   and a label ("Music on" or "Music off"), and a volume slider. Pressing play also creates or resumes the
@@ -135,6 +137,18 @@ function startMusic(ctx, out, { bpm = 68, scale = [0, 2, 4, 7, 9], root = 220, c
 Wire `play()` and `pause()` to the music button, call `pause()` on `visibilitychange` when the tab is hidden, and keep
 the music bus on its own gain so the slider and the effects master never fight. For a found or user file, decode it
 into an `AudioBuffer` or use an `<audio loop>` element through a `MediaElementSource`, and fade the same bus.
+
+### Found music, in practice
+
+- **Check that the source is still alive before promising it.** Free-music sites close; if one is gone, say so and
+  move to the next source instead of falling back silently to no music.
+- **Good CC0 sources for found music:** Musopen recordings on archive.org (classical, CC0), and other archive.org
+  items whose licence field reads CC0 or Public Domain Mark. Read the item's licence field, not the search result.
+- **iOS Safari:** `audio.volume` is ignored, so route the `<audio>` element through a `MediaElementSource` and fade
+  a `GainNode`. Call `audio.play()` and create or resume the `AudioContext` synchronously inside the tap, before
+  any `await`. Set `navigator.audioSession.type = "playback"` where it exists, so the ring/silent switch doesn't
+  mute the music, and still tell the user to test with the switch both ways.
+- **Encode for phones:** MP3 or AAC around 96 to 128 kbps, loudness-normalised, a short fade-in at the start.
 
 ## Accessibility
 
